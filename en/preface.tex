@@ -1,0 +1,138 @@
+\chapter{Introduction}
+
+According to Wikipedia definition of the word\footnote{\url{https://en.wikipedia.org/wiki/Treebank}}, a treebank is a parsed text corpus, which annotates syntactic or semantic structure. Built usually (but not always) on top of a POS-annotated corpus, a treebank might seek to include phrase structure (Example- PennTreebank \citep{PennTreebank}), dependency structure (Example- Prague Dependency Treebank \citep{PDT}) or semantic information (Example- FrameNet \citep{framenet}).
+
+A treebank can be constructed manually, by linguists spending a considerable time developing the treebank; or semi-automatically, wherein the data is automatically annotated, and then checked for consistency. Regardless of the method used for its creation, a treebank is an essential element in the field of computational linguistics. A treebank can be used to study linguistic structures, find out features associated with a language, or to understand the constructional peculiarities within a language, among others. 
+
+In this work, our main focus is on syntactic treebanks and especially dependency treebanks, rather than semantic ones. Therefore, the term `treebank' shall be used to refer to a syntactic (dependency) treebank henceforth, unless specified otherwise.
+
+\section{Inter-conversion of Treebanks}
+
+There exist a multitude of treebanks for different languages as they can be seen on Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Treebank\#Syntactic_treebanks}}, for example. As noted by \cite{kakkonen2006}, there exist a variety of formats and annotation schemes even for the treebanks for the same language. A well known example to this is the case of distinctive POS tagging schemes for PennTreebank\footnote{\url{https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html}} and for British National Corpus\footnote{\url{http://www.natcorp.ox.ac.uk/docs/c5spec.html}}, both of which are meant for annotation of English language. \citeauthor{kakkonen2006}, in his work also notices that there exist tools which are meant to work for a particular tagset/annotation scheme. Given enough similarities in annotation schemes, a (automatic) conversion process can be drafted from one annotation schema to another.
+
+This conversion process of a treebank from one annotation scheme to another can be either 1:1 (one-to-one mapping) or n:m (many-to-many mapping). As in Machine Translation, the approach can also be pivot-based, i.e. conversion to an intermediate set, and then from the intermediate set to the desired set. For example, Interset \citep{interset}  uses the pivot-based approach, implemented in form of a Perl library. More often than not, the conversion between different schemes can be applied deterministically, making use of rule-based approach whenever needed.
+
+It is important to note that not all the conversions are deterministic. If we consider an example of a dependency treebank where the dependency structure is changed from function-word head to content-word head structure, the entire dependency structures need to be modified. An attempt to approach such indeterministic conversion in a deterministic manner would introduce problems in the resulting annotation. Such problems can be characterized by loss of information, loss of language-specific patterns, and induced inconsistencies in the data, among others.
+
+Knowing the downside of fully-automatic conversion techniques, one can argue that we could do the task of treebank conversion manually, rather than automatically. This is not an ideal proposition because of multiple reasons as listed:
+\begin{enumerate}
+    \item The treebanks differ in size, ranging from thousands to millions of tokens. An example would be WikiText-2 dataset \citep{Wikitext2}, which contains around 2 million words, extracted from Wikipedia articles. The manual annotation on data as large as this requires time, money and significant human effort.
+    \item In case of multiple annotators for a given data, the different annotators may not always agree on the annotation principles for the same amount of data. This is especially the case when the guidelines are not specific enough, or in cases where the local grammatical tradition differs from the guidelines.
+    \item In case of low-resource languages, it might be difficult to find a knowledgeable annotator for the language, thus rendering the process to be painfully slow, and in some cases inaccurate.
+\end{enumerate}
+
+To combat this problem, an approach of semi-automatic conversion is preferred over manual or fully-automatic conversion. The semi-automated conversion procedure can be done by converting the data from one annotation style to another automatically, followed by a human annotator verifying the results and correcting them if needed. A trade-off between the fully-automatic and manual techniques, the semi-automatic approach is considerably faster than its manual counterpart, and allows the conversion process to be controlled for a higher degree of quality-check as compared to a fully-automatic approach (cf. \cite{preannotation}). In practice, there can be a significant number of iterations (or revisions) of the treebanks that might be needed before the converted data is again available at par with or better than the data quality in the original scheme. Since the research breakthroughs and improvements don't wait for the data to be perfect, the task of checking for consistency, and/or quality of the treebanks has gained momentum in recent years as a research problem.
+
+\section{Universal Dependencies (UD) Project}
+
+A rather more detailed history of UD Project can be accessed online\footnote{\url{https://universaldependencies.org/introduction.html\#history}}. This section deals with a shorter version thereof.
+
+As elaborated in the previous section, there are multiple and (possibly) conflicting annotation styles, even for the treebanks for the same language. Like any other measurement criteria where the standardized unit (in form of SI unit, or ISO standards) was needed to be defined, the different annotation styles required a similar form of standardization.
+
+Although there already existed annotation schemes that were used as de facto standards, with the example of The Stanford dependencies \citep{Standford}, Google universal tagset \citep{google}, HamleDT \citep{HamleDT}, among others. However, there was still the problem of which annotation style to go for. \cite{UDv1} in their Universal Dependency Treebank (UDT) Project tried to provide with a universal annotation language, covering 6 languages in 2013, and expanding to 11 languages the following year.
+
+With the modifications resulting in development of HamleDT 2.0 \citep{HamleDT2}, and Universal Stanford Dependencies (USD) \citep{USD}, the Universal Dependencies (UD) Project was thus born in 2014 as a means of unifying all the novel features of different annotation formats as a universal annotation scheme consistent among different languages.
+
+The version 1.0 of UD (also referred to as UDv1.0) \citep{UDv1.0} was launched in January 2015, and covered 10 treebanks in 10 different languages. With the iterative methodology, the project evolved to contain 146 treebanks in 83 languages in UDv2.4 \citep{UDv2.4}, and 157 treebanks in 90 languages in UDv2.5 \citep{UDv2.5}. It is worth noting that not all the treebanks in UD are manually annotated. Rather, most treebanks are semi-automatically converted from the original source to the UD format according to a set of guidelines\footnote{\url{https://universaldependencies.org/guidelines.html}}.
+
+\section{Motivation for the Problem}
+
+Since the introduction of UD, it has fast become a standard reference to compare scores relating to parser performance (\cite{parser-performance1}, \cite{parser-performance2}), study of language-specific features \citep{language-study}, and for Shared Tasks on UD \citep{ud-shared-task}. Given how different UD treebanks are being considered as benchmarks for comparison of different scores, it only makes sense to be considered them as Gold Standard (GS) data.
+
+We discussed earlier how many of the UD treebanks are generated through a semi-automatic process, and thus are liable to contain a significant amount of errors. Such errors are detrimental in a GS, because of multiple reasons. Some of the reasons are listed as follows:
+
+\begin{enumerate}
+    \item In the case of parser evaluation, the parser learns errors from the data as well, replicating them when used on test data. While this affects parser evaluation scores, it also means that the parser does not learn the features of the language correctly, thus causing increasingly more errors on unseen data.
+    \item Since semi-automatic conversion is also likely to introduce more errors, this can result in inflating/deflating already known errors/features. These patterns can become a nuisance on the treebank-level or might disappear altogether. Consider the case of a language-feature \(F\) which is a rare phenomenon in language \(L\), with the relative occurrence of \(x_0 \%\) in the original data. Due to conversion process, it is possible that the relative occurrence might change to \(x_1 \%\), where \(x_1 \neq x_0\).
+    \begin{itemize}
+        \item In case of the inflation of error (\(x_1 > x_0\)), the data which otherwise did not exhibit \(F\) suddenly starts displaying the pattern, thus affecting the quality of the data.
+        \item In case of the deflation of pattern (\(x_1 < x_0\)), the data might not exhibit \(F\) at all, increasing its rarity. Considering the case of parser evaluation as above, the parser might decide to overlook this feature in entirety, thus losing out on essential data.
+    \end{itemize}
+    \item With respect to identification of language-specific features, it is very possible that a lot of features might start getting wrongly associated with a language (the case of inflation as above) or they might be deemed a rare status (the case of deflation as above). Such instances, while seemingly harmless for high/medium resource languages, can pose serious problems with respect to low-resource languages, impacting the way the given language is studied.
+\end{enumerate}
+
+The problems as mentioned above are but a subset of multiple problems associated with an erroneous GS, and how they affect UD and the research around it. As such, these problems need to be minimized as much as possible, with attempts at their elimination in an ideal case. However, doing the task (of correcting the GS) manually is again a difficult one and the automatic methods are not always 100\% reliable and/or effective. While the methods often work well for individual languages or a language family, they often fail to generalize in a language-neutral sense. This is because of the different properties of languages, different language families, among others.
+
+\section{Formal Problem Statement}
+
+Having learned about the UD project, problems concerning semi-automatic conversions, and possible effects of these problems within the scope of UD, we can now formulate our problem statement for the scope of the thesis as follows:
+
+Given the different treebanks in UD, the thesis aims to identify inconsistencies in treebanks, and provide corresponding automated correction tools for them. The inconsistencies might be related to linguistic annotation, improper adherence to guidelines, lack of guidelines related to an observed phenomenon, annotator caused error, among others. The proposed methods should ideally not require a human annotator for verification, and should be as language-neutral as possible. However, language-specific methods can also be investigated and reported.
+
+\section{Data Source}
+
+When the work on the present thesis document was started in February 2019, UDv2.3 \citep{UDv2.3} was the latest release. Most of the experiments contained within this document were first developed for UDv2.3. However, with the release of UDv2.4 and subsequently UDv2.5, the experiments were carried forward to the newer dataset. The results throughout the length of the document are reported over UDv2.4 and UDv2.5 data.
+
+There are some experiments that work well for UDv2.4 and UDv2.5 throughout, and there are some that work better for only one of the releases, mainly owing to the error instance being fixed in iterative format, and/or continuously evolving guidelines. To facilitate the understanding of individual experiments better, each experiment shall contain a note specifying the dataset (which also mentions the release version of UD) on which the experiment was conducted.
+
+\section{Organizational Layout of the Document}
+
+This subsection deals with organization structure of the rest of the document. We first continue the preface of the document by very quickly noting a few conventions that are used throughout this document. In Chapter \ref{sec:problems}, we take a look at the different categorisation of errors, and then the typology of different problems identified in UD treebanks. We continue the document with Chapter \ref{chap:prev_research}, containing the background on the research pertaining to the problems from Chapter \ref{sec:problems}. In the subsequent chapters (Chapters \ref{chap:pos-harmony} - \ref{chap:failures}), we layout the individual problems, and elaborate on the method/approach undertaken to solve the problem(s). In Chapter \ref{chap:future}, we discuss on some of the open problems as identified by the other authors, which were not undertaken in the current work. We officially conclude the document with a chapter on Conclusions.
+
+Attached to the document are also a series of Appendices. The appendices contain the data meant to help the reader understand some of the terms used through out the document, with an example being a list of ISO language codes used throughout.
+
+\section{A Brief Overview of Conventions Used}
+\label{conventions}
+
+This section is an overview on some of the important conventions used throughout the length of the document.
+
+\begin{enumerate}
+    \item The following conventions hold with respect to the UD terminology. A short introduction to different terms associated with UD can be accessed in Appendix \ref{app:UDterminology}.
+    \begin{itemize}
+        \item Unless otherwise mentioned, part-of-speech (POS) refers to `UPOS' field in the CONLL-U format (Appendix \ref{app:conlluformat}). The two terms are used interchangeably, unless mentioned otherwise.
+        \item Syntactic Relations in UD can be referred to by either of `relation(s)', `deprel', or `dependency relation'. Unless otherwise mentioned, the instances refer to the `udeprel' field in CONLL-U format (Appendix \ref{app:conlluformat}).
+    \end{itemize}
+    
+    \item The POS tags, as well as dependency relations are formatted in the same formatting style, with one essential difference. Both the categories are marked orthographically using a separate tag in \LaTeX. We refer to this formatting style as `tag' category. \\
+    Table \ref{tab:formats} shows the difference in formatting as below:
+
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|l|l|}
+            \hline
+            Text Format & Output \\
+            \hline \hline
+            % heading
+            Regular & Lorem ipsum \\
+            Italic & \textit{Lorem ipsum}\\
+            Bold & \textbf{Lorem ipsum}\\
+            Tag & \verb|Lorem ipsum| \\
+            \hline
+        \end{tabular}
+        \caption{Illustration of Formatting styles}
+        \label{tab:formats}
+        \end{table}
+
+    \item The POS tags are always capitalized (written in upper-case), while the deprels are always non-capitalized (written in lower-case).
+    
+    \item When referring to specific files that are part of the standard release of the accompanying module, the filename is referred to with `Tag' category formatting.
+    
+    \item The use of `Tag' category is also reserved for nomenclature of problems. Thus, a problem identified as \verb|ProblemX| will act as the unique identifier for the problem across the length of the document.
+    
+    \item The languages are referred to by their language-identification codes whenever possible.
+    \begin{itemize}
+        \item A complete list of languages in UDv2.5, with their identification codes can be seen in Appendix \ref{app:lang_codes}.
+        \item The language codes are also formatted using `Tag' category as defined above. Given the nature of the dependency relations, it should be easily possible to disambiguate the language code from the former.
+        \item In case of an unclear distinction, the language name corresponding to the language-code shall follow in parentheses. 
+    \end{itemize}
+    
+    \item The name of the different treebanks are written in the format of\\ \verb|LanguageCode|-treebank\_name. The truecasing in the name of the treebank is optional.\\
+    For example, the SynTagRus treebank for \verb|ru| can be referred to by either of \verb|ru|-syntagrus or \verb|ru|-SynTagRus.
+    
+    \item The tokens taken from a language other than \verb|en| follow a pattern when mentioned inline:
+    \begin{itemize}
+        \item For the tokens with Latin based orthography, the token is marked in bold, followed by a literal translation in parenthesis. Consider the following example from \verb|nl|, written inline in text with \verb|en|.
+        \begin{example}
+            Lorem ipsum text \textbf{hier} (here).
+        \end{example}
+        \item For the tokens with non-Latin based orthography, the token is again marked in bold, followed by the transliteration of the token in italics, and the literal translation of the token in regular case, separated by a semi-colon. The transliteration, and the translation are mentioned in the parenthesis following the token. Consider the following example from \verb|ru|, written inline in text with \verb|en|.
+        \begin{example}
+            \textrussian{да} (\textit{da}; yes), this is Lorem ipsum text here.
+        \end{example}
+        \item For the case where LTR (Left-To-Right) languages are mentioned inline with RTL (Right-To-Left) languages, the transliteration and translation are written for the tokens in the order of utterance. Consider the following example, assuming \textbf{A, B and C} is written in RTL as \textbf{C and B ,A}. The example would be written inline with \verb|en| in the following way:
+        \begin{example}
+            This is the Lorem Ipsum for RTL language- \textbf{C and B ,A} (\textit{A, B and C}; A, B and C)
+        \end{example}
+    \end{itemize}
+    
+\end{enumerate}

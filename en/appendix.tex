@@ -1,0 +1,520 @@
+\chapter{Appendix}
+\label{appendix}
+
+\section{Terminology Pertaining to UD}
+\label{app:UDterminology}
+
+This appendix is meant primarily for the offline/hard copy readers of the document. A better (and official) explanation of the terms can be accessed online\footnote{\url{https://universaldependencies.org/format.html}}\textsuperscript{,}\footnote{\url{https://universaldependencies.org/u/overview/morphology.html}}.
+
+\subsection{CoNLL-U Format}
+\label{app:conlluformat}
+
+UD uses an extension of CoNLL-X format \citep{CONLLX}, referred to as CoNLL-U format. The CoNLL-U format is used for the annotation procedure, with three types of lines. Each line is delimited by LF character as line break, written in UTF-8 encoding. The details of the line types are as follows:
+
+\begin{enumerate}
+    \item \textbf{Blank Line}: A line without any content, used as a separator for annotations of different sentences in the treebank.
+    \item \textbf{Comment Line}: A line starting with hash (\#) symbol, typically contains details about the annotated sentence. The details that are common across all treebanks are `sent\_id` (a unique ID associated with each sentence in the treebank), and `text' (the text of the annotated sentence). The comment can also include any other details like paragraph id, document id, etc.
+    \item \textbf{Word Line}: Each Word Line contains the annotation of a single word, in a 10-column TSV (tab-separated values) format. The columns, in order, and their explanation are as follows:
+    \begin{enumerate}
+        \item \textbf{ID}: Word Index in the sentence, starts at 1. Can be a ranged value for fused tokens and multiword tokens; decimal value for empty nodes. The ID of a token can be only greater than 0.
+        \item \textbf{FORM}: Word Form, as it appears in the sentence.
+        \item \textbf{LEMMA}: Lemma or Stem of Word Form.
+        \item \textbf{UPOS}: The Universal POS tag of the word, as per UD Tagset.
+        \item \textbf{XPOS}: The language-specific POS tag of the word. Generally comes from the original tagset that was converted into UD. 
+        \item \textbf{FEATS}: List of morphological features from UD feature inventory, or a language specific version thereof.
+        \item \textbf{HEAD}: Head of the current word in dependency relation. Contains `ID' of the parent word, or 0 if the parent word is `Root' (explained later).
+        \item \textbf{DEPREL}: Universal Dependency Relation, extendable with language specific extension thereof (cf. Section \ref{app:UDAnnotation}).
+        \item \textbf{DEPS}: Enhanced Dependency Relation in form of head:deprel pairs.
+        \item \textbf{MISC}: Any other annotation.
+    \end{enumerate}
+    Of the different columns (referred to as Fields), there are associated restrictions, briefed as follows:
+    \begin{itemize}
+        \item Fields must not be empty. An unspecified value is represented by an underscore (\_) symbol. 
+        \item Fields other than FORM and LEMMA cannot contain space characters.
+        \item UPOS, HEAD, DEPREL are not allowed to be left unspecified.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{UD Annotation}
+\label{app:UDAnnotation}
+There are some additional points with respect to UD Annotation that must be clarified.
+\begin{enumerate}
+    \item For the dependency tree, UD annotates the global root of a sentence as a token with ID=0, referred to as \verb|ROOT|. The root in the sentence is always a singular unit, and is a direct child of this \verb|ROOT| node. 
+    \item A dependency relation is expressed in a format that combines the universal deprel and language specific part of deprel with a colon mark (:). The language specific extension is optional, but is present in a lot of cases nonetheless. We refer to the universal relation as udeprel, and the language specific extension as xdeprel. Following example illustrates the same.
+    \begin{example}
+    In DEPREL Field value as \verb|acl:relcl|, \verb|acl| is the universal dependency relation (referred to as udeprel, as per Udapi nomenclature) while \verb|relcl| is the language specific extension of \verb|acl| udeprel (referred to as xdeprel, as per Udapi nomenclature).
+    \end{example}
+    As mentioned earlier, we refer to udeprel when we talk about deprels in this document, unless otherwise stated.
+\end{enumerate}
+\newpage
+
+\section{List of Language Codes}
+\label{app:lang_codes}
+
+This appendix contains the list of languages along with their identification codes, as used in the different treebanks of UDv2.5. A full list of ISO 639-3 language codes can also be accessed online\footnote{\url{https://iso639-3.sil.org/code_tables/639/data/all}}. 
+
+Table \ref{tab:langISO} indicates languages where the ISO codes (ISO 639-1 or ISO 639-3) is used as an identifier, arranged in alphabetical order. The only exception is \verb|qhe| for UD\_Hindi\_English-HIENCS code-switching treebank, where the ISO code being employed is a reserved code for local use.
+
+\textbf{Note}: 
+\begin{itemize}
+    \item * against a language name indicates lack of a treebank corresponding to the language in UDv2.4.
+\end{itemize}
+
+\begin{longtable}{|l|l|}
+\hline \multicolumn{1}{|l|}{\textbf{Code}} &
+\multicolumn{1}{l|}{\textbf{Language Name}} \\ \hline \hline
+\endhead
+
+\hline \multicolumn{2}{|r|}{{Continued on next page}} \\ 
+\hline
+\endfoot
+\endlastfoot
+    \label{tab:langISO}
+\texttt{af} & Afrikaans\\
+\texttt{aii} & Assyrian \\
+\texttt{akk} & Akkadian\\
+\texttt{am} & Amharic \\
+\texttt{ar} & Arabic \\
+\texttt{be} & Belarusian \\
+\texttt{bg} & Bulgarian \\
+\texttt{bho} & Bhojpuri\(^{*}\) \\
+\texttt{bm} & Bambara \\
+\texttt{br} & Breton \\
+\texttt{bxr} & Buryat \\
+\texttt{ca} & Catalan \\
+\texttt{cop} & Coptic \\
+\texttt{cs} & Czech \\
+\texttt{cu} & Old Church Slavonic \\
+\texttt{cy} & Welsh \\
+\texttt{da} & Danish \\
+\texttt{de} & German \\
+\texttt{el} & Greek \\
+\texttt{en} & English \\
+\texttt{es} & Spanish \\
+\texttt{et} & Estonian \\
+\texttt{eu} & Basque \\
+\texttt{fa} & Persian \\
+\texttt{fi} & Finnish \\
+\texttt{fo} & Faroese \\
+\texttt{fr} & French \\
+\texttt{fro} & Old French \\
+\texttt{ga} & Irish \\
+\texttt{gd} & Scottish Gaelic\(^{*}\) \\
+\texttt{gl} & Galician \\
+\texttt{got} & Gothic \\
+\texttt{grc} & Ancient Greek \\
+\texttt{gsw} & Swiss German\(^{*}\) \\
+\texttt{gun} & Mbya Guarani \\
+\texttt{he} & Hebrew \\
+\texttt{hi} & Hindi \\
+\texttt{hr} & Croatian \\
+\texttt{hu} & Hungarian \\
+\texttt{hsb} & Upper Sorbian \\
+\texttt{hy} & Armenian \\
+\texttt{id} & Indonesian \\
+\texttt{it} & Italian \\
+\texttt{ja} & Japanese \\
+\texttt{kk} & Kazakh \\
+\texttt{kmr} & Kurmanji \\
+\texttt{ko} & Korean \\
+\texttt{koi} & Komi Permyak\(^{*}\) \\
+\texttt{kpv} & Komi Zyrian \\
+\texttt{krl} & Karelian \\
+\texttt{la} & Latin \\
+\texttt{lt} & Lithuanian \\
+\texttt{lv} & Latvian \\
+\texttt{lzh} & Classical Chinese \\
+\texttt{mdf} & Moksha\(^{*}\) \\
+\texttt{mr} & Marathi \\
+\texttt{mt} & Maltese \\
+\texttt{myv} & Erzya \\
+\texttt{no} & Norwegian \\
+\texttt{nl} & Dutch \\
+\texttt{olo} & Livvi\(^{*}\) \\
+\texttt{orv} & Old Russian \\
+\texttt{pcm} & Naija \\
+\texttt{pl} & Polish \\
+\texttt{pt} & Portuguese \\
+\texttt{ro} & Romanian \\
+\texttt{ru} & Russian \\
+\texttt{sa} & Sanskrit \\
+\texttt{sk} & Slovak \\
+\texttt{sl} & Slovenian \\
+\texttt{sme} & North Sami \\
+\texttt{sms} & Skolt Sami\(^{*}\) \\
+\texttt{sr} & Serbian \\
+\texttt{sv} & Swedish \\
+\texttt{swl} & Swedish Sign Language \\
+\texttt{ta} & Tamil \\
+\texttt{te} & Telugu \\
+\texttt{th} & Thai \\
+\texttt{tl} & Tagalog \\
+\texttt{tr} & Turkish \\
+\texttt{ug} & Uyghur \\
+\texttt{uk} & Ukrainian \\
+\texttt{ur} & Urdu \\
+\texttt{vi} & Vietnamese \\
+\texttt{wbp} & Warlpiri \\
+\texttt{wo} & Wolof \\
+\texttt{yo} & Yoruba \\
+\texttt{yue} & Cantonese \\
+\texttt{zh} & Chinese \\
+    \hline
+    \caption{Languages in UDv2.5, identified with their ISO Codes}
+    \end{longtable}
+
+\newpage
+
+\section{Multiple Treebanks in Languages (UDv2.5)}
+\label{app:multi_trees}
+
+Table \ref{tab:multi_trees} contains the different languages in UDv2.5 such that they contain multiple treebanks. The second column of the table corresponds to the count of the different treebanks, and the last column contains the name of the treebanks. Notice that PUD treebanks are not included. A list of PUD treebanks can be accessed in Appendix \ref{app:pud}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+    \hline
+    \textbf{Language} & \textbf{Count} & \textbf{Treebank Names} \\
+    \hline \hline
+\texttt{ar} & 2 & NYUAD, PADT \\
+\texttt{cs} & 4 & CAC, CLTT, FicTree, PDT \\
+\texttt{de} & 3 & GSD, HDT, LIT \\
+\texttt{en} & 6 & ESL, EWT, GUM, LinES, ParTUT, Pronouns\(^{+}\) \\
+\texttt{es} & 2 & AnCora, GSD \\
+\texttt{et} & 2 & EDT, EWT \\
+\texttt{fi} & 2 & FTB, TDT \\
+\texttt{fr} & 6 & FQB, FTB, GSD, ParTUT, Sequoia, Spoken \\
+\texttt{gl} & 2 & CTG, TreeGal \\
+\texttt{grc} & 2 & Perseus, PROIEL \\
+\texttt{gun} & 2 & Dooley, Thomas \\
+\texttt{it} & 5 & ISDT, ParTUT, PoSTWITA, TWITTIRO\(^{+}\), VIT \\
+\texttt{ja} & 3 & BCCWJ, GSD, Modern \\
+\texttt{ko} & 2 & GSD, Kaist \\
+\texttt{kpv} & 2 & IKDP, Lattice \\
+\texttt{la} & 3 & ITTB, Perseus, PROIEL \\
+\texttt{lt} & 2 & ALKSNIS, HSE \\
+\texttt{nl} & 2 & Alpino, LassySmall \\
+\texttt{no} & 3 & Bokmaal, Nynorsk, NynorskLIA \\
+\texttt{orv} & 2 & RNC, TOROT \\
+\texttt{pl} & 2 & LFG, PDB \\
+\texttt{pt} & 2 & Bosque, GSD \\
+\texttt{ro} & 3 & Nonstandard, RRT, SiMoNERo\(^{+}\) \\
+\texttt{ru} & 3 & GSD, SynTagRus, Taiga \\
+\texttt{sl} & 2 & SSJ, SST \\
+\texttt{sv} & 2 & LinES, Talbanken \\
+\texttt{tr} & 2 & GB, IMST \\
+\texttt{zh} & 4 & CFL, GSD, GSDSimp\(^{+}\), HK \\
+    \hline
+    \end{tabular}
+    \caption{Multiple Treebanks in Different Languages, UDv2.5}
+    Note: Superscript \(+\) against a treebank name indicates treebank not present in UDv2.4
+    \label{tab:multi_trees}
+\end{table}
+
+\newpage
+
+\section{PUD Treebanks}
+\label{app:pud}
+
+PUD treebanks were formed as a part of CoNLL 2017 Shared Task \citep{ud-shared-task}. Across different languages, the PUD treebanks contain the same 1000 sentences, from news genre, and from Wikipedia. Of these sentences, the first 750 sentences were originally in \verb|en|, whereas the others were originally in \verb|de|, \verb|es|, \verb|fr| or \verb|it| and were translated to other languages via \verb|en|. The translation into majority of the languages have been performed by professional translators. The treebanks for the languages were first annotated as per Google universal annotation guidelines \cite{google}, and then to UDv2 guidelines. The treebanks for \verb|cs|, \verb|fi| and \verb|sv| were translated by local teams responsible for the language, and were annotated directly as per UDv2 guidelines.
+
+Table \ref{tab:pud} contains a list of languages which contain a PUD treebank. Notice that PUD treebanks contain only the test set, and are devoid of train and dev data. The official recommended usage of PUD treebanks is with a 10-fold cross validation for training purpose, or using the whole treebank as testing data, as the case may be.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Code} & \textbf{Language Name} \\
+    \hline \hline
+\texttt{ar} & Arabic \\
+\texttt{cs} & Czech \\
+\texttt{de} & German \\
+\texttt{en} & English \\
+\texttt{es} & Spanish \\
+\texttt{fi} & Finnish \\
+\texttt{fr} & French \\
+\texttt{hi} & Hindi \\
+\texttt{id} & Indonesian \\
+\texttt{it} & Italian \\
+\texttt{ja} & Japanese \\
+\texttt{ko} & Korean \\
+\texttt{pl} & Polish \\
+\texttt{pt} & Portuguese \\
+\texttt{ru} & Russian \\
+\texttt{sv} & Swedish \\
+\texttt{th} & Thai \\
+\texttt{tr} & Turkish \\
+\texttt{zh} & Chinese \\
+    \hline
+    \end{tabular}
+    \caption{Languages with PUD Treebanks, UDv2.5}
+    \label{tab:pud}
+\end{table}
+
+\newpage
+
+\section{Treebanks without train/dev Data}
+\label{app:treebank_data}
+
+The Table \ref{tab:test_only} lists treebanks (in alphabetical order) in UDv2.5 with either of train or dev data being unavailable. Note that all PUD treebanks, generated for CoNLL-2018 Shared Task, do not have either of train or dev data, and are therefore not included in this table.
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{|l|l|}
+    \hline 
+    \textbf{Treebank Name} & \textbf{Unavailable} \\
+    \hline 
+    \hline
+    \texttt{aii}-AS & train, dev \\
+    \texttt{akk}-PISANDUB & train, dev \\
+    \texttt{am}-ATT & train, dev \\
+    \texttt{bm}-CRB & train, dev \\
+    \texttt{bho}-BHTB & train, dev \\
+    \texttt{br}-KEB & train, dev \\
+    \texttt{bxr}-BDT & dev \\
+    \texttt{ca}-HK & train, dev \\
+    \texttt{cy}-CCG & train, dev \\
+    \texttt{de}-LIT & train, dev \\
+    \texttt{en}-Pronouns & train, dev \\
+    \texttt{et}-EWT & dev \\
+    \texttt{fo}-OFT & train, dev \\
+    \texttt{fr}-FQB & train, dev \\
+    \texttt{gl}-TreeGal & dev \\
+    \texttt{gsw}-UZH & train, dev \\
+    \texttt{gun}-Dooley & train, dev \\
+    \texttt{gun}-Thomas & train, dev \\
+    \texttt{hsb}-UFAL & dev \\
+    \texttt{ja}-Modern & train, dev \\
+    \hline
+    \end{tabular}
+    \begin{tabular}{|l|l|}
+    \hline 
+    \textbf{Treebank Name} & \textbf{Unavailable} \\
+    \hline 
+    \hline
+    \texttt{kk}-KTB & dev \\
+    \texttt{kmr}-MG & dev \\
+    \texttt{koi}-UH & train, dev\\
+    \texttt{kpv}-IKDP & train, dev \\
+    \texttt{kpv}-Lattice & train, dev \\
+    \texttt{krl}-KKPP & train, dev \\
+    \texttt{mdf}-JR & train, dev \\
+    \texttt{myv}-JR & train, dev \\
+    \texttt{olo}-KKPP & dev \\
+    \texttt{orv}-RNC & train, dev \\
+    \texttt{pcm}-NSC & train, dev \\
+    \texttt{ro}-SiMoNERo & train, dev \\
+    \texttt{sa}-UFAL & train, dev \\
+    \texttt{sl}-SST & dev \\
+    \texttt{sme}-Giella & dev \\
+    \texttt{tl}-TRG & train, dev \\
+    \texttt{tr}-GB & train, dev \\
+    \texttt{wbp}-UFAL & train, dev \\
+    \texttt{yo}-YTB & train, dev \\
+    \texttt{zh}-CFL & train, dev \\
+    \texttt{zh}-HK & train, dev \\
+    \hline
+\end{tabular}
+\caption{Unavailable Data in UDv2.5 Treebanks}
+\label{tab:test_only}
+\end{table}
+
+\newpage
+\section{Relaxations to Non-Projectivity}
+\label{app:nonproj-relaxations}
+
+The condition of projectivity is a strict constraint for natural languages, exhibited by very few constructions in most languages of the world. To better account for linguistic processes, several relaxations to the definition of projectivity were defined. A discussion of all such relaxations is out of scope of this work. However, we define 3 most widely used relaxations here.
+
+\begin{enumerate}
+    \item \textbf{Planarity}\\
+    The given tree is said to be planar, if it does not have any edges that overlap. Formally speaking, given two undirected edges \(i1 \leftrightarrow j1 \text{ and } i2 \leftrightarrow j2\); if \(i1 < i2 < j1 < j2\) or \(i1 > i2 > j1 > j2\), the edges are said to overlap.
+    Therefore, a given tree is called non-planar if there exists a pair of edges \(i1 \leftrightarrow j1\) and \(i2 \leftrightarrow j2\) such that the edges overlap.
+    \item \textbf{Ill-Nestedness}\\
+    It is easier to define the condition of ill-nestedness rather than to define the well-nestedness. A given (sub)tree is called ill-nested, if for given undirected edges \(i1 \leftrightarrow j1 \text{ and } i2 \leftrightarrow j2\); \(i1 \in Gap(i2,j2) \And i2 \in Gap(i1,j1)\). It is worth noting that projective trees are always well-nested, but a well-nested tree is not always projective.
+    \item \textbf{Mild Non-Projectivity}\\
+    A tree is said to be mildly non-projective if
+    \begin{enumerate}
+        \item It is well-nested.
+        \item The gap degree of the tree is bound by any constant \(k\). Essentially, gap degree of tree \(\leq k\).
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Statistics of Non-Projectivities in UDv2.5}
+
+\begin{longtable}{|l|l|l|l|l|l|l|l|}
+    \hline 
+    \multirow{2}{*}{\textbf{Treebank}} &
+    \multirow{2}{*}{\textbf{\# Trees}} & 
+    \multicolumn{2}{c|}{\textbf{Non-Proj.}} & 
+    \multicolumn{2}{c|}{\textbf{Non-Planar}} & 
+    \multicolumn{2}{c|}{\textbf{Ill-Nested}} \\
+     & & Trees & \% & Trees & \% & Trees & \% \\
+    \hline 
+    \endhead
+    \hline 
+    \multicolumn{8}{|r|}{{Continued on next page}} \\ 
+    \hline
+    \endfoot
+    \endlastfoot
+    \hline
+    \label{tab:allnpudv2.5}
+\texttt{af}\_afribooms & 1934 & 432 & 22.3371 & 19 & 0.9824 & 1 & 0.0517\\
+\texttt{aii}\_as & 57 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{akk}\_pisandub & 101 & 7 & 6.9307 & 0 & 0.0 & 0 & 0.0\\
+\texttt{am}\_att & 1074 & 26 & 2.4209 & 0 & 0.0 & 0 & 0.0\\
+\texttt{ar}\_nyuad & 19738 & 122 & 0.6181 & 0 & 0.0 & 0 & 0.0\\
+\texttt{ar}\_padt & 7664 & 638 & 8.3246 & 19 & 0.2479 & 11 & 0.1435\\
+\texttt{ar}\_pud & 1000 & 38 & 3.8 & 1 & 0.1 & 0 & 0.0\\
+\texttt{be}\_hse & 637 & 46 & 7.2214 & 0 & 0.0 & 0 & 0.0\\
+\texttt{bg}\_btb & 11138 & 342 & 3.0706 & 2 & 0.018 & 1 & 0.009\\
+\texttt{bho}\_bhtb & 254 & 35 & 13.7795 & 7 & 2.7559 & 1 & 0.3937\\
+\texttt{bm}\_crb & 1026 & 33 & 3.2164 & 0 & 0.0 & 0 & 0.0\\
+\texttt{br}\_keb & 888 & 24 & 2.7027 & 1 & 0.1126 & 1 & 0.1126\\
+\texttt{bxr}\_bdt & 927 & 145 & 15.6419 & 12 & 1.2945 & 1 & 0.1079\\
+\texttt{ca}\_ancora & 16678 & 746 & 4.473 & 5 & 0.03 & 0 & 0.0\\
+\texttt{cop}\_scriptorium & 1575 & 206 & 13.0794 & 0 & 0.0 & 0 & 0.0\\
+\texttt{cs}\_cac & 24709 & 3143 & 12.7201 & 50 & 0.2024 & 14 & 0.0567\\
+\texttt{cs}\_cltt & 1125 & 163 & 14.4889 & 7 & 0.6222 & 6 & 0.5333\\
+\texttt{cs}\_fictree & 12760 & 1455 & 11.4028 & 32 & 0.2508 & 3 & 0.0235\\
+\texttt{cs}\_pdt & 87913 & 10098 & 11.4864 & 157 & 0.1786 & 47 & 0.0535\\
+\texttt{cs}\_pud & 1000 & 104 & 10.4 & 2 & 0.2 & 1 & 0.1\\
+\texttt{cu}\_proiel & 6338 & 1034 & 16.3143 & 32 & 0.5049 & 5 & 0.0789\\
+\texttt{cy}\_ccg & 956 & 18 & 1.8828 & 1 & 0.1046 & 0 & 0.0\\
+\texttt{da}\_ddt & 5512 & 1185 & 21.4985 & 55 & 0.9978 & 19 & 0.3447\\
+\texttt{de}\_gsd & 15590 & 1451 & 9.3072 & 24 & 0.1539 & 4 & 0.0257\\
+\texttt{de}\_hdt & 189928 & 12871 & 6.7768 & 588 & 0.3096 & 37 & 0.0195\\
+\texttt{de}\_lit & 1922 & 150 & 7.8044 & 10 & 0.5203 & 1 & 0.052\\
+\texttt{de}\_pud & 1000 & 137 & 13.7 & 6 & 0.6 & 1 & 0.1\\
+\texttt{el}\_gdt & 2521 & 142 & 5.6327 & 0 & 0.0 & 0 & 0.0\\
+\texttt{en}\_esl & 5124 & 208 & 4.0593 & 7 & 0.1366 & 4 & 0.0781\\
+\texttt{en}\_ewt & 16622 & 767 & 4.6144 & 22 & 0.1324 & 6 & 0.0361\\
+\texttt{en}\_gum & 5427 & 410 & 7.5548 & 10 & 0.1843 & 1 & 0.0184\\
+\texttt{en}\_lines & 5243 & 459 & 8.7545 & 24 & 0.4578 & 13 & 0.2479\\
+\texttt{en}\_partut & 2090 & 39 & 1.866 & 2 & 0.0957 & 1 & 0.0478\\
+\texttt{en}\_pronouns & 285 & 5 & 1.7544 & 0 & 0.0 & 0 & 0.0\\
+\texttt{en}\_pud & 1000 & 45 & 4.5 & 1 & 0.1 & 0 & 0.0\\
+\texttt{es}\_ancora & 17680 & 928 & 5.2489 & 5 & 0.0283 & 0 & 0.0\\
+\texttt{es}\_gsd & 16013 & 937 & 5.8515 & 16 & 0.0999 & 2 & 0.0125\\
+\texttt{es}\_pud & 1000 & 45 & 4.5 & 1 & 0.1 & 0 & 0.0\\
+\texttt{et}\_edt & 30972 & 993 & 3.2061 & 9 & 0.0291 & 3 & 0.0097\\
+\texttt{et}\_ewt & 1662 & 111 & 6.6787 & 2 & 0.1203 & 1 & 0.0602\\
+\texttt{eu}\_bdt & 8993 & 2983 & 33.1702 & 424 & 4.7148 & 92 & 1.023\\
+\texttt{fa}\_seraji & 5997 & 401 & 6.6867 & 25 & 0.4169 & 1 & 0.0167\\
+\texttt{fi}\_ftb & 18723 & 1444 & 7.7124 & 150 & 0.8012 & 73 & 0.3899\\
+\texttt{fi}\_pud & 1000 & 36 & 3.6 & 0 & 0.0 & 0 & 0.0\\
+\texttt{fi}\_tdt & 15136 & 931 & 6.1509 & 9 & 0.0595 & 0 & 0.0\\
+\texttt{fo}\_oft & 1208 & 33 & 2.7318 & 2 & 0.1656 & 1 & 0.0828\\
+\texttt{fr}\_fqb & 2289 & 75 & 3.2765 & 1 & 0.0437 & 0 & 0.0\\
+\texttt{fr}\_ftb & 18535 & 2019 & 10.8929 & 69 & 0.3723 & 21 & 0.1133\\
+\texttt{fr}\_gsd & 16342 & 428 & 2.619 & 6 & 0.0367 & 0 & 0.0\\
+\texttt{fr}\_partut & 1020 & 45 & 4.4118 & 0 & 0.0 & 0 & 0.0\\
+\texttt{fr}\_pud & 1000 & 17 & 1.7 & 0 & 0.0 & 0 & 0.0\\
+\texttt{fr}\_sequoia & 3099 & 66 & 2.1297 & 0 & 0.0 & 0 & 0.0\\
+\texttt{fr}\_spoken & 2789 & 340 & 12.1907 & 8 & 0.2868 & 1 & 0.0359\\
+\texttt{fro}\_srcmf & 17678 & 2726 & 15.4203 & 290 & 1.6405 & 82 & 0.4639\\
+\texttt{ga}\_idt & 1763 & 272 & 15.4282 & 22 & 1.2479 & 9 & 0.5105\\
+\texttt{gd}\_arcosg & 2193 & 259 & 11.8103 & 14 & 0.6384 & 8 & 0.3648\\
+\texttt{gl}\_ctg & 3993 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{gl}\_treegal & 1000 & 113 & 11.3 & 7 & 0.7 & 2 & 0.2\\
+\texttt{got}\_proiel & 5401 & 949 & 17.5708 & 32 & 0.5925 & 5 & 0.0926\\
+\texttt{grc}\_perseus & 13919 & 8890 & 63.8695 & 1275 & 9.1601 & 150 & 1.0777\\
+\texttt{grc}\_proiel & 17080 & 6409 & 37.5234 & 392 & 2.2951 & 38 & 0.2225\\
+\texttt{gsw}\_uzh & 100 & 4 & 4.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{gun}\_dooley & 1046 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{gun}\_thomas & 98 & 4 & 4.0816 & 0 & 0.0 & 0 & 0.0\\
+\texttt{he}\_htb & 6216 & 472 & 7.5933 & 6 & 0.0965 & 0 & 0.0\\
+\texttt{hi}\_hdtb & 16647 & 2264 & 13.6 & 116 & 0.6968 & 13 & 0.0781\\
+\texttt{hi}\_pud & 1000 & 257 & 25.7 & 16 & 1.6 & 1 & 0.1\\
+\texttt{hr}\_set & 9010 & 810 & 8.99 & 20 & 0.222 & 9 & 0.0999\\
+\texttt{hsb}\_ufal & 646 & 73 & 11.3003 & 2 & 0.3096 & 0 & 0.0\\
+\texttt{hu}\_szeged & 1800 & 488 & 27.1111 & 38 & 2.1111 & 17 & 0.9444\\
+\texttt{hy}\_armtdp & 2502 & 179 & 7.1543 & 4 & 0.1599 & 0 & 0.0\\
+\texttt{id}\_gsd & 5593 & 291 & 5.2029 & 11 & 0.1967 & 2 & 0.0358\\
+\texttt{id}\_pud & 1000 & 13 & 1.3 & 0 & 0.0 & 0 & 0.0\\
+\texttt{it}\_isdt & 14167 & 196 & 1.3835 & 9 & 0.0635 & 5 & 0.0353\\
+\texttt{it}\_partut & 2090 & 42 & 2.0096 & 2 & 0.0957 & 2 & 0.0957\\
+\texttt{it}\_postwita & 6713 & 86 & 1.2811 & 2 & 0.0298 & 2 & 0.0298\\
+\texttt{it}\_pud & 1000 & 8 & 0.8 & 0 & 0.0 & 0 & 0.0\\
+\texttt{it}\_twittiro & 1424 & 17 & 1.1938 & 1 & 0.0702 & 0 & 0.0\\
+\texttt{it}\_vit & 10087 & 353 & 3.4996 & 18 & 0.1784 & 7 & 0.0694\\
+\texttt{ja}\_bccwj & 57109 & 163 & 0.2854 & 1 & 0.0018 & 0 & 0.0\\
+\texttt{ja}\_gsd & 8186 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{ja}\_modern & 822 & 5 & 0.6083 & 0 & 0.0 & 0 & 0.0\\
+\texttt{ja}\_pud & 1000 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{kk}\_ktb & 1078 & 130 & 12.0594 & 3 & 0.2783 & 1 & 0.0928\\
+\texttt{kmr}\_mg & 754 & 130 & 17.2414 & 5 & 0.6631 & 4 & 0.5305\\
+\texttt{ko}\_gsd & 6339 & 1006 & 15.87 & 22 & 0.3471 & 3 & 0.0473\\
+\texttt{ko}\_kaist & 27363 & 5938 & 21.7008 & 89 & 0.3253 & 0 & 0.0\\
+\texttt{ko}\_pud & 1000 & 66 & 6.6 & 0 & 0.0 & 0 & 0.0\\
+\texttt{koi}\_uh & 49 & 1 & 2.0408 & 0 & 0.0 & 0 & 0.0\\
+\texttt{kpv}\_ikdp & 117 & 3 & 2.5641 & 0 & 0.0 & 0 & 0.0\\
+\texttt{kpv}\_lattice & 210 & 4 & 1.9048 & 1 & 0.4762 & 0 & 0.0\\
+\texttt{krl}\_kkpp & 228 & 45 & 19.7368 & 3 & 1.3158 & 0 & 0.0\\
+\texttt{la}\_ittb & 21011 & 7771 & 36.9854 & 357 & 1.6991 & 39 & 0.1856\\
+\texttt{la}\_perseus & 2273 & 1094 & 48.1302 & 201 & 8.8429 & 64 & 2.8157\\
+\texttt{la}\_proiel & 18411 & 5227 & 28.3906 & 448 & 2.4333 & 38 & 0.2064\\
+\texttt{lt}\_alksnis & 3642 & 441 & 12.1087 & 7 & 0.1922 & 1 & 0.0275\\
+\texttt{lt}\_hse & 263 & 38 & 14.4487 & 2 & 0.7605 & 1 & 0.3802\\
+\texttt{lv}\_lvtb & 13643 & 888 & 6.5088 & 7 & 0.0513 & 0 & 0.0\\
+\texttt{lzh}\_kyoto & 15115 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{mdf}\_jr & 65 & 2 & 3.0769 & 0 & 0.0 & 0 & 0.0\\
+\texttt{mr}\_ufal & 466 & 28 & 6.0086 & 1 & 0.2146 & 1 & 0.2146\\
+\texttt{mt}\_mudt & 2074 & 81 & 3.9055 & 1 & 0.0482 & 0 & 0.0\\
+\texttt{myv}\_jr & 1550 & 79 & 5.0968 & 4 & 0.2581 & 3 & 0.1935\\
+\texttt{nl}\_alpino & 13578 & 1961 & 14.4425 & 129 & 0.9501 & 0 & 0.0\\
+\texttt{nl}\_lassysmall & 7338 & 447 & 6.0916 & 25 & 0.3407 & 1 & 0.0136\\
+\texttt{no}\_bokmaal & 20044 & 1495 & 7.4586 & 32 & 0.1596 & 0 & 0.0\\
+\texttt{no}\_nynorsk & 17575 & 1361 & 7.744 & 27 & 0.1536 & 4 & 0.0228\\
+\texttt{no}\_nynorsklia & 5250 & 495 & 9.4286 & 37 & 0.7048 & 3 & 0.0571\\
+\texttt{olo}\_kkpp & 125 & 17 & 13.6 & 2 & 1.6 & 2 & 1.6\\
+\texttt{orv}\_rnc & 604 & 189 & 31.2914 & 10 & 1.6556 & 3 & 0.4967\\
+\texttt{orv}\_torot & 16944 & 2575 & 15.1971 & 71 & 0.419 & 4 & 0.0236\\
+\texttt{pcm}\_nsc & 948 & 6 & 0.6329 & 0 & 0.0 & 0 & 0.0\\
+\texttt{pl}\_lfg & 17246 & 111 & 0.6436 & 3 & 0.0174 & 1 & 0.0058\\
+\texttt{pl}\_pdb & 22152 & 1390 & 6.2748 & 20 & 0.0903 & 2 & 0.009\\
+\texttt{pl}\_pud & 1000 & 52 & 5.2 & 0 & 0.0 & 0 & 0.0\\
+\texttt{pt}\_bosque & 9365 & 2862 & 30.5606 & 307 & 3.2782 & 72 & 0.7688\\
+\texttt{pt}\_gsd & 12078 & 684 & 5.6632 & 11 & 0.0911 & 6 & 0.0497\\
+\texttt{pt}\_pud & 1000 & 33 & 3.3 & 0 & 0.0 & 0 & 0.0\\
+\texttt{qhe}\_hiencs & 1898 & 192 & 10.1159 & 7 & 0.3688 & 4 & 0.2107\\
+\texttt{ro}\_nonstandard & 15843 & 819 & 5.1695 & 9 & 0.0568 & 1 & 0.0063\\
+\texttt{ro}\_rrt & 9524 & 864 & 9.0718 & 21 & 0.2205 & 10 & 0.105\\
+\texttt{ro}\_simonero & 491 & 54 & 10.998 & 4 & 0.8147 & 1 & 0.2037\\
+\texttt{ru}\_gsd & 5030 & 318 & 6.3221 & 10 & 0.1988 & 2 & 0.0398\\
+\texttt{ru}\_pud & 1000 & 24 & 2.4 & 0 & 0.0 & 0 & 0.0\\
+\texttt{ru}\_syntagrus & 61889 & 4658 & 7.5264 & 58 & 0.0937 & 13 & 0.021\\
+\texttt{ru}\_taiga & 3264 & 277 & 8.4865 & 12 & 0.3676 & 5 & 0.1532\\
+\texttt{sa}\_ufal & 230 & 40 & 17.3913 & 3 & 1.3043 & 0 & 0.0\\
+\texttt{sk}\_snk & 10604 & 347 & 3.2724 & 4 & 0.0377 & 2 & 0.0189\\
+\texttt{sl}\_ssj & 8000 & 960 & 12.0 & 11 & 0.1375 & 2 & 0.025\\
+\texttt{sl}\_sst & 3188 & 144 & 4.5169 & 1 & 0.0314 & 0 & 0.0\\
+\texttt{sme}\_giella & 3122 & 338 & 10.8264 & 21 & 0.6726 & 5 & 0.1602\\
+\texttt{sms}\_giellagas & 36 & 2 & 5.5556 & 0 & 0.0 & 0 & 0.0\\
+\texttt{sr}\_set & 4384 & 172 & 3.9234 & 5 & 0.1141 & 1 & 0.0228\\
+\texttt{sv}\_lines & 5243 & 305 & 5.8173 & 13 & 0.2479 & 4 & 0.0763\\
+\texttt{sv}\_pud & 1000 & 38 & 3.8 & 0 & 0.0 & 0 & 0.0\\
+\texttt{sv}\_talbanken & 6026 & 181 & 3.0037 & 0 & 0.0 & 0 & 0.0\\
+\texttt{swl}\_sslc & 203 & 67 & 33.0049 & 6 & 2.9557 & 0 & 0.0\\
+\texttt{ta}\_ttb & 600 & 9 & 1.5 & 0 & 0.0 & 0 & 0.0\\
+\texttt{te}\_mtg & 1328 & 2 & 0.1506 & 0 & 0.0 & 0 & 0.0\\
+\texttt{th}\_pud & 1000 & 28 & 2.8 & 0 & 0.0 & 0 & 0.0\\
+\texttt{tl}\_trg & 55 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{tr}\_gb & 2802 & 28 & 0.9993 & 0 & 0.0 & 0 & 0.0\\
+\texttt{tr}\_imst & 5635 & 646 & 11.4641 & 65 & 1.1535 & 26 & 0.4614\\
+\texttt{tr}\_pud & 1000 & 149 & 14.9 & 4 & 0.4 & 0 & 0.0\\
+\texttt{ug}\_udt & 3456 & 172 & 4.9769 & 1 & 0.0289 & 0 & 0.0\\
+\texttt{uk}\_iu & 7060 & 547 & 7.7479 & 9 & 0.1275 & 1 & 0.0142\\
+\texttt{ur}\_udtb & 5130 & 1158 & 22.5731 & 98 & 1.9103 & 27 & 0.5263\\
+\texttt{vi}\_vtb & 3000 & 87 & 2.9 & 1 & 0.0333 & 0 & 0.0\\
+\texttt{wbp}\_ufal & 55 & 6 & 10.9091 & 0 & 0.0 & 0 & 0.0\\
+\texttt{wo}\_wtb & 2107 & 63 & 2.99 & 1 & 0.0475 & 1 & 0.0475\\
+\texttt{yo}\_ytb & 100 & 9 & 9.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{yue}\_hk & 1004 & 126 & 12.5498 & 13 & 1.2948 & 5 & 0.498\\
+\texttt{zh}\_cfl & 451 & 4 & 0.8869 & 0 & 0.0 & 0 & 0.0\\
+\texttt{zh}\_gsd & 4997 & 117 & 2.3414 & 1 & 0.02 & 0 & 0.0\\
+\texttt{zh}\_gsdsimp & 4997 & 0 & 0.0 & 0 & 0.0 & 0 & 0.0\\
+\texttt{zh}\_hk & 1004 & 43 & 4.2829 & 0 & 0.0 & 0 & 0.0\\
+\texttt{zh}\_pud & 1000 & 7 & 0.7 & 0 & 0.0 & 0 & 0.0\\
+\hline
+\caption{Non-Projectivity and Relaxations in UDv2.5 Data (\% of \# Trees)}
+\end{longtable}

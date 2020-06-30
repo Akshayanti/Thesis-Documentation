@@ -1,0 +1,394 @@
+\chapter{Experiment4: Mining False Non-Projective Structures}
+\label{chap:nonproj}
+
+\section{Observations About Problem Statement}
+\subsection{Projectivization vs False Non-Projectivity}
+
+Projectivization can best be defined as making a non-projective structure artificially projective. This could be for the sake of training a parser, or to form a phrase-based constituency tree, among others. \cite{nivre2005pseudo} discuss the projectivization procedure for a non-projective edge using a process called edge lift. In the process, once a non-projective edge is detected, it is re-attached to the grandparent node as per the original attachment. The authors also define a minimal projective transformation to remove non-projective edges from a tree in an iterative manner. To do so, the algorithm starts with the node that has the least distance between the head and the dependent, and then performs lift operation on it, repeating the process until the entire tree is projectivized. The authors use this approach to find an optimal parser for parsing non-projectivities in the languages. A udapy-python block on the method of \citeauthor{nivre2005pseudo} is also under development\footnote{\url{https://github.com/udapi/udapi-python/tree/master/udapi/block/transform}} at the time of writing this document.
+
+While there have been several publications on how to develop parsers that can parse non-projective trees efficiently (\citep{npparser1}, \citep{npparser2}, \citep{npparser3}, among others), there are also multiple works in an attempt to understand the linguistic features that cause non-projectivities (\citep{mannem2009insights}, \citep{mambriniNonProj},
+\citep{npprojvalency}, among others). The need for automatic error-correction methods for treebanks was realised early on, thanks to \cite{boyd}. Since then, the focus of such techniques for dependency treebanks has been limited to either determining the direction of association of edges, determining right candidate node for association (also intersects with dependency parsing), or determining the correct association between the nodes. While a search for false non-projective structures would also employ all of the above, this is the first work that focuses on the particular problem of finding false non-projective structures.
+
+\cite{mannem2009insights} inspect the causes of non-projectivity in Hyderabad Dependency Treebank\footnote{Later adapted into UD as \texttt{hi}-hdtb treebank} (HyDT) for \verb|hi| where they define the notion of rigidity of a non-projective structure as the possibility of reordering the construction without losing on the meaning of a sentence (not taking into consideration the discourse and topic-focus). The authors look at major causes of non-projectivities in the treebank, and classify each of the cause as rigid/non-rigid based on if it is possible to remove non-projectivity from the structure through reordering. Out of the total number of non-projective structures in the treebank, only around a 20\% of them could be classified as rigid structures, which couldn't be projectivized. The authors rely on their knowledge of the language to classify the underlying causal linguistic phenomenon (of non-projectivity) as rigid/non-rigid, without offering any (data driven) rules to determine the rigidity of a structure. The authors also define the notion of \textit{naturalness} of a projectivized construction, based on if the speakers of language would prefer a projective or non-projective structure. Again, this is also not defined in an empirical manner, but is open to subjectivity of the speaker of the language. Although the definition of rigidity can come handy in context of free word-order languages, it is not a metric that can be employed to all languages universally. Extending definitions given by \citeauthor{mannem2009insights} and based on their classification, we would like to differentiate between a few different kinds of non-projective structures as below, while still going by the definition of \textit{rigidity} and \textit{natural}-ness as given by the authors.
+
+\begin{enumerate}
+    \item Not rigid, and \textbf{does not} require reordering for natural projectivity
+    \item Not rigid, and \textbf{does} require reordering for natural projectivity
+    \item Not rigid, and no natural projectivity possible
+    \item Rigid, with natural projectivity possible
+    \item Rigid, and no natural projectivity possible
+\end{enumerate}
+
+Given that we are not interested in reordering the nodes of a tree in a given treebank, the second case as mentioned above does not warrant consideration in the present research. For the exact same reason, we can combine remaining cases to get the following two cases, referred to as condensed cases henceforth:
+
+\begin{enumerate}
+    \item \textbf{Natural Projectivity Possible}: A given edge can occur non-projectively, as well as projectively. A very common example of this can be seen in poetry, or in elliptical constructions where the choice of construction can make an edge projective or non-projective.
+    \item \textbf{Natural Projectivity Not Possible}: There are a few constructions that seem to always introduce non-projectivity. In \verb|hi|, the tendency is exhibited by token \texthindi{कि} (\textit{ki}; that) as pointed out by \cite{mannem2009insights}.
+    
+\end{enumerate}
+
+Different treebanks in UD do not annotate the multiple possible structures of a given sentence, but rather the most frequently used one. Therefore, a given sentence (or a sequence of tokens contained therein) can be categorised in either of the two condensed cases. In this experiment, we seek to identify the cases of the first kind where an edge has been annotated as non-projective, when a projective edge is more likely. Going the reverse way, we also want to identify the cases where a given edge in second case has been annotated as a projective edge. To do so, we use the concept of variation nuclei as used in \cite{boyd}. We have not yet defined the \textit{natural}-ness of a construction so far, in terms of data-driven approach. We do not go over the concept here, but elaborate on it alongwith the discussion of variation nuclei in Section \ref{sec:variation}.
+
+\subsection{Terms Related to Non-Projectivity}
+
+In a directed edge \(i \rightarrow j\), we refer to \(i\) as head, and \(j\) as dependent. Unless mentioned otherwise, we refer to directed edges, with the ordered pair \((i, j)\) denoting \(i \rightarrow j\). We refer to the subtree, rooted at node \(i\) as \(Subtree(i)\). To specify that node \(i\) precedes node \(j\) in tree, we denote it in the form of \(i < j\). A node \(x\) is said to be in gap of non-projective edge if \((i,j)\) if \(x \in (i, j) \And x \notin Subtree(i)\). Alternatively, the node \(x\) is said to belong to gap of \((i, j)\), denoted as \(x \in Gap(i, j)\).
+
+Edge degree is defined as the number of nodes in a tree \(T\) that are in gap. The edge-degree of a tree is defined as the maximum edge-degree from the individual edge's edge-degree. While this is based on a per-edge basis, a gap degree is defined as the number of times a non-projective edge's gap is broken. A very trivial way of calculating gap degree of an edge (\(i, j\)) is to iterate through the nodes in order. Let us say, we have node \(x \in (i, j)\). If \(x\) alongwith its immediate neighbours are all in \(Subtree(i)\) or if none of them is, the gap is not broken. Every time the condition is not met, the gap is said to be broken. The gap degree of an edge is the number of times the gap is broken. Similar to the definition of edge-degree of a tree, gap degree of a tree is the maximum gap degree among all edges therein.
+
+
+\subsection{Genre Association with Non-Projectivity}
+
+
+
+The rest of the chapter is organised as follows. Section \ref{sec:nonproj_dataset} talks about the used dataset for the experiment. We split the analysis of the data in two parts, analysing the non-mild non-projective structures in Section \ref{sec:nonmildnonproj}, and then discussing the concept of variation nuclei and the selection (and querying process) of variation nuclei in mild non-projective structures in Section \ref{sec:variation}. We continue with an evaluation of the findings of the experiments in Section \ref{sec:nonprojeval}. Section \ref{sec:nonprojconclude} concludes.
+
+\section{Dataset}
+\label{sec:nonproj_dataset}
+
+The experiment was started on UDv2.3, and eventually brought over to UDv2.4. The experiment(s) on non-projective structures in a treebank were tried over an extended period of time, and as the newer versions of UD were released, the dataset for the experiment changed. The presented version of the experiments was conducted over UDv2.5 \citep{UDv2.5}. As with other experiments that changed datasets in the chronology of the research, the number of problematic cases have diminished over the newer versions of UD. Nonetheless, the problem of identifying the incorrect cases of non-projectivity in a treebank is still relevant, especially in case of treebank(s) of languages where non-projectivity is already established as a common phenomenon\footnote{As mentioned earlier, there exists an association between the genre of the text and the counts of non-projective structures therein. Although we do not discard that association, in this context we refer to the languages where the probability of finding non-projectivities in high, regardless of the genre.} (\cite{mambriniNonProj}, \cite{indic-riyaz}, \cite{Havelka}).
+
+The \verb|fixpunct| block\footnote{\url{https://github.com/udapi/udapi-python/blob/master/udapi/block/ud/fixpunct.py}} of udapi-Python \citep{udapi} attempts to rehang the punctuation nodes. This also takes care of the punctuation nodes that cause non-projectivity, or are attached non-projectively. Since the procedure of lifting the punctuation nodes is not deterministic, there are times when the udapi block makes the situation worse, by introducing non-projectivities in the given data\footnote{One such example can be seen in case of \texttt{cs}\_pdt in Table \ref{tab:treatment-results} where the number of non-projective edges is increased, post application of the udapi block on the treebank}.
+
+UDv2.5 contains 157 treebanks in 90 languages. Of those treebanks, we disregarded PUD treebanks entirely from the consideration, owing to their small size (1000 sentences). In the remaining treebanks, there exist considerable number of non-projectivities induced due to punctuation (cf. Section \ref{ssec:punct-nonproj}). The \verb|fixpunct| block is applied on these treebanks to eliminate cases of punctuation induced non-projectivity.
+
+Having treated the treebanks with udapi-python block, there were 2 categories of treebanks that were chosen as experimental data. The first category, hereafter referred to as \texttt{working treebanks}, contains top 10 treebanks (ranked in order of percentage composition of non-projective trees) which satisfy the following conditions:
+\begin{enumerate}
+    \item Total number of trees \(\geq 10,000\)
+    \item Number of non-projective trees \(\geq 10\% \cdot \) Total number of trees
+\end{enumerate}
+The second category is hereafter referred to as \texttt{support treebanks}. This category consists of the treebanks that provide added instances of data for treebanks found in \texttt{working treebanks}. For a treebank \(T_{w} \in\) \texttt{working treebanks}, a candidate treebank \(T_{c}\) can be included in the list of \texttt{support treebanks} if it satisfies the following conditions:
+\begin{enumerate}
+    \item Language of \(T_{w} = \) Language of \(T_{c}\)
+    \item Total number of trees in \(T_{c} \geq 5,000\)
+    \item Number of non-projective trees in \(T_{c} \geq 5\% \cdot \) Total number of trees in \(T_{c}\)
+    \item Genre composition of \(T_{c} \subseteq \) Genre composition of \(T_{w}\)
+\end{enumerate}
+
+Having considered the conditions for each category, we get a list of treebanks as can be seen in Table \ref{tab:nonproj_dataset}. The table also shows the counts of trees which fail the relaxations to the conditions of non-projectivity as well (cf. Section \ref{ssec:nonproj-relaxations}). The two categories of treebanks, viz. \texttt{working treebanks} and \texttt{support treebanks} are separated by a horizontal line in the table. In all instances where the two categories are maintained separate, the results of the treebanks shall be included in the same manner, with a horizontal line in between. Table \ref{tab:gap_degrees} and Table \ref{tab:edge_degrees} show the gap degree and edge degree statistics respectively for the experimental data. The effect of application of udapi-python block can be seen in Table \ref{tab:treatment-results} where the counts of non-projective edges are listed for the treebanks in the experimental data. Table \ref{tab:allnpudv2.5} shows the counts of all non-projective structures, and their relaxations in UDv2.5. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{2}{*}{\textbf{Treebank}} &
+    \multirow{2}{*}{\textbf{\# Trees}} & 
+    \multicolumn{2}{c|}{\textbf{Non-Proj.}} & 
+    \multicolumn{2}{c|}{\textbf{Non-Planar}} & 
+    \multicolumn{2}{c|}{\textbf{Ill-Nested}} \\
+    & & Trees & \% & Trees & \% & Trees & \% \\
+    \hline
+    \hline
+    \texttt{grc}\_perseus & 13 919 & 8 683 & 62.38 & 1 098 & 7.89 & 126 & 0.91\\
+    \texttt{grc}\_proiel & 17 080 & 6 409 & 37.52 & 392 & 2.30 & 38 & 0.22\\
+    \texttt{la}\_ittb & 21 011 & 7 680 & 36.55 & 338 & 1.61 & 35 & 0.17\\
+    \texttt{la}\_proiel & 18 411 & 5 227 & 28.39 & 448 & 2.43 & 38 & 0.21\\
+    \texttt{ko}\_kaist & 27 363 & 5 875 & 21.47 & 83 & 0.30 & 0 & 0\\
+    \texttt{fro}\_srcmf & 17 678 & 2 726 & 15.42 & 290 & 1.64 & 82 & 0.46\\
+    \texttt{orv}\_torot & 16 944 & 2 575 & 15.20 & 71 & 0.42 & 4 & 0.02\\
+    \texttt{nl}\_alpino & 13 578 & 1 953 & 14.38 & 128 & 0.94 & 0 & 0\\
+    \texttt{hi}\_hdtb & 16 647 & 2 264 & 13.60 & 116 & 0.70 & 13 & 0.08\\
+    \texttt{cs}\_cac & 24 709 & 3 143 & 12.72 & 50 & 0.20 & 14 & 0.06\\
+    \hline
+    \texttt{cs}\_pdt & 87 913 & 10 145 & 11.54 & 159 & 0.18 & 47 & 0.05\\
+    \texttt{nl}\_lassysmall & 7 338 & 446 & 6.08 & 25 & 0.34 & 1 & 0.01\\
+    \hline
+    \end{tabular}
+    \caption{Non-Projectivity and Relaxations in Experimental Data}\% is calculated on the total number of trees (\# Trees)
+    \label{tab:nonproj_dataset}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \multirow{2}{*}{\textbf{Treebank}} &
+    \multicolumn{5}{c|}{\textbf{Gap Degree}} \\
+    & gd0 & gd1 & gd2 & gd3 & gd4+\\
+    \hline
+    \hline
+    \texttt{grc}\_perseus & 45.57 & 50.59 & 3.72 & 0.12 & - \\
+    \texttt{grc}\_proiel & 66.70 & 31.18 & 2.04 & 0.08 & <0.01\\
+    \texttt{la}\_ittb & 68.74 & 30.20 & 1.06 & <0.01 & - \\
+    \texttt{la}\_proiel & 77.31 & 21.70 & 0.93 & 0.05 & <0.01 \\
+    \texttt{ko}\_kaist & 84.54 & 15.36 & 0.10 & - & - \\
+    \texttt{fro}\_srcmf & 89.11 & 10.58 & 0.29 & 0.02 & <0.01 \\
+    \texttt{orv}\_torot & 87.94 & 11.77 & 0.29 & <0.01 & - \\
+    \texttt{nl}\_alpino & 90.48 & 9.31 & 0.20 & - & <0.01 \\
+    \texttt{hi}\_hdtb & 89.49 & 10.19 & 0.28 & 0.04 & <0.01 \\
+    \texttt{cs}\_cac & 92.41 & 7.52 & 0.07 & - & - \\
+    \hline
+    \texttt{cs}\_pdt & 92.81 & 7.06 & 0.12 & <0.01 & <0.01 \\
+    \texttt{nl}\_lassysmall & 95.97 & 3.95 & 0.08 & - & - \\
+    \hline
+    \end{tabular}
+    \caption{Gap Degrees (in \%) in Experimental Data}\% is calculated on the total number of edges
+    \label{tab:gap_degrees}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \multirow{2}{*}{\textbf{Treebank}} &
+    \multicolumn{5}{c|}{\textbf{Edge Degree}} \\
+    & ed0 & ed1 & ed2 & ed3 & ed4+\\
+    \hline
+    \hline
+    \texttt{grc}\_perseus & 37.62 & 35.70 & 12.37 & 6.19 & 8.12\\
+    \texttt{grc}\_proiel & 62.48 & 23.58 & 6.74 & 3.06 & 4.14\\
+    \texttt{la}\_ittb & 63.45 & 25.47 & 4.63 & 2.52 & 3.93\\
+    \texttt{la}\_proiel & 71.61 & 17.33 & 5.04 & 2.60 & 3.41\\
+    \texttt{ko}\_kaist & 78.53 & 6.02 & 3.35 & 2.48 & 9.61\\
+    \texttt{fro}\_srcmf & 84.58 & 5.39 & 4.18 & 2.40 & 3.45\\
+    \texttt{orv}\_torot & 84.80 & 9.84 & 2.67 & 1.29 & 1.39\\
+    \texttt{nl}\_alpino & 85.62 & 6.47 & 3.87 & 1.86 & 2.18\\
+    \texttt{hi}\_hdtb & 86.4 & 4.05 & 3.07 & 2.62 & 3.85\\
+    \texttt{cs}\_cac & 87.28 & 6.58 & 3.12 & 1.33 & 1.68\\
+    \hline
+    \texttt{cs}\_pdt & 88.46 & 5.41 & 2.82 & 1.26 & 2.05\\
+    \texttt{nl}\_lassysmall & 93.92 & 2.89 & 1.46 & 0.76 & 0.97\\
+    \hline
+    \end{tabular}
+    \caption{Edge Degrees (in \%) in Experimental Data}\% is calculated on the total number of edges
+    \label{tab:edge_degrees}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|r|c|r|c|}
+    \hline
+    \multirow{2}{*}{\textbf{Treebank}} &
+      \multirow{2}{*}{\textbf{\# Edges}} &
+      \multicolumn{2}{c|}{\textbf{Non-Proj. Edges\(^{+}\)}} &
+      \multicolumn{2}{c|}{\textbf{Non-Proj. Edges\(^{*}\)}} \\
+    & & No. & \% & No. & \%\\
+    \hline
+    \hline
+    \texttt{grc}\_perseus & 202 989 & 20 574 & 10.14 & 18 635 & 9.18\\
+    \texttt{grc}\_proiel & 213 999 & 11 247 & 5.26 & 11 247 & 5.26\\
+    \texttt{la}\_ittb & 353 035 & 11 104 & 3.15 & 10 689 & 3.03\\
+    \texttt{la}\_proiel & 200 163 & 9 481 & 4.74 & 9 481 & 4.74\\
+    \texttt{ko}\_kaist & 350 090 & 8 928 & 2.55 & 8 821 & 2.52\\
+    \texttt{fro}\_srcmf & 170 741 & 3 712 & 2.17 & 3 712 & 2.17\\
+    \texttt{orv}\_torot & 149 780 & 3 961 & 2.64 & 3 961 & 2.64\\
+    \texttt{nl}\_alpino & 208 470 & 2 779 & 1.33 & 2 753 & 1.32\\
+    \texttt{hi}\_hdtb & 351 704 & 2 680 & 0.76 & 2 680 & 0.76\\
+    \texttt{cs}\_cac & 494 383 & 3 827 & 0.77 & 3 827 & 0.77\\
+    \hline
+    \texttt{cs}\_pdt & 1 506 484 & 12 310 & 0.82 & 12 387 & 0.82\\
+    \texttt{nl}\_lassysmall & 98 033 & 582 & 0.59 & 576 & 0.59\\
+    \hline
+    \end{tabular}
+    \caption{Effect of application of udapi-python block on Experimental Data}\(^{+}\): Counts before the application \\
+    \(^{*}\): Counts after the application\\\% is calculated on the total number of edges (\# Edges)
+    \label{tab:treatment-results}
+\end{table}
+
+% \begin{table}[h]
+%     \centering
+%     \scalebox{0.9}{\begin{tabular}{|l|c|c|c|c|c|c|c|}
+%     \hline
+%     \multirow{2}{*}{\textbf{Treebank}} &
+%     \multirow{2}{*}{\textbf{\# Trees}} & 
+%     \multicolumn{2}{c|}{\textbf{Non-Proj.}} & 
+%     \multicolumn{2}{c|}{\textbf{Non-Planar}} & 
+%     \multicolumn{2}{c|}{\textbf{Ill-Nested}} \\
+%     & & Trees & \% & Trees & \% & Trees & \% \\
+%     \hline
+%     \hline
+
+\section{Structures with Gap Degree > 2}
+\label{sec:nonmildnonproj}
+ 
+\cite{nivre2006constraints} points out that limiting the gap degree to at most 2 excludes less than 0.5\% of the dependency graphs. Looking at the data in Table \ref{tab:gap_degrees}, we can see that the number of trees with a gap degree \(\geq 3\) is less than 0.15\%. This essentially means that we can focus on the experimental data in 2 parts, one where the trees have a gap degree of at most 2, and the others with gap degree of at least 3.
+
+\subsection{Not Mild Non-Projective Structures}
+Having defined the notion of mild non-projectivity earlier in Section \ref{ssec:nonproj-relaxations}, we specify the limit on gap degree as \(k=4\). We find that there are roughly 0.02\% of the total number of non-projective trees (11 trees in 4 treebanks) that fail to satisfy one or both of the conditions (cf. Table \ref{tab:mildhighgap}). A manual evaluation of such  cases indicates errors in annotation, and therefore a false non-projectivity. It is worth noting that in some of the aforementioned cases, the entire tree might not be projective after the erroneous non-projective edge is removed. In some cases, this could be owing to the presence of another valid non-projective edge in the tree. In other cases, this could be due to the non-projective edge containing more gaps in the wrong annotation, and the correction decreasing the gap degree.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    \multirow{2}{*}{\textbf{Treebank}} &
+    \multirow{2}{*}{\textbf{\# Non Proj. Trees}} & 
+    \multicolumn{2}{c|}{\textbf{\# Gap Degree \(\geq 3\)}} \\
+    & & Mild & Not Mild \\
+    \hline
+    \texttt{grc}\_perseus & 8 683 & 13 & 3 \\
+    \texttt{grc}\_proiel & 6 409 & 14 & - \\
+    \texttt{la}\_ittb & 7 680 & 1 & - \\
+    \texttt{la}\_proiel & 5 227 & 6 & 4 \\
+    \texttt{ko}\_kaist & 5 875 & - & - \\
+    \texttt{fro}\_srcmf & 2 726 & 2 & 2 \\
+    \texttt{orv}\_torot & 2 575 & 1 & - \\
+    \texttt{nl}\_alpino & 1 953 & 1 & - \\
+    \texttt{hi}\_hdtb & 2 264 & 5 & 2 \\
+    \texttt{cs}\_cac & 3 143 & - & - \\
+    \hline
+    \end{tabular}
+    \caption{Mildness of Non-Projectivity in High Gap Degree Trees}
+    \label{tab:mildhighgap}
+\end{table}
+
+\subsection{Mild Non-Projectivity}
+
+The counts of mild non-projective trees in different treebanks is shown in Table \ref{tab:mildhighgap}. The mild non-projective trees being few in number were also manually annotated by native speakers of the language or an annotator comfortable with the language. In manual evaluation, we found around 25\% of trees contained genuine instances of non-projectivity, with no possibility of a reduction in the gap degree of the tree.
+
+\section{Structures with Gap Degree of at max 2}
+\label{sec:variation}
+
+Having analyzed high gap-degree trees, we are left with trees of gap-degree \(\leq 2\). For analyzing the high count of such trees, we adapt the concept of variation nucleus, as adapted for usage in case of dependency trees by \cite{boyd}, tuning it specifically for the current problem at hand.
+
+\subsection{Variation Nucleus}
+
+For our problem statement, we are primarily concerned with the edges that are non-projective in nature. To that effect, we develop the variation nuclei for the concerned edge. In \cite{boyd}, the authors use deprels and a NIL relation to combine together the different possible annotations between the nodes of a given edge. While that approach is useful to find the inconsistencies in labelling, it is not helpful in determining if a particular edge is more likely to be projective or not. We are interested in looking at the edge's occurrence in the different trees in the treebank. Once all such occurrences are found, we can check if the majority of them are attached projectively or not, and then take a decision based on the general consensus. In a data-driven approach, we define the \textit{natural}-ness of an edge by looking at the edge in different trees, and going by the majority association type (dependent attached to head projectively or non-projectively). To get a clear consensus that is not readily affected by addition of data, we need to define some parameter for the consensus. We get to definition of such a constraint in Section \ref{sec:nonprojeval}, after we have defined the variation nucleus, and have formally outlined the variation nucleus query methodology.
+
+Although gap degree is considered as a tighter constraint, there have been no works based on inspection of the gap nodes (nodes in the gap of a non-projective edge) to the best of our knowledge. For the current specific problem, we hypothesise that inspecting the gap nodes could be advantageous. The primary advantage of inspecting gap nodes is in languages with a limited free word order. If the token in edge is not the main cause for the non-projectivity, it should be because of what comes in between the edge. In \cite{mambriniNonProj}, an inspection of nodes in gap revealed the presence of clitics very often responsible for non-projectivity in \verb|grc|. In such a case, the gap node would definitely add as a determining factor to query for non-projective associations of the edges. To that effect, in addition to the head and dependent of an edge, we also select nodes from gap to add to our variation nucleus.
+
+\subsection{Variation Nucleus: Definition and Constraints}
+\label{ssec:variationdefn}
+
+For browsing through different possible attachments of the same dependent to the same head, we always need the two ends of an edge as primary fixed element to form a query. For the given edge, if we search by keeping a particular deprel or UPOS tag as the constant factor, the query results would essentially explode in count. The approach of using deprels is referred to as ``dependency heuristic" by \citeauthor{boyd}. We mentioned earlier how the variation nuclei as proposed by \citeauthor{boyd} was evaluated on UD treebanks in \cite{de2017assessing} for three languages (\verb|en|, \verb|fi|, \verb|fr|). They found that the technique of using lemma works for languages that are not morphologically rich, but fails otherwise. Owing to the different forms possible for a given lemma in morphologically rich languages, we still advocate for the lemma based approach.
+
+Limiting the gap degree to 2 in the considered trees does not restrict the number of gap nodes. Therefore, it is not possible (and/or useful) to add every gap node to the variation nucleus. We call the set of gap nodes that compose the variation nucleus as gap nucleus. We select nodes from gap nodes to add to gap nucleus by the process of elimination using Algorithm \ref{algo:gaptovn}.
+
+\begin{algorithm}[H]
+\caption{get\_vn\_from\_gap()}
+\label{algo:gaptovn}
+    \begin{algorithmic}[1]
+    \REQUIRE Set of gap nodes $G$, Head of non-projective edge $H$
+    \STATE Set of candidate nodes $V$ = $G$
+    \FORALL {$x$ in $G$}
+    \IF {$x$ == $ROOT$}
+        \STATE DO NOTHING
+    \ELSIF{$H$ in $x.descendants$}
+        \FORALL{$z$ in $x.descendants$}
+            \IF{$z$ in $H.descendants$}
+                \STATE DO NOTHING
+            \ELSE
+                \STATE $V.remove(z)$
+            \ENDIF
+        \ENDFOR
+    \ELSE
+        \FORALL{$z$ in $x.descendants$}
+            \IF{$z$ in $V$}
+                \STATE $V.remove(z)$
+            \ENDIF
+        \ENDFOR
+    \ENDIF
+    \ENDFOR
+    \RETURN $V$
+    \end{algorithmic}
+\end{algorithm}
+
+Proceeding as per Algorithm \ref{algo:gaptovn}, we are left with two kind of nodes in the resultant gap nucleus. The first kind consists of all the nodes that are leaf nodes, i.e. they have no children; and the second kind consists of the nodes who do not have their parents in the gap. We are interested in looking at gap nucleus that is sufficiently large enough to provide context of the gap. As such, we place the restriction that the length of gap nucleus should be at least 2 before it can be added to the variation nucleus. Given a sufficiently large gap nucleus, it is very unlikely that all the nodes present in the gap nucleus would occur in another tree's gap nucleus as well. Thus, we create combinations of elements in the gap nuclei, ranging from choice of 1 node at a time, until all the nodes are utilised. These combinations of nodes from the gap nuclei constitute the sub-nuclei, and are used to generate variation nuclei of their own. We refer to the largest variation nucleus generated by the gap nucleus as principal variation nucleus.
+
+A considerable difference in selection of our variation nucleus from that of \citeauthor{boyd} is the usage of non-fringe heuristic, which essentially requires same immediate neighbours for the ends of the edge in every queried instance. Given a non-projective edge (\(i,j\)), if we denote the immediate neighbours of the tokens (in word order) as \(i-1, i+1\) and \(j-1, j+1\) for the nodes \(i\) and \(j\) respectively, non-fringe heuristic requires a retrieved instance of the variation nucleus to have \(i-1, i+1\) and \(j-1, j+1\) as neighbours of nodes \(i\), and \(j\) respectively for the retrieval to be valid. For the task of mining for false non-projectivity, we argue that the approach is counter-productive in two ways:
+\begin{enumerate}
+    \item In the established research on linguistic analysis of non-projective structures (cf. \citep{mambriniNonProj}, \citep{indic-riyaz}, among others), there have been identified instances of sole tokens being responsible for causing non-projectivity. Once the non-fringe heuristic is used, the precision in query of the responsible node decreases, resulting in lower number of verifiable instances.
+    \item The concept of looking at the neighboring nodes works efficiently when one needs to identify inconsistencies as classes, without pinpointing to the error kind. This approach works for sequence labelling based tasks such as mining for tagging inconsistencies or dependency based inconsistencies, but not when a particular edge has to be scanned through.
+\end{enumerate}
+
+Owing to the above mentioned reasons, we do not use non-fringe heuristic and therefore rely on using lemmas to encompass the edge in considerably more lenses than would be possible with using wordforms, for example.
+
+\subsection{Querying for Variation Nucleus}
+
+For this part of the experiment, we now use the \texttt{support treebanks} as well. For each generated variation nucleus, we first create an index to list the source of the sentence ID that resulted in the nucleus. The outline pattern for querying a given variation nucleus (principal, or otherwise) in cases of experiment where the dependent is kept in variation nucleus is as outlined in Algorithm \ref{algo:querydependent}. In the variation nucleus, the first and the last element in the nucleus are the head and dependent of the non-projective edge respectively.
+
+\begin{algorithm}[h]
+\caption{pattern\_query()}
+\label{algo:querydependent}
+    \begin{algorithmic}[1]
+    \REQUIRE Tree $T$ to perform query on, Variation Nucleus as a list $V$
+    \IF {$T.id$ not in $V.source$}
+        \STATE \COMMENT {Make sure both head and dependent are in tree, and are linked to each other}\\
+        \STATE $head \leftarrow $ first element in $V$
+        \STATE $dependent \leftarrow $ last element in $V$
+        \STATE $gapNucleus \leftarrow $ remaining elements in $V$
+        \IF {$head.lemma$ in $T$}
+            \IF {$dependent.lemma$ in $T$ \AND $dependent.parent == head$}
+            \STATE \COMMENT {Start iterating through nodes in gap nucleus now}\\
+                \STATE $fromNode = head.ord$
+                \STATE $toNode = dependent.ord$
+                \IF {$fromNode > toNode $}
+                    \STATE swap($fromNode, toNode$)
+                \ENDIF
+                \FORALL{$x$ in $gapNucleus$}
+                    \IF{$x.lemma$ not in $T$ \OR \NOT ($fromNode < x.ord < toNode$)}
+                        \RETURN
+                    \ENDIF
+                \ENDFOR
+                \STATE \COMMENT {Program didn't terminate, all nodes in gap nucleus present}
+                \IF {$dependent$ attached projectively to $head$}
+                    \STATE $globalCounter[V][projective] += 1$
+                    \STATE $globalList[V][projectiveIDs].append(T.id)$
+                \ELSE
+                    \STATE $globalCounter[V][nonprojective] += 1$
+                    \STATE $globalList[V][nonprojectiveIDs].append(T.id)$
+                \ENDIF
+            \ENDIF
+        \ENDIF
+    \ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\section{Evaluation of Experiments on Variation Nuclei}
+\label{sec:nonprojeval}
+
+We summarise the counts of all the unique variation nuclei\footnote{The longest subsequence is considered. If \textit{(A,B,C,D)} is the first variation nucleus, and \textit{(A,B,C)} is second variation nucleus that were queried for, the smaller sequence, even if generated from a different source tree, is not included in the counts.} generated per language in Table \ref{tab:nucleicounts}. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Lang. Code} & \textbf{\# Non Proj. Edges} & \textbf{\# Variation Nuclei} \\
+    \hline
+    \texttt{grc} & 29 882 & 4 669 \\
+    \texttt{la} & 20 170 & 2 532 \\
+    \texttt{ko} & 8 821 & 4 360 \\
+    \texttt{fro} & 3 712 & 1 291 \\
+    \texttt{orv} & 3 961 & 653 \\
+    \texttt{nl} & 2 753 & 489 \\
+    \texttt{hi} & 2 680 & 831 \\
+    \texttt{cs} & 3 827 & 749 \\
+    \hline
+    \end{tabular}
+    \caption{Counts of Unique Variation Nuclei in Experimental Dataset}
+    \label{tab:nucleicounts}
+\end{table}
+
+We did not define on the constraints to determine the consensus earlier in Section \ref{ssec:variationdefn}. We define two rules to determine consensus here. We only inspect the edges that satisfy both the conditions. In the event that either condition is not satisfied, we discard the edge from our consideration.
+\begin{enumerate}
+    \item A given variation nucleus might show up in multiple trees since it is being queried for across the treebank(s). A given variation nucleus might appear just 10 times across the queried treebanks though, for example. In this case, we cannot deduce anything concrete about the (non-)projectivity of the edge. In a data driven approach, we can only talk about patterns that manifest themselves multiple times. For our experiment, we set the minimum threshold at 0.005\% of the treebank size threshold. Since we chose treebanks that had at least 10,000 trees, we set the lower limit at 50. In essence, a variation nucleus should appear in at least 50 trees in the queried treebank(s) before it can be inspected. 
+    \item In an ideal scenario, there are edges that are always associated projectively, or non-projectively. In this scenario, our algorithm should identify 0 trees where the edge is marked non-projective, implying there is never a projective manner of association for the edge, and vice-versa. However, it is likely that we will have instances that show up as both projective, and non-projective. If we go by the crude definition of majority consensus, a ratio of \(\frac{50.1}{49.9}\) is also technically a consensus. However, this is not a strong majority, and so we need to define a stricter constraint to be able to reach a definitive consensus. Intuitively, an edge that shows up 90\% of the time as either of projective/non-projective and only 10\% of the time otherwise is likely to be an error, regardless of the rarity of non-projective structures in the language. Using the same intuition, we define the majority consensus to be 9:1. This essentially means that we inspect an edge iff it shows up in either category at least 90\% of the time.
+\end{enumerate}
+
+\section{Results and Conclusion}
+\label{sec:nonprojconclude}
+
+The total number of variation nuclei that were retrieved for each language when the dependent was kept are shown in Table \ref{tab:nucleiqueried1}. The \textit{Retrieved VN} refers to the count of nuclei that were found in other trees when queried for.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Language} & \textbf{\# VN Queried} & \textbf{Retrieved VN}\\
+    \hline
+    \texttt{grc} & 4 669 & 243\\
+    \texttt{la} & 2 532 & 188 \\
+    \texttt{ko} & 4 360 & 2 \\
+    \texttt{fro} & 1 291 & 5 \\
+    \texttt{orv} & 653 & 21 \\
+    \texttt{nl} & 489 & 37 \\
+    \texttt{hi} & 831 & 44 \\
+    \texttt{cs} & 749 & 37 \\
+    \hline
+    \end{tabular}
+    \caption{Query Results of Variation Nuclei with dependent not removed}VN = Variation Nucleus/Nuclei
+    \label{tab:nucleiqueried1}
+\end{table}
+
+In our experiment, we found the constraints to be very restrictive. Of all the retrieved variation nuclei, we could find just two nuclei (1 in \verb|cs| and 1 in \verb|la|), that were able to satisfy all constraints. However, the edges found by the nuclei were found to be wrongly annotated as non-projective. We also found 2 instances of ideal scenario (with both constraints satisfied), where the variation nucleus was associated only with non-projective edges throughout the queried pool of data.
+
+Since the approach didn't work for any of the 10 languages, we inspected the cause of low retrieval of variation nuclei for the generated queries. In case of \verb|ko| data, the lemma data contains plus (+) symbol to annotate the fusion of different lemma. Since it is possible for different tokens to fuse together, the algorithm could not handle such case, and thus the low retrieval for variation nuclei in this case. In case of \verb|fro|, the data does not contain any lemmas and so lowercase forms were used instead. Considering inflectional morphology of the language, the algorithm could not with simply the forms, and so the retrieval was extremely low.
+
