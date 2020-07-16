@@ -86,27 +86,20 @@ In UDv1, \verb|nmod| relation was used for nominals modifying either predicates 
 To put it simply, this conversion implied the following in an equation format, where \(\verb|x|_{vi}\) refers to the dependency relation \(\verb|x|\) as used in version \(i\) of UD treebanks:
 
 \begin{equation*}
-    \verb|nmod|_{v1} = \verb|nmod|_{v2} \cup \verb|obl|
+    \boxed{\texttt{nmod}_{v1} = \texttt{nmod}_{v2} \cup \texttt{obl}}
 \end{equation*}
-\textbf{FIX THIS}
-This essentially meant that in case a relation was to be changed from \(\verb|nmod|_{v1}\) to \verb|obl|, there were often 2 changes that needed to be made to fit the data to UDv2 guidelines.
 
-Page 82: "there were often 2 changes that needed to be made" ... No. The
-parent node was not changed. But if the parent node was a verb, the
-relation had to change from "nmod" to "obl". If the parent was a
-nominal, the relation stayed "nmod" unless the parent happened to be a
-nominal predicate of a clause; then the relation could be "nmod" or
-"obl", depending on whether it modified just the nominal, or the entire
-clause. If the parent was an adjective or an adverb, the relation should
-probably be changed to "obl". And if the parent was none of the above,
-the instance would deserve individual treatment.
+Depending on the parent node, the relations were modified as follows:
 
 \begin{enumerate}
-    \item The token's parent had to be changed, owing to the difference in definition of the deprel \verb|nmod| in UDv2 and UDv1.
-    \item The token's deprel had to be changed from \verb|nmod| to \verb|obl|. Although a seemingly simple change, the difficulty in the correct implementation stems from the lack of automatic rules to differentiate between erroneous attachments of the deprels involved.
+    \item If the parent node was a verb, the deprel was changed from \texttt{nmod} to \texttt{obl}.
+    \item If the parent was not a nominal predicate, the deprel could be either of \texttt{nmod} or \texttt{obl}, depending on if only the nominal was being modified, or the whole clause was being modified.
+    \item If the parent was a nominal, there was no change in the deprel.
+    \item If the parent was an adjective or an adverb, the deprel would be changed to \texttt{obl}, based on additional conditions.
+    \item In case none of the above conditions held true, the instance would deserve individual treatment.
 \end{enumerate}
 
-The above two errors often occur together, and are referred to as combined head identification and labelling error in \cite{alzetta2017dangerous}. In the same work, the authors note that this error contributes to around 7 \% of total discovered errors in the newspaper section of the Italian UD Treebank (IUDT). In the work, the authors attribute this error pattern to annotation inconsistency internal to the treebank. Given that this error is largely stemming from the change in guidelines, changing guidelines can be argued as a cause of this error, rather than what is proposed by the authors in their work. Added to the difficulty of correct identification of head, it is not always possible to isolate the error in dependency label. Although a significantly important error, this is not covered in the scope of the current research. Nonetheless, this is an important error that should be taken care of in future.
+The change in definition from UDv1 to UDv2 was the primary cause of the error, as identified in \cite{alzetta2017dangerous}. In the same work, the authors note that this error contributes to around 7 \% of total discovered errors in the newspaper section of the Italian UD Treebank (IUDT). In the work, the authors attribute this error pattern to annotation inconsistency internal to the treebank. Although a significantly important error, this is not covered in the scope of the current research. Nonetheless, this is an important error that should be taken care of in future.
 
 \section{Punctuation}
 

@@ -1,0 +1,246 @@
+\chapter{Part-of-Speech (POS) Annotation Consistency}
+\label{chap:pos-harmony}
+
+We introduced the problem of inter treebank POS annotation quality in Section \ref{sec:harmony} earlier, followed by a discussion of the literature relevant to the problem in Section \ref{ssec:inconsistency-detection-pos}. 
+
+In this chapter, we propose a metric based on $KL_{cpos^3}$ metric \citep{klcpos3}, which in turn is based upon Kullback-Liebler Divergence (KL Divergence). 
+
+We start by a short introduction to $KL_{cpos^3}$ metric and a definition of the proposed metric in Section \ref{sec:pos-harmony-definition}. We define our dataset for the experiments in this chapter in Section \ref{sec:pos-harmony-dataset}, followed by the metric values being listed in Section \ref{sec:pos-harmony-scores}. The experiments are detailed in Section \ref{sec:pos-harmony-size} and Section \ref{sec:pos-harmony-genre}, with their results summarised in Section \ref{sec:pos-harmony-calculations}. The chapter concludes with a discussion on the metric in Section \ref{sec:pos-harmony-conclusion}.
+
+\section{KLcpos3 and Metric Definition}
+\label{sec:pos-harmony-definition}
+
+\cite{klcpos3} show that KL-Divergence score of POS trigrams can be effectively used for source selection for POS Tagging in a delexicalised cross-language model transfer scenario. In their approach, they are able to select effectively not just a singular source, but are also able to rank multiple sources by specifying weights to individual source in a multi-source transfer scenario. Computing the KL-Divergence on POS trigrams, they call the measure as $KL_{cpos^3}$, defined as follows:
+
+\begin{definition}
+\label{def:klcpos3}
+\textbf{ }\\
+\begin{equation}
+\label{eqn:klcpos3}
+\small KL_{cpos^3}(tgt, src) = \sum_{\forall cpos^3 \in tgt}^{}f_{tgt}(cpos^3)\log\frac{f_{tgt}(cpos^3)}{f_{src}(cpos^3)}
+\end{equation}
+where $cpos^3$ is a coarse POS tag trigram, and \\
+\begin{align}
+\label{eqn:cpos}
+f(cpos^3) & = \nonumber f(cpos_{i-1}, cpos_{i}, cpos_{i+1}) \\ &= \frac{count(cpos_{i-1}, cpos_{i}, cpos_{i+1})}{\sum_{\forall cpos_{a,b,c}}{count(cpos_{a}, cpos_{b}, cpos_{c})}}
+\end{align}
+with $count_{src}(cpos^3) = 1$ for each unseen trigram.
+\end{definition}
+
+Intuitively, treebanks of the same language (despite the differences in the genres covered) should be better fit for single-source transfer than a treebank from another language. This is the primary motivation for using $KL_{cpos^3}$ (as defined for a single-source transfer scenario) to assess the annotation consistency among the treebanks of a language. However, $KL_{cpos^3}$ is a variant of KL-Divergence, and thus asymmetric, making it unfit in its original form for assessing annotation consistency symmetrically. We refer to the symmetric variant of the metric as $\theta_{pos}$ defined for the treebanks $A$ and $B$ as follows:
+
+\begin{equation}
+    \boxed{\theta_{pos}(A, B) = KL_{cpos^3}(A,B) + KL_{cpos^3}(B,A)}
+\end{equation}
+where $KL_{cpos^3}(P,Q)$ indicates $KL_{cpos^3}$ score of $Q$ as an estimator for $P$.
+
+Since $KL_{cpos^3}$ is a non-negative divergence metric, so is $\theta_{pos}$. While either metric is numeric in nature, the $KL_{cpos^3}$ scores can be used as an estimator of quality in presence of an absolute gold standard. However, in absence of an absolute gold standard, the scores for the metric in different treebanks can not be compared directly. In such case (of lack of absolute gold standard), there should be an upper bound that needs to be placed on the $\theta_{pos}$ scores. As long as the $\theta_{pos}$ scores are lower than this upper bound, the considered pair of treebanks can be considered as harmonious in terms of their POS annotation. We call this upper bound as $\Theta_{pos}$. The metrics $\theta_{pos}$ and $\Theta_{pos}$ are linked together in the following definition.
+
+\begin{definition}
+\label{def:harmony}
+Given two treebanks $A$ and $B$, we say the treebanks are in harmony with (or, are harmonious to) each other in terms of POS annotation, if the symmetric measure of their mutual divergence (given by $\theta_{pos}$) is less than or equal to a threshold (given by $\Theta_{pos}$). \\
+    Mathematically, it can be represented as:
+    \begin{align}
+    \label{eq:pos_harmony}
+        \Aboxed{\theta_{pos}(A, B) & = \nonumber KL_{cpos^3}(A,B) + KL_{cpos^3}(B,A)} \\
+        &\leq \Theta_{pos}(A, B)
+    \end{align}
+    where $KL_{cpos^3}(P,Q)$ indicates $KL_{cpos^3}$ score of $Q$ as an estimator for $P$.
+\end{definition}
+
+Even though $\Theta_{pos}$ is a bound on the $\theta_{pos}$ metric, the former is essentially a property of the latter. For a given set of guidelines, and a given set of data, the upper bound value would need to be estimated often, albeit using the same technique. In the remaining chapter, we try to estimate the upper bound in a language-independent manner by looking at the influence of size of data, and the POS distribution in individual genres on $\theta_{pos}$ metric. While the methods that we shall discuss shortly can be applied for estimations across different guidelines and different set of data, care must be taken while estimating the upper bound for a new guideline (or even on different iterations of UD data). If the estimated value of $\Theta_{pos}$ is too large, we run the risk of saying the treebanks are harmonious even when they might not be. Also, if the value is too small, we could be overlooking at the effect of domain change and dataset size, to mistakenly announce the pair of treebanks as being non-harmonious to each other.
+
+\section{Dataset}
+\label{sec:pos-harmony-dataset}
+
+UDv2.5 \citep{UDv2.5} contains 157 treebanks in 90 languages. There are multiple languages with more than one treebank, with some containing up to 6 treebanks. A list of all such languages, with the associated treebanks can be seen in Appendix \ref{app:multi_trees}. We list $\theta_{pos}$ scores of the different treebanks in different languages in the next section. In the listing of scores, the treebanks where the data needs to be fetched from another corpus because of licensing issues are not included.
+
+As mentioned earlier, the treebanks in UD are assigned a score based on the system of checks run by the official UD validator. We want to estimate the $\Theta_{pos}$ scores to the best of our ability, and so, working with a pair of low quality treebanks would be the worst approach that can be undertaken. To that effect, we estimate the bounding score on treebanks with the ratings of at least 3.5 stars (out of 5 stars). The treebanks selected in this manner can be considered to be of high quality. The selection of high quality treebanks also enforces an important assumption, that the data within a singular treebank has been annotated consistently or that there are considerably lower number of annotation inconsistencies within the data in a treebank. The assumption would also imply that in a pair of considered treebanks, while the treebanks might not be annotated consistently with respect to each other, the individual treebanks are assumed to be internally consistent with respect to their annotation.
+
+The assumption as mentioned above is a strict constraint, and might not always hold. An alternative assumption can be used in cases where the stricter version is not expected to hold. The relaxed version of the assumption assumes that the data belonging to one particular genre in a treebank would be annotated consistently throughout. This is a relaxation in the sense that given multiple genres in a treebank, the entire treebank might not be annotated consistently. However, the data in individual genres is annotated consistently. The experiments listed in this chapter work within the bound of these assumptions. 
+
+\section{\texorpdfstring{$\theta_{pos}$}{theta\_pos} Scores for UDv2.5}
+\label{sec:pos-harmony-scores}
+
+\begin{minipage}{0.48\textwidth}
+\subsection*{Languages with 2 Treebanks}
+\begin{table}[H]
+    \scalebox{0.90}{\begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Treebank1} & \textbf{Treebank2} & \textbf{$\theta_{pos}$} \\
+    \hline
+    \texttt{es}-AnCora & \texttt{es}-GSD & 0.352\\
+    \hline
+    \texttt{et}-EDT & \texttt{et}-EWT & 0.413 \\
+    \hline
+    \texttt{fi}-FTB & \texttt{fi}-TDT & 1.195 \\
+    \hline
+    \texttt{gl}-CTG & \texttt{gl}-TreeGal & 0.714 \\
+    \hline
+    \texttt{grc}-Perseus & \texttt{grc}-PROIEL & 4.641 \\
+    \hline
+    \texttt{ja}-GSD & \texttt{ja}-Modern & 2.915 \\
+    \hline
+    \texttt{ko}-GSD & \texttt{ko}-Kaist & 2.56 \\
+    \hline
+    \texttt{lt}-ALKSNIS & \texttt{lt}-HSE & 1.096 \\
+    \hline
+    \texttt{nl}-Alpino & \texttt{nl}-LassySmall & 0.664 \\
+    \hline
+    \texttt{orv}-RNC & \texttt{orv}-TOROT & 4.468 \\
+    \hline
+    \texttt{pl}-LFG & \texttt{pl}-PDB & 0.623 \\
+    \hline
+    \texttt{pt}-Bosque & \texttt{pt}-GSD & 0.678 \\
+    \hline
+    \texttt{sl}-SSJ & \texttt{sl}-SST & 2.405 \\
+    \hline
+    \texttt{sv}-LinES & \texttt{sv}-Talbanken & 0.443 \\
+    \hline
+    \texttt{tr}-GB & \texttt{tr}-IMST & 1.477 \\
+    \hline
+    \end{tabular}}
+    \end{table}
+    
+    \subsection*{Languages with 4 Treebanks}
+    
+    \begin{table}[H]
+    \scalebox{0.90}{\begin{tabular}{|l|l|l|l|}
+    \hline
+    \texttt{cs} & \textbf{CAC} & \textbf{CLTT} & \textbf{FicTree} \\
+    \hline
+    \textbf{CLTT} & 1.453 & - & - \\
+    \hline
+    \textbf{FicTree} & 1.138 & 2.657 & - \\
+    \hline
+    \textbf{PDT} & 0.373 & 1.935 & 1.006 \\
+    \hline 
+    \end{tabular}}
+    \end{table}
+    
+    \vspace{1cm}
+    \subsection*{Languages with 5 Treebanks}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+    \subsection*{Languages with 3 Treebanks}
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{de} & \textbf{GSD} & \textbf{HDT} \\
+    \hline
+    \textbf{HDT} & 0.49 & - \\
+    \hline
+    \textbf{LIT} & 1.383 & 1.1 \\
+    \hline
+    \end{tabular}
+    \end{table}
+    
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{la} & \textbf{ITTB} & \textbf{Perseus} \\
+    \hline
+    \textbf{Perseus} & 1.106 & - \\
+    \hline
+    \textbf{PROIEL} & 3.763 & 3.901 \\
+    \hline
+    \end{tabular}
+    \end{table}
+    
+    \begin{table}[H]
+    \scalebox{0.90}{\begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{no} & \textbf{Bokmaal} & \textbf{Nynorsk} \\
+    \hline
+    \textbf{Nynorsk} & 0.095 & - \\
+    \hline
+    \textbf{NynorskLIA} & 2.291 & 2.375 \\
+    \hline
+    \end{tabular}}
+    \end{table}
+    
+    \begin{table}[H]
+    \scalebox{0.90}{\begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{ro} & \textbf{Nonstandard} & \textbf{RRT} \\
+    \hline
+    \textbf{RRT} & 1.233 & - \\
+    \hline
+    \textbf{SiMoNERo} & 2.712 & 0.866 \\
+    \hline
+    \end{tabular}}
+    \end{table}
+    
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{ru} & \textbf{GSD} & \textbf{SynTagRus} \\
+    \hline
+    \textbf{SynTagRus} & 0.567 & - \\
+    \hline
+    \textbf{Taiga} & 1.027 & 0.631 \\
+    \hline
+    \end{tabular}
+    \end{table}
+    
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \texttt{zh} & \textbf{CFL} & \textbf{GSD} \\
+    \hline
+    \textbf{GSD} & 1.97 & - \\
+    \hline
+    \textbf{HK} & 0.74 & 1.958 \\
+    \hline
+    \end{tabular}
+    \end{table}
+    \end{minipage}
+    
+    \begin{table}[H]
+    \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \texttt{en} & \textbf{EWT} & \textbf{GUM} & \textbf{LinES} & \textbf{ParTUT}\\
+    \hline
+    \textbf{GUM} & 0.26 & - & - & -\\
+    \hline
+    \textbf{LinES} & 0.407 & 0.455 & - & -\\
+    \hline 
+    \textbf{ParTUT} & 0.62 & 0.432 & 0.581 & -\\
+    \hline 
+    \textbf{Pronouns} & 3.828 & 3.927 & 3.426 & 4.224\\
+    \hline 
+    \end{tabular}}
+    \end{table}
+    
+    \begin{table}[H]
+    \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \texttt{fr} & \textbf{FQB} & \textbf{GSD} & \textbf{ParTUT} & \textbf{Sequoia}\\
+    \hline
+    \textbf{GSD} & 1.582 & - & - & -\\
+    \hline
+    \textbf{ParTUT} & 1.942 & 0.683 & - & -\\
+    \hline
+    \textbf{Sequoia} & 1.693 & 0.248 & 0.524 & -\\
+    \hline
+    \textbf{Spoken} & 3.644 & 3.089 & 2.599 & 2.732\\
+    \hline
+    \end{tabular}}
+    \end{table}
+    
+    \begin{table}[H]
+    \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \texttt{it} & \textbf{ISDT} & \textbf{ParTUT} & \textbf{VIT} & \textbf{PoSTWITA}\\
+    \hline
+    \textbf{ParTUT} & 0.133 & - & - & - \\
+    \hline
+    \textbf{VIT} & 0.121 & 0.194 & - & -\\
+    \hline
+    \textbf{PoSTWITA} & 1.67 & 1.478 & 1.764 & - \\
+    \hline
+    \textbf{TWITTIRO} & 1.501 & 1.376 & 1.594 & 0.347 \\
+    \hline
+    \end{tabular}}
+    \end{table}

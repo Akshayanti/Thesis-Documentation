@@ -67,6 +67,7 @@
 \usepackage{soul}
 \setlength{\columnsep}{5mm}
 \usepackage{tikz}
+\usepackage{mathtools}
 \usetikzlibrary{shapes,arrows,fit,calc}
 
 \tikzstyle{decision} = [diamond, draw=black, thick, fill=blue!20, 
@@ -186,16 +187,19 @@ This research attempts at identification and correction of inconsistencies in di
     \include{en/preface}    %     08 pages
     \include{en/problems}    % 06 pages
     \include{en/solutions}   % 04 pages
-% \include{en/expt01}
-% \include{en/expt01-p1}
-\include{en/expt01-p2} % ?? pages on tuning theta_POS
-% \include{en/expt01-final}
+    \include{en/pos_preface} % 05 pages on Preface to theta_POS
+    \include{en/pos_size} % 05 pages on tuning theta_POS for size variation
+\include{en/pos_genre}
+\include{en/pos_conclusion}
     \include{en/conj-head} % 35 pages on conj_head
-\include{en/expt03} % ?? pages on LISCA
-% \include{en/expt04} % ?? pages on Non-Projectivity
+    \include{en/lisca} % 17 pages on LISCA
     \include{en/AUXvsVERB} % 06 pages on AuxVsVerbs
     \include{en/future} % 06 pages on Future Recommendations
     \include{en/conclusion} % 01 pages on Conclusions
+% \include{en/expt01}
+% \include{en/expt01-p1}
+% \include{en/expt01-final}
+% \include{en/expt04} % ?? pages on Non-Projectivity
 
 %%% Bibliography
 \include{bibliography}

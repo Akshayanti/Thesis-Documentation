@@ -54,7 +54,7 @@ While the algorithm mentioned above successfully points out the arcs that are in
 
 Added to these difficulties is the difficulty of training the algorithm. The algorithm essentially needs to be trained on a gold standard data, from which it builds a statistical model that is used to generate the probability scores of a dependency arc. In case of languages with no high-quality parsers available or for low-resource languages, this poses a cold-start problem where we do not have the data to train the algorithm, and so the algorithm cannot be used at all.
 
-We tried solving this problem of cold-start by using the method of k-fold cross validation (with varying values of k) in training the algorithm. We discuss the experiment in more detail in Chapter \ref{chap:lisca}.
+We tried solving this problem of cold-start by using the method of \(k\)-fold cross validation (with varying values of \(k\)) in training the algorithm. We discuss the experiment in more detail in Chapter \ref{chap:lisca}.
 
 \section{Error Mining Methods}
 \label{sec:error-mining}
@@ -68,3 +68,5 @@ Error mining in treebanks can be done in multiple ways. There is a possibility o
 \cite{de2017assessing} extended and evaluated the method proposed by \citeauthor{boyd}, in context of UD Treebanks for three languages (\verb|en|, \verb|fi|, \verb|fr|). The authors further extended the method to use word lemmas instead of simply using word forms, and also evaluate on the automatically annotated treebanks to identify more inconsistencies. The first extension of using lemmas works well for languages that are not too morphologically-rich (\verb|en|, \verb|fr|), but fails otherwise. The second extension is done at the cost of a drop in precision, but without a significant gain in recall.
 
 The method proposed by \citeauthor{boyd} has an inherent problem instance of data sparseness. \cite{kook} implemented an algorithm based on n-grams and suspicion sharing across the n-grams by extending the methods of \cite{sagot} and \cite{noord}. Their approach however, relies on classifying each sentence within the results of a parsed corpus as a parsable or unparsable sentence. This classification of individual sentence needs to be done manually, and is therefore not optimal for large treebanks.
+
+\newpage

@@ -1,0 +1,129 @@
+\section{Genre Distribution and \texorpdfstring{$\theta_{pos}$}{theta\_pos}}
+\label{sec:pos-harmony-genre}
+
+There can be a significant difference between genres in terms of syntactic annotations that are typical of the genre. While this difference is best exhibited across treebanks containing instances from different genres, it can also be exhibited within a given treebank. The problem of music genre classification in speech data has been studied in detail, with different audio similarity metrics being proposed as well (cf. \cite{music1, music2}, among others). In the written data, while there has been some research on the study of inter-genre variations for language acquisition \citep{genre-acquisition1}, the classification of genres in textual corpus is identified mainly by the source of data.
+
+In \cite{biber2}, a line of distinction is drawn between between text type and genre as the basis of classification of texts. While the former is `defined and distinguished on the basis of systematic nonlinguistic criteria', the latter is `defined on the basis of strictly linguistic criteria (similarities in the use of cooccuring linguistic features)' \cite[p.~39]{biber2}. In \cite{biber}, the different genres in \verb|en| are studied in different dimensions, focusing on one dimension at a time. The dimensions are a group of factors that associate the different features of a discourse, and are as listed in Table \ref{tab:dimensions-genres}. In the same work, the author notes that a given genre can contain multiple sub-genres which may or may not be internally coherent to each other \cite[p.~170]{biber}, and that no dimension in itself can attribute to the similarity or dissimilarity of the genres. In a later study of variations of the genres based on the dimensions (as identified in \cite{biber}) across 4 languages, the author notes that `even when defined at a high level of generality, parallel registers are more similar cross-linguistically than are disparate registers within a single language' \cite[p.~279]{biberbook}.
+
+\begin{table}[h]
+    \scalebox{0.9}{\begin{tabular}{|c|l|l|}
+    \hline
+    \textbf{S.No.} & \textbf{Dimension Name} & \textbf{Characteristic of Dimension} \\
+    \hline
+    \hline
+    1. & \textbf{Involved vs Informational Production} & interactional, affective, involved \\
+     & & purposes, associated with \\
+     & & strict real-time production and \\
+     & & comprehension constraints\\
+    \hline
+    2. & Narrative vs Non-Narrative Concerns & primary narrative purpose\\
+    \hline
+    3. & \textbf{Explicit vs Situation-Dependent} & identifies referents fully and \\
+     & \textbf{Reference} & explicitly through relativization\\
+    \hline
+    4. & Overt Expression of Persuasion & speaker's expression of own \\
+     & & point of view or with\\
+     & & argumentative styles \\
+     & & to persuade the addressee\\
+    \hline
+    5. & Abstract vs Non-Abstract Information & highly abstract and technical \\
+    & & informational focus\\
+    \hline
+    6. & \textbf{On-Line Information Elaboration} & production under highly \\
+    & & constrained conditions where \\
+    & & information is presented \\
+    & & in relatively loose, fragmented\\
+    & & manner\\
+    \hline
+    \end{tabular}}
+    \caption[Identified Dimensions for Comparison of Genres in \cite{biber}]{Identified Dimensions for Comparison of Genres. The characteristic of individual dimensions is as found in \cite[p.~115]{biber}. Dimension 5 on `Abstract vs Non-Abstract Information' is noted to be not universal across all languages \cite[p.~278]{biberbook}}
+    \label{tab:dimensions-genres}
+\end{table}
+
+\textbf{REPHRASE<}The different poles of the dimensions marked in bold in Table \ref{tab:dimensions-genres} can be summarised under the notion of \textit{deep formality}, as coined in \cite{formality1}. \citeauthor{formality1} identify and separate linguistic constructions into different genres according to the measurement of their formality. The formality of a construction was calculated in terms of F-measure (formality measure), as defined in Equation \ref{eqn:formality}. The measure was updated to work with Web2.0 data in \cite{formality2}, where they termed I-measure (informality measure) [Equation \ref{eqn:informality} as a metric to quantify the informality in Web2.0 texts. \citeauthor{formality2} discovered that a combination of the two measures worked better than either of the measure in identification of formality levels in data.\textbf{>}
+\begin{align}
+    \text{F-measure} &= \textstyle{\frac{f_{noun} + f_{adjective} + f_{preposition} + f_{article} - f_{pronoun} - f_{verb} - f_{adverb} - f_{interjection} + 100}{2}} \label{eqn:formality}\\
+    \text{I-measure} &= (f_{mistyped} + f_{interjection} + f_{emoticon}) * 100 \label{eqn:informality}
+\end{align}
+where \(f_{A}\) represents relative frequency of \(A\).
+
+To understand the differences between different genres, we will use F-measure as the primary 
+\textbf{blah}
+ 
+
+
+For the same effect, \(KL_{cpos^{3}}\) scores were computed between equal instances\footnote{in terms of number of sentences} of different genres. 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Genre} & \textbf{Sentence Count} \\
+        \hline
+        \hline
+        \textbf{fiction} & 7 252 \\
+        \textbf{news} & 6 744 \\
+        \textbf{nonfiction} & 1 273 \\
+        \textbf{social} & 526 \\
+        \textbf{spoken (conversational)} & 789 \\
+        academic & 51 \\
+        blog & 136 \\
+        legal & 11 \\
+        spoken (media) & 158 \\
+        spoken (prepared) & 306 \\
+        \hline
+    \end{tabular}
+    \caption{Genre Distribution in UDv2.5 \texttt{pl}-LFG treebank}
+    \label{tab:theta2_genre_data}
+\end{table}
+
+% fiction 2739-
+% grammar 2002-
+% wiki 2269-
+% blog 1781-
+% jrc (legal) 1141-
+
+
+
+% uni news 942-
+
+% wiki news 1120-
+
+% uni art 1058
+% europarl 1082
+% fin news 1002
+
+blog2, fiction12, grammar2, legal2, news12, nonfic1, social1, spoken1, wiki2
+
+\verb|pl|-LFG treebank in UDv2.5 contains data from 10 different genres\footnote{For understanding of what genre category involves exactly what kind of data, refer to the github page of the treebank at \url{https://github.com/UniversalDependencies/UD_Polish-LFG}}. The sentence counts of different genres are shown in Table \ref{tab:theta2_genre_data}. Of the different kind of data in \textit{spoken} genre, we keep only the \textit{conversational}, discarding the others from consideration. We also remove \textit{academic}, \textit{blog} and \textit{legal} data from our consideration owing to a considerably low number of sentences. The genres we work with are marked in bold in the table. For the experiment, we first split \verb|pl|-LFG treebank into the constituent genres, discarding those that are not marked in bold in Table \ref{tab:theta2_genre_data}. For the data from considered genres, we proceed as follows:
+
+\begin{enumerate}
+    \item For a given genre, we randomly sample 125 instances from the genre data. We refer to this resultant split as working data for the genre.
+    \item For the given genre, compute \(\theta_{POS}\) score of the working data of this genre with the working data of other genres.
+    \item Report the computed \(\theta_{POS}\) scores.
+\end{enumerate}
+
+We repeat the above steps for a 100 times, generating randomly sampled data for each genre, every time\footnote{For \textit{blog} data containing 136 sentences, the data can be sampled in \(\genfrac(){0pt}{2}{136}{125} > 4.8 \times 10^{15}\) ways. The count of sentences in randomly sampled data was purposefully fixed to 125, to allow increased variability of trigrams in the data without suffering from overfitting caused due to lack of data.}. We report the average of the computed scores from all the runs in Table \ref{tab:klcpos3-confusion-results}. For an individual genre under consideration, we 
+
+\begin{table}[H]
+\centering
+\scalebox{0.80}{
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    \textbf{Genres} & \textbf{blog} & \textbf{fiction} & \textbf{news} & \textbf{nonfiction} & \textbf{social}\\
+    \hline
+    \textbf{fiction} & 0.511 \(\pm\) 0.033 & - & - & - & - \\
+    \textbf{news} & 0.446 \(\pm\) 0.027 & 0.468 \(\pm\) 0.038 & - & - & - \\
+    \textbf{nonfiction} & 0.461 \(\pm\) 0.027 & 0.41 \(\pm\) 0.034 & 0.453 \(\pm\) 0.034 & - & - \\
+    \textbf{social} & 0.594 \(\pm\) 0.045 & 0.5 \(\pm\) 0.05 & 0.631 \(\pm\) 0.061 & 0.501 \(\pm\) 0.048 & - \\
+    \textbf{spoken} & 1.184 \(\pm\) 0.068 & 0.84 \(\pm\) 0.074 & 1.178 \(\pm\) 0.095 & 0.994 \(\pm\) 0.081 & 0.824 \(\pm\) 0.056\\
+    \hline
+\end{tabular}}
+\caption{\(\theta_{POS}\) Scores (\(\pm\) sd) for Genre Optimization (Averaged over 100 runs)}
+\label{tab:klcpos3-confusion-results}
+\end{table}
+
+Intuitively, the pair of genres with the smaller value of \(\theta_{POS}\) metric are more similar to each other than those contained in the pair with a higher metric value. From the table, it is evident that the \textit{spoken} genre is least similar to any other considered genre, followed by \textit{social} and \textit{blog}. 
+
+
+\newpage

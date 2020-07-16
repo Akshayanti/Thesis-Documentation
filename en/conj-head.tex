@@ -54,7 +54,7 @@ Owing to the change in associated dependency from right-headed to left-headed\fo
     \label{tab:syndetion}
 \end{table}
 
-In the example, note that the coordinating conjunction \texthindi{च} (\textit{ca}; and) appears postposed on the last conjunct, unlike in English. It is also worth pointing out that a given language can exhibit multiple kind of syndetion typologies as listed in Table \ref{tab:syndetion}, without restricting itself to just one. For example, a conjunction can also appear as a separate token in \verb|sa|. Similarly in \verb|he|, the conjunctions can occur in preposed form on the second conjunct, or as a separate token on its own. However, given the possibility of inflectional affixes, a singular word can have multiple prefixes which may or may imply a case of coordination.
+In the example, note that the coordinating conjunction \texthindi{च} (\textit{ca}; and) appears postposed on the last conjunct, unlike in English. It is also worth pointing out that a given language can exhibit multiple kind of syndetion typologies as listed in Table \ref{tab:syndetion}, without restricting itself to just one. For example, a conjunction can also appear as a separate token in \verb|sa|. Similarly in \verb|he|, the conjunctions can occur in preposed form on the second conjunct, or as a separate token on its own. However, given the possibility of inflectional affixes, a singular word can have multiple prefixes which may or may not imply a case of coordination.
 
 The above cases exhibit two problematic instances. Nonetheless, they can easily be handled similarly as follows:
 
@@ -77,25 +77,25 @@ It must be stressed here that the problem at hand is not about detecting the cas
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
  & & \textbf{(\% Total)} & \\
 \hline
-\texttt{ar}\_pud & 651 & 5 (0.768) & 02\\
-\texttt{cs}\_pud & 626 & 5 (0.799) & 0\\
-\texttt{de}\_pud & 733 & 8 (1.091) & 0\\
-\texttt{en}\_pud & 575 & 0 (0.0) & 0\\
-\texttt{es}\_pud & 553 & 0 (0.0) & 0\\
-\texttt{fi}\_pud & 596 & 1 (0.168) & 0\\
-\texttt{fr}\_pud & 537 & 0 (0.00) & 0\\
-\texttt{hi}\_pud & 789 & 25 (3.169) & 0\\
-\texttt{id}\_pud & 545 & 3 (0.550) & 0\\
-\texttt{it}\_pud & 576 & 1 (0.174) & 0\\
-\texttt{ja}\_pud & 0 & 0 (-) & 0\\
-\texttt{ko}\_pud & 79 & 0 (0.0) & 0\\
-\texttt{pl}\_pud & 571 & 5 (0.876) & 0\\
-\texttt{pt}\_pud & 533 & 2 (0.375) & 0\\
-\texttt{ru}\_pud & 588 & 0 (0.0) & 0\\
-\texttt{sv}\_pud & 593 & 6 (1.012) & 0\\
-\texttt{th}\_pud & 588 & 3 (0.510) & 0\\
-\texttt{tr}\_pud & 490 & 2 (0.408) & 0\\
-\texttt{zh}\_pud & 283 & 3 (1.060) & 0\\
+\texttt{ar}\_pud & 651 & 5 (0.768) & 2\\
+\texttt{cs}\_pud & 626 & 5 (0.799) & -\\
+\texttt{de}\_pud & 733 & 8 (1.091) & -\\
+\texttt{en}\_pud & 575 & - & -\\
+\texttt{es}\_pud & 553 & - & -\\
+\texttt{fi}\_pud & 596 & 1 (0.168) & -\\
+\texttt{fr}\_pud & 537 & - & -\\
+\texttt{hi}\_pud & 789 & 25 (3.169) & -\\
+\texttt{id}\_pud & 545 & 3 (0.550) & -\\
+\texttt{it}\_pud & 576 & 1 (0.174) & -\\
+\texttt{ja}\_pud & - & - & -\\
+\texttt{ko}\_pud & 79 & - & -\\
+\texttt{pl}\_pud & 571 & 5 (0.876) & -\\
+\texttt{pt}\_pud & 533 & 2 (0.375) & -\\
+\texttt{ru}\_pud & 588 & - & -\\
+\texttt{sv}\_pud & 593 & 6 (1.012) & -\\
+\texttt{th}\_pud & 588 & 3 (0.510) & -\\
+\texttt{tr}\_pud & 490 & 2 (0.408) & -\\
+\texttt{zh}\_pud & 283 & 3 (1.060) & -\\
 \hline
 \end{tabular}
 \caption{Misdirected Coordinating Conjunctions in UDv2.4 PUD Treebanks}
@@ -112,68 +112,68 @@ The PUD treebanks contain the same set of sentences, therefore allowing for a pa
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
 \hline
 \textbf{\texttt{af}\_afribooms} & \textbf{1832} & \textbf{1829} & \textbf{130}\\
-\textbf{\texttt{aii}\_as} & \textbf{25} & \textbf{8} & \textbf{0}\\
-\texttt{akk}\_pisandub & 100 & 0 & 0\\
+\textbf{\texttt{aii}\_as} & \textbf{25} & \textbf{8} & \textbf{-}\\
+\texttt{akk}\_pisandub & 100 & - & -\\
 \textbf{\texttt{am}\_att} & \textbf{80} & \textbf{73} & \textbf{1}\\
-\texttt{ar}\_nyuad & 48768 & 1532 & 0\\
+\texttt{ar}\_nyuad & 48768 & 1532 & -\\
 \textbf{\texttt{ar}\_padt} & \textbf{13855} & \textbf{1411} & \textbf{80}\\
-\texttt{be}\_hse & 590 & 1 & 0\\
-\texttt{bg}\_btb & 4794 & 6 & 0\\
-\texttt{bm}\_crb & 64 & 0 & 0\\
-\texttt{br}\_keb & 204 & 6 & 0\\
+\texttt{be}\_hse & 590 & 1 & -\\
+\texttt{bg}\_btb & 4794 & 6 & -\\
+\texttt{bm}\_crb & 64 & - & -\\
+\texttt{br}\_keb & 204 & 6 & -\\
 \texttt{bxr}\_bdt & 70 & 61 & 13\\
-\texttt{ca}\_ancora & 14067 & 19 & 0\\
-\texttt{cop}\_scriptorium & 675 & 7 & 0\\
+\texttt{ca}\_ancora & 14067 & 19 & -\\
+\texttt{cop}\_scriptorium & 675 & 7 & -\\
 \texttt{cs}\_cac & 21798 & 509 & 8\\
-\texttt{cs}\_cltt & 1805 & 20 & 0\\
+\texttt{cs}\_cltt & 1805 & 20 & -\\
 \texttt{cs}\_fictree & 7410 & 108 & 3\\
 \texttt{cs}\_pdt & 49302 & 1372 & 9\\
 \textbf{\texttt{cu}\_proiel} & \textbf{4865} & \textbf{3263} & \textbf{124}\\
-\texttt{cy}\_ccg & 305 & 0 & 0\\
+\texttt{cy}\_ccg & 305 & - & -\\
 \texttt{da}\_ddt & 3097 & 177 & 61\\
 \texttt{de}\_gsd & 8675 & 169 & 4\\
-\texttt{de}\_hdt & 68917 & 1 & 0\\
-\texttt{de}\_lit & 1686 & 17 & 0\\
-\texttt{el}\_gdt & 2017 & 24 & 0\\
-\texttt{en}\_esl & 3189 & 2 & 0\\
-\texttt{en}\_ewt & 8197 & 8 & 0\\
+\texttt{de}\_hdt & 68917 & 1 & -\\
+\texttt{de}\_lit & 1686 & 17 & -\\
+\texttt{el}\_gdt & 2017 & 24 & -\\
+\texttt{en}\_esl & 3189 & 2 & -\\
+\texttt{en}\_ewt & 8197 & 8 & -\\
 \texttt{en}\_gum & 3212 & 26 & 4\\
-\texttt{en}\_lines & 2510 & 10 & 0\\
+\texttt{en}\_lines & 2510 & 10 & -\\
 \texttt{en}\_partut & 1647 & 6 & 1\\
-\texttt{es}\_ancora & 14233 & 36 & 0\\
+\texttt{es}\_ancora & 14233 & 36 & -\\
 \texttt{es}\_gsd & 12784 & 226 & 9\\
-\texttt{et}\_edt & 15957 & 37 & 0\\
-\texttt{et}\_ewt & 1120 & 1 & 0\\
+\texttt{et}\_edt & 15957 & 37 & -\\
+\texttt{et}\_ewt & 1120 & 1 & -\\
 \texttt{eu}\_bdt & 4620 & 318 & 56\\
 \texttt{fa}\_seraji & 7653 & 101 & 5\\
-\texttt{fi}\_ftb & 4726 & 32 & 0\\
-\texttt{fi}\_tdt & 8284 & 12 & 0\\
-\texttt{fo}\_oft & 296 & 1 & 0\\
-\texttt{fr}\_fqb & 97 & 0 & 0\\
+\texttt{fi}\_ftb & 4726 & 32 & -\\
+\texttt{fi}\_tdt & 8284 & 12 & -\\
+\texttt{fo}\_oft & 296 & 1 & -\\
+\texttt{fr}\_fqb & 97 & - & -\\
 \texttt{fr}\_ftb & 11605 & 45 & 5\\
-\texttt{fr}\_gsd & 10068 & 2 & 0\\
-\texttt{fr}\_partut & 853 & 4 & 0\\
-\texttt{fr}\_sequoia & 1621 & 0 & 0 \\
-\texttt{fr}\_spoken & 1042 & 0 & 0\\
-\texttt{fro}\_srcmf & 10075 & 13 & 0\\
-\texttt{ga}\_idt & 640 & 1 & 0\\
-\textbf{\texttt{gl}\_ctg} & \textbf{4261} & \textbf{4127} & \textbf{0}\\
-\texttt{gl}\_treegal & 700 & 0 & 0\\
+\texttt{fr}\_gsd & 10068 & 2 & -\\
+\texttt{fr}\_partut & 853 & 4 & -\\
+\texttt{fr}\_sequoia & 1621 & - & - \\
+\texttt{fr}\_spoken & 1042 & - & -\\
+\texttt{fro}\_srcmf & 10075 & 13 & -\\
+\texttt{ga}\_idt & 640 & 1 & -\\
+\textbf{\texttt{gl}\_ctg} & \textbf{4261} & \textbf{4127} & \textbf{-}\\
+\texttt{gl}\_treegal & 700 & - & -\\
 \(^{*}\)\textbf{\texttt{got}\_proiel} & \textbf{5017} & \textbf{3084} & \textbf{125}\\
 \textbf{\texttt{grc}\_perseus} & \textbf{5316} & \textbf{5098} & \textbf{780}\\
 \textbf{\texttt{grc}\_proiel} & \textbf{13980} & \textbf{10704} & \textbf{771}\\
-\textbf{\texttt{gun}\_dooley} & \textbf{24} & \textbf{3} & \textbf{0}\\
-\texttt{gun}\_thomas & 26 & 1 & 0\\
+\textbf{\texttt{gun}\_dooley} & \textbf{24} & \textbf{3} & \textbf{-}\\
+\texttt{gun}\_thomas & 26 & 1 & -\\
 \texttt{he}\_htb & 4724 & 21 & 2\\
 \texttt{hi}\_hdtb & 6426 & 9 & 3\\
-\texttt{hr}\_set & 7236 & 78 & 0\\
-\texttt{hsb}\_ufal & 419 & 5 & 0\\
+\texttt{hr}\_set & 7236 & 78 & -\\
+\texttt{hsb}\_ufal & 419 & 5 & -\\
 \textbf{\texttt{hu}\_szeged} & \textbf{1809} & \textbf{390} & \textbf{2}\\
-\texttt{hy}\_armtdp & 1561 & 8 & 0\\
+\texttt{hy}\_armtdp & 1561 & 8 & -\\
 \texttt{id}\_gsd & 3549 & 215 & 18\\
-\texttt{it}\_isdt & 8131 & 2 & 0\\
-\texttt{it}\_partut & 1680 & 6 & 0\\
-\texttt{it}\_postwita & 2801 & 14 & 0\\
+\texttt{it}\_isdt & 8131 & 2 & -\\
+\texttt{it}\_partut & 1680 & 6 & -\\
+\texttt{it}\_postwita & 2801 & 14 & -\\
 \texttt{it}\_vit & 8120 & 284 & 2\\
 \hline
 \end{tabular}
@@ -182,69 +182,69 @@ The PUD treebanks contain the same set of sentences, therefore allowing for a pa
 \hline
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
 \hline
-\textbf{\texttt{ja}\_bccwj} & \textbf{16120} & \textbf{11574} & \textbf{0}\\
-\texttt{ja}\_gsd & 0 & 0 & 0\\
-\textbf{\texttt{ja}\_modern} & \textbf{479} & \textbf{271} & \textbf{0}\\
-\texttt{kk}\_ktb & 180 & 6 & 0\\
+\textbf{\texttt{ja}\_bccwj} & \textbf{16120} & \textbf{11574} & \textbf{-}\\
+\texttt{ja}\_gsd & - & - & -\\
+\textbf{\texttt{ja}\_modern} & \textbf{479} & \textbf{271} & \textbf{-}\\
+\texttt{kk}\_ktb & 180 & 6 & -\\
 \textbf{\texttt{kmr}\_mg} & \textbf{355} & \textbf{41} & \textbf{1}\\
 \textbf{\texttt{ko}\_gsd} & \textbf{223} & \textbf{52} & \textbf{4}\\
-\texttt{ko}\_kaist & 5136 & 2 & 0\\
-\texttt{kpv}\_ikdp & 48 & 1 & 0\\
-\texttt{kpv}\_lattice & 56 & 2 & 0\\
-\texttt{krl}\_kkpp & 156 & 0 & 0\\
+\texttt{ko}\_kaist & 5136 & 2 & -\\
+\texttt{kpv}\_ikdp & 48 & 1 & -\\
+\texttt{kpv}\_lattice & 56 & 2 & -\\
+\texttt{krl}\_kkpp & 156 & - & -\\
 \(^{*}\)\texttt{la}\_ittb & 16789 & 673 & 6\\
 \(^{*}\)\textbf{\texttt{la}\_perseus} & \textbf{1255} & \textbf{960} & \textbf{65}\\
 \(^{*}\)\textbf{\texttt{la}\_proiel} & \textbf{14575} & \textbf{10311} & \textbf{638}\\
-\texttt{lt}\_alksnis & 1648 & 40 & 0\\
-\texttt{lt}\_hse & 287 & 0 & 0\\
-\texttt{lv}\_lvtb & 8043 & 9 & 0\\
-\texttt{lzh}\_kyoto & 923 & 0 & 0\\
-\texttt{mr}\_ufal & 62 & 1 & 0\\
-\texttt{mt}\_mudt & 1514 & 4 & 0\\
-\texttt{myv}\_jr & 314 & 3 & 0\\
-\texttt{nl}\_alpino & 3853 & 7 & 0\\
-\texttt{nl}\_lassysmall & 2501 & 6 & 0\\
-\texttt{no}\_bokmaal & 10709 & 0 & 0\\
-\texttt{no}\_nynorsk & 10847 & 4 & 0\\
+\texttt{lt}\_alksnis & 1648 & 40 & -\\
+\texttt{lt}\_hse & 287 & - & -\\
+\texttt{lv}\_lvtb & 8043 & 9 & -\\
+\texttt{lzh}\_kyoto & 923 & - & -\\
+\texttt{mr}\_ufal & 62 & 1 & -\\
+\texttt{mt}\_mudt & 1514 & 4 & -\\
+\texttt{myv}\_jr & 314 & 3 & -\\
+\texttt{nl}\_alpino & 3853 & 7 & -\\
+\texttt{nl}\_lassysmall & 2501 & 6 & -\\
+\texttt{no}\_bokmaal & 10709 & - & -\\
+\texttt{no}\_nynorsk & 10847 & 4 & -\\
 \texttt{no}\_nynorsklia & 2421 & 188 & 1\\
-\texttt{orv}\_rnc & 1460 & 0 & 0\\
+\texttt{orv}\_rnc & 1460 & - & -\\
 \textbf{\texttt{orv}\_torot} & \textbf{13640} & \textbf{6683} & \textbf{453}\\
-\texttt{pcm}\_nsc & 135 & 0 & 0\\
-\texttt{pl}\_lfg & 3227 & 0 & 0\\
-\texttt{pl}\_pdb & 10670 & 138 & 0\\
+\texttt{pcm}\_nsc & 135 & - & -\\
+\texttt{pl}\_lfg & 3227 & - & -\\
+\texttt{pl}\_pdb & 10670 & 138 & -\\
 \texttt{pt}\_bosque & 5153 & 57 & 9\\
-\texttt{pt}\_gsd & 7717 & 82 & 0\\
-\texttt{qhe}\_hiencs & 493 & 3 & 0\\
-\texttt{ro}\_nonstandard & 14953 & 12 & 0\\
+\texttt{pt}\_gsd & 7717 & 82 & -\\
+\texttt{qhe}\_hiencs & 493 & 3 & -\\
+\texttt{ro}\_nonstandard & 14953 & 12 & -\\
 \texttt{ro}\_rrt & 6275 & 155 & 8\\
 \texttt{ru}\_gsd & 2952 & 44 & 2\\
 \texttt{ru}\_syntagrus & 38914 & 86 & 1\\
-\texttt{ru}\_taiga & 1712 & 0 & 0\\
-\textbf{\(^{*}\)\texttt{sa}\_ufal} & \textbf{32} & \textbf{17} & \textbf{0}\\
-\texttt{sk}\_snk & 3162 & 29 & 0\\
-\texttt{sl}\_ssj & 4665 & 0 & 0\\
+\texttt{ru}\_taiga & 1712 & - & -\\
+\textbf{\(^{*}\)\texttt{sa}\_ufal} & \textbf{32} & \textbf{17} & \textbf{-}\\
+\texttt{sk}\_snk & 3162 & 29 & -\\
+\texttt{sl}\_ssj & 4665 & - & -\\
 \texttt{sl}\_sst & 1082 & 26 & 1\\
 \textbf{\texttt{sme}\_giella} & \textbf{984} & \textbf{891} & \textbf{60}\\
-\texttt{sr}\_set & 2900 & 18 & 0\\
+\texttt{sr}\_set & 2900 & 18 & -\\
 \texttt{sv}\_lines & 2941 & 11 & 1\\
-\texttt{sv}\_talbanken & 3510 & 112 & 0\\
-\texttt{swl}\_sslc & 5 & 0 & 0\\
-\(^{*}\)\texttt{ta}\_ttb & 46 & 1 & 0\\
-\textbf{\texttt{te}\_mtg} & \textbf{11} & \textbf{4} & \textbf{0}\\
-\texttt{tl}\_trg & 0 & 0 & 0\\
-\texttt{tr}\_gb & 160 & 6 & 0\\
+\texttt{sv}\_talbanken & 3510 & 112 & -\\
+\texttt{swl}\_sslc & 5 & - & -\\
+\(^{*}\)\texttt{ta}\_ttb & 46 & 1 & -\\
+\textbf{\texttt{te}\_mtg} & \textbf{11} & \textbf{4} & \textbf{-}\\
+\texttt{tl}\_trg & - & - & -\\
+\texttt{tr}\_gb & 160 & 6 & -\\
 \texttt{tr}\_imst & 825 & 69 & 10\\
-\texttt{ug}\_udt & 462 & 2 & 0\\
-\texttt{uk}\_iu & 4753 & 0 & 0\\
+\texttt{ug}\_udt & 462 & 2 & -\\
+\texttt{uk}\_iu & 4753 & - & -\\
 \texttt{ur}\_udtb & 3248 & 10 & 1\\
-\textbf{\texttt{vi}\_vtb} & \textbf{1177} & \textbf{340} & \textbf{0}\\
-\texttt{wbp}\_ufal & 0 & 0 & 0\\
-\texttt{wo}\_wtb & 1365 & 1 & 0\\
-\texttt{yo}\_ytb & 148 & 0 & 0\\
-\texttt{yue}\_hk & 76 & 3 & 0\\
-\texttt{zh}\_cfl & 92 & 0 & 0\\
+\textbf{\texttt{vi}\_vtb} & \textbf{1177} & \textbf{340} & \textbf{-}\\
+\texttt{wbp}\_ufal & - & - & -\\
+\texttt{wo}\_wtb & 1365 & 1 & -\\
+\texttt{yo}\_ytb & 148 & - & -\\
+\texttt{yue}\_hk & 76 & 3 & -\\
+\texttt{zh}\_cfl & 92 & - & -\\
 \texttt{zh}\_gsd & 1739 & 21 & 1\\
-\texttt{zh}\_hk & 71 & 2 & 0\\
+\texttt{zh}\_hk & 71 & 2 & -\\
 \hline
 \end{tabular}
 }
@@ -333,7 +333,7 @@ Since the conjunction is associated to a conjunct in the different coordination 
     \centering
     \includegraphics[scale=0.75]{img/nonconj.png}
     \caption{Dependency Tree for Example \ref{examp:nonconj}}
-    Note: \textbf{But} should be connected to \textbf{like}, and not to \textbf{seem}
+    Note: \textit{But} should be connected to \textit{like}, and not to \textit{seem}
     \label{fig:nonconj}
 \end{figure}
 
@@ -739,7 +739,7 @@ The number of originally nonprojective nodes affected by the first part of the a
         \textbf{Lang.} & \textbf{Total} & \textit{nextConjHead()} & \textit{projTempFix()} & Unaffected\\
         \hline
         \texttt{af} & 130 & 20 & 106 & 5\\
-        \texttt{ar} & 80 & 0 & 44 & 36\\
+        \texttt{ar} & 80 & - & 44 & 36\\
         \hline
     \end{tabular}
     \caption{Nodes Affected: Non Projective Attachment}
@@ -788,7 +788,7 @@ Table \ref{tab:projTempFixResults} shows the number of instances that were force
     \textbf{Lang.} & \textbf{Total} & Conj. Sand. & Unfixed & Correct\\
     \hline
     \texttt{af} & 106 & 12 & 91 & 3\\
-    \texttt{ar} & 44 & 0 & 42 & 2\\
+    \texttt{ar} & 44 & - & 42 & 2\\
     \hline
     \end{tabular}
     \caption{Evaluation: \textit{projTempFix()}}
@@ -968,7 +968,7 @@ We based \textit{attachToSibling()} algorithm based on the assumption that we wo
     Note: \textbf{en} (and) should be attached to \textbf{gevolg} (consequence) after the change of subtree head
 \end{figure}
 
-The instances of misdirected dependency in conjunctions that escaped processing by \textit{attachToSibling()} algorithm were then processed by algorithms \textit{attachToAunt()} and \textit{attachToGrandparent()} in that order. We found that the majority of these cases were still misdirected even after being processed by the overall algorithm. We discuss such cases in the next section where we discuss some insights into the processing of the algorithm step by step. Of the instances that led to a case of conjunction sandwich, the majority of the cases were caused by an annotation error, caused due to improper selection of the head of the relevant subtree. The example from \verb|af| treebank in Example \ref{examp:others-conj-sand}, and the associated dependency tree in Figure \ref{fig:others-conj-sand} demonstrates this. In the example, the conjunction sandwich is caused because of the improper annotation of token marked with UPOS as \verb|DET|. The conjunction of interest is marked in bold.
+The instances of misdirected dependency in conjunctions that escaped processing by \textit{attachToSibling()} algorithm were then processed by algorithms \textit{attachToAunt()} and \textit{attachToGrandparent()} in that order. We found that the majority of these cases were still misdirected even after being processed by the overall algorithm. We discuss such cases in the next section where we discuss some insights into the processing of the algorithm step by step. Of the instances that led to a case of conjunction sandwich, the majority of the cases were caused by an annotation error, caused due to improper selection of the head of the relevant subtree. The example from \verb|af| treebank in Example \ref{examp:others-conj-sand}, and the associated dependency tree in Figure \ref{fig:others-conj-sand} demonstrates this. In the example, the conjunction sandwich is caused because of the improper annotation in the tree. The conjunction of interest is marked in bold.
 
 \begin{example}
 \label{examp:others-conj-sand}
@@ -992,7 +992,7 @@ The instances of misdirected dependency in conjunctions that escaped processing 
     \label{fig:others-conj-sand-2}
     \end{subfigure}
     \caption{Change in Annotation for Example \ref{examp:others-conj-sand}}
-    Note: \textbf{of} (and) should be attached to \textbf{vreemde} (alien) and not to \textbf{wees} (be)\\
+    Note: \textbf{of} (and) should be attached to \textbf{vreemde} (alien) and not to \textbf{'n} (a)\\
     \label{fig:others-conj-sand}
 \end{figure}
 
@@ -1015,7 +1015,9 @@ While the aforementioned reasons did bring about the cases of a conjunction sand
 In the evaluation, \textit{attachToSibling()} algorithms performs very well, even after accounting for sampling error. For the instances that are not processed by the algorithm, \textit{attachToAunt()} and \textit{attachToGrandparent()} algorithms don't perform as well. Upon analysis of instances that are passed to the latter algorithms, we observe a pattern. In general, if a conjunction occurs at a position such that it can change the level at which it is associated with, it will further be processed by the algorithms \textit{attachToAunt()} and \textit{attachToGrandparent()}, or would remain a case of misdirected dependency. The position of an instance in a dependency tree can be more often than not given by Equation \ref{eqn:movement-position}, where \(co\) is the conjunction of interest in dependency tree \(T\), attached to the node \(u\).
 
 \begin{equation}
-co: u \rightarrow co \And \not\exists(x) [u \rightarrow x \And co \neq x] \hspace{5mm} co, u \in T
+\boxed{
+    co: u \rightarrow co \And \not\exists(x) [u \rightarrow x \And co \neq x] \hspace{5mm} co, u \in T
+}
 \label{eqn:movement-position}
 \end{equation}
 

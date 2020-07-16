@@ -1,0 +1,39 @@
+\section{Framing \(\Theta_{pos}\) Limit}
+\label{sec:pos-harmony-calculations}
+
+We studied the effects of size and genre variation in treebanks in the previous sections. In case of size based disparity, we looked at the 
+
+There are a large number of genres that are not covered in our approach. However, we can come up with a theoretical limit nonetheless. We can describe our coverage of genres in 3 broad categories, viz. print media (\textit{fiction}, \textit{news}, \textit{nonfiction}), social media (\textit{blog}, \textit{social}) and spoken data (\textit{spoken}). There exists an overlap between the categories. However, any genre that is not included can almost always be classified within the realm of the categories defined above. It is important to note that the categories should be considered as points in the continuous range, and not as discreet ones in themselves. From there, we can establish the upper limits on the variability of \(\theta_{POS}\) score as in Table \ref{tab:thetapos_genre}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Category 1} & \textbf{Category 2} & \textbf{Limit} \\
+    \hline
+    Print & Social & 0.8 \\
+    Print & Spoken & 1.4 \\
+    Social & Spoken & 1.4 \\
+    \hline
+    \end{tabular}
+    \caption{Limits on \(\theta_{POS}\) for Genre-based Disparity}
+    \label{tab:thetapos_genre}
+\end{table}
+
+\section{Discussion and Conclusion}
+\label{sec:pos-harmony-conclusion}
+
+\subsection{Unaccounted Factors}
+\subsubsection{Out of Vocabulary Words}
+
+The metric \(\theta_{pos}\) uses POS trigrams to compute the divergence of the annotation. Since the metric is delexicalised, the concept of out-of-vocabulary (OOV) words does not make sense in the calculation of the metric score. In case of either treebank being annotated (semi-)automatically by a POS tagger, the improper annotation of OOV words can affect the scores negatively.
+
+In UD tagset, \verb|X| tag is reserved for words such that they can not be categorised under any of the other POS. While it is recommended to be used in a restricted manner\footnote{\url{https://universaldependencies.org/u/pos/X.html}}, the tag can exhibit itself abundantly depending on the origin source of the data, with the genres containing Web2.0 data being especially susceptible.
+
+For most treebanks, the influence of OOV words should be minimal. Nonetheless, care must be taken when the \verb|X| tag is present in the trigrams of either of the treebanks.
+
+\subsection{Conclusion}
+
+In practice, it is not always possible to get an estimate of the annotation quality of individual treebanks. Neither of the aforementioned assumptions can be made in such cases. If either of the treebanks in a considered pair can be estimated for quality, the other treebank can be compared for a similar annotation quality. However, like in the x 
+\textbf{ELABORATE}
+\textbf{blah}
