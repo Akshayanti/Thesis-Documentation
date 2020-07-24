@@ -18,7 +18,7 @@ In the following subsections, we shall elaborate on the experiment with LISCA. W
 
 The experiment was conducted entirely on data from \verb|hi|-HDTB treebank from UDv2.4\footnote{Code alongwith manually annotated data is available at \url{https://github.com/Akshayanti/Masters-Thesis-CUNI-2020/tree/master/lisca_coldstart}} \citep{UDv2.4}. The motivation behind the limiting of the dataset to a particular language is threefold. Firstly, the treebank in question is limited to news genre. The lack of variability in the genre in the treebank can be used to frame a better statistical model than when there would be different genres present. Secondly, the treebank is medium sized (16,000+ sentences containing around 350k tokens) as can be seen in Table \ref{tab:hi_size2}. The medium sized treebank is optimal in the manner that a variety of values (of the number of folds in \(k\)-fold cross validation procedure) can be experimented with. Furthermore, the different values of the parameter can be used to ascertain the performance of the algorithm in both large-sized and small-sized treebanks. Lastly, the author has \verb|hi| as their native language, making it easier for them to analyse the given data, thus reducing the source of ambiguity during the process of manual annotation and verification of results from the results of the algorithm.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
@@ -44,7 +44,7 @@ For the remainder of the experiment, we adapt the usage of \textit{iteration} an
 
 For the different runs of the current experiment, the total number of sentences poses a problem in the terms of how many folds the data can be split into\footnote{16,647 can be factorised as 3 x 31 x 179, which allows limited manipulation in the number of folds that can be worked with for equal distribution of instances.}. To combat this problem, we first concatenate the different splits of the treebank into one. The concatenated split is then downsampled to 16,000 sentences. This downsampled data becomes our functional dataset for the experiment. The downsampling is needed to allow for the different values of \(k\) to work. While the data if downsampled to 16,640 instances would have also worked, we chose to set the count to 16,000 sentences for empirical reasons. The number of sentences from the original splits that feature in the downsampled version are as listed in Table \ref{tab:split_lisca_downsample}.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|l||c|c||c|c|}
     \hline
@@ -226,7 +226,7 @@ The second analysis of data in Table \ref{tab:baseline_cv_error_percentage} woul
 
 We therefore are able to establish that the cross-validation technique is a better choice than the trivial approach. Table \ref{tab:typology_test_arcs} shows the typology of different errors as identified in the different runs. We discuss the most relevant error typologies in Section \ref{typologies:lisca}.
 
-\begin{table}[h]
+\begin{table}[H]
     \scalebox{0.95}{\begin{tabular}{|l|c|c|c|c|}
     \hline
     \textbf{Error Typology} & \textbf{Baseline} & \textbf{\(k=2\)} & \textbf{\(k=4\)} & \textbf{\(k=8\)}\\
@@ -280,7 +280,7 @@ where
     \item \(k_{2}\) represents the counts of \(error\) in the annotated sample of arcs flagged only by the run with \(k=2\), but not flagged by runs with \(k=4\) or \(k=8\)
 \end{itemize}
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
@@ -334,7 +334,7 @@ Part of sentence from UDv2.4 \texttt{hi}-HDTB treebank in Example \ref{examp:cas
 \textbf{Translated:} 10 senators of Marxist Communist Party (MaCPa)
 \end{example}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.90]{img/caseError.png}
     \caption{\texttt{Case Error} in Example \ref{examp:caseError}}
@@ -480,7 +480,7 @@ Example \ref{examp:treeError} shows an instance of this error in UDv2.4 \texttt{
 \textbf{Translated:} The confidential information of attempt at some plane hijacking or suicide bombing by terrorists ...
 \end{example}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{img/treeError.png}
     \caption{\texttt{Subtree Error} in Example \ref{examp:treeError}}

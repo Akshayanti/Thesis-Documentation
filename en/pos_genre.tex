@@ -1,129 +1,150 @@
-\section{Genre Distribution and \texorpdfstring{$\theta_{pos}$}{theta\_pos}}
-\label{sec:pos-harmony-genre}
+\verb|pl|-LFG treebank in UDv2.5 (rated 4 stars on a scale of 5 stars) contains data from 10 different genres\footnote{For understanding of what genre category involves exactly what kind of data, refer to the github page of the treebank at \url{https://github.com/UniversalDependencies/UD_Polish-LFG}}. The sentence counts of different genres are shown in Table \ref{tab:genre_pl}. Of the different kind of data in \textit{spoken} genre, we keep only the \textit{conversational}, discarding the others from consideration. We also remove \textit{academic}, \textit{blog} and \textit{legal} data from our consideration owing to a considerably low number of sentences. Table \ref{tab:genre_fi} shows the genre distribution in UDv2.5 \texttt{fi}-TDT data. The genres we work with are marked in bold in the table. 
 
-There can be a significant difference between genres in terms of syntactic annotations that are typical of the genre. While this difference is best exhibited across treebanks containing instances from different genres, it can also be exhibited within a given treebank. The problem of music genre classification in speech data has been studied in detail, with different audio similarity metrics being proposed as well (cf. \cite{music1, music2}, among others). In the written data, while there has been some research on the study of inter-genre variations for language acquisition \citep{genre-acquisition1}, the classification of genres in textual corpus is identified mainly by the source of data.
-
-In \cite{biber2}, a line of distinction is drawn between between text type and genre as the basis of classification of texts. While the former is `defined and distinguished on the basis of systematic nonlinguistic criteria', the latter is `defined on the basis of strictly linguistic criteria (similarities in the use of cooccuring linguistic features)' \cite[p.~39]{biber2}. In \cite{biber}, the different genres in \verb|en| are studied in different dimensions, focusing on one dimension at a time. The dimensions are a group of factors that associate the different features of a discourse, and are as listed in Table \ref{tab:dimensions-genres}. In the same work, the author notes that a given genre can contain multiple sub-genres which may or may not be internally coherent to each other \cite[p.~170]{biber}, and that no dimension in itself can attribute to the similarity or dissimilarity of the genres. In a later study of variations of the genres based on the dimensions (as identified in \cite{biber}) across 4 languages, the author notes that `even when defined at a high level of generality, parallel registers are more similar cross-linguistically than are disparate registers within a single language' \cite[p.~279]{biberbook}.
-
-\begin{table}[h]
-    \scalebox{0.9}{\begin{tabular}{|c|l|l|}
-    \hline
-    \textbf{S.No.} & \textbf{Dimension Name} & \textbf{Characteristic of Dimension} \\
-    \hline
-    \hline
-    1. & \textbf{Involved vs Informational Production} & interactional, affective, involved \\
-     & & purposes, associated with \\
-     & & strict real-time production and \\
-     & & comprehension constraints\\
-    \hline
-    2. & Narrative vs Non-Narrative Concerns & primary narrative purpose\\
-    \hline
-    3. & \textbf{Explicit vs Situation-Dependent} & identifies referents fully and \\
-     & \textbf{Reference} & explicitly through relativization\\
-    \hline
-    4. & Overt Expression of Persuasion & speaker's expression of own \\
-     & & point of view or with\\
-     & & argumentative styles \\
-     & & to persuade the addressee\\
-    \hline
-    5. & Abstract vs Non-Abstract Information & highly abstract and technical \\
-    & & informational focus\\
-    \hline
-    6. & \textbf{On-Line Information Elaboration} & production under highly \\
-    & & constrained conditions where \\
-    & & information is presented \\
-    & & in relatively loose, fragmented\\
-    & & manner\\
-    \hline
-    \end{tabular}}
-    \caption[Identified Dimensions for Comparison of Genres in \cite{biber}]{Identified Dimensions for Comparison of Genres. The characteristic of individual dimensions is as found in \cite[p.~115]{biber}. Dimension 5 on `Abstract vs Non-Abstract Information' is noted to be not universal across all languages \cite[p.~278]{biberbook}}
-    \label{tab:dimensions-genres}
-\end{table}
-
-\textbf{REPHRASE<}The different poles of the dimensions marked in bold in Table \ref{tab:dimensions-genres} can be summarised under the notion of \textit{deep formality}, as coined in \cite{formality1}. \citeauthor{formality1} identify and separate linguistic constructions into different genres according to the measurement of their formality. The formality of a construction was calculated in terms of F-measure (formality measure), as defined in Equation \ref{eqn:formality}. The measure was updated to work with Web2.0 data in \cite{formality2}, where they termed I-measure (informality measure) [Equation \ref{eqn:informality} as a metric to quantify the informality in Web2.0 texts. \citeauthor{formality2} discovered that a combination of the two measures worked better than either of the measure in identification of formality levels in data.\textbf{>}
-\begin{align}
-    \text{F-measure} &= \textstyle{\frac{f_{noun} + f_{adjective} + f_{preposition} + f_{article} - f_{pronoun} - f_{verb} - f_{adverb} - f_{interjection} + 100}{2}} \label{eqn:formality}\\
-    \text{I-measure} &= (f_{mistyped} + f_{interjection} + f_{emoticon}) * 100 \label{eqn:informality}
-\end{align}
-where \(f_{A}\) represents relative frequency of \(A\).
-
-To understand the differences between different genres, we will use F-measure as the primary 
-\textbf{blah}
- 
-
-
-For the same effect, \(KL_{cpos^{3}}\) scores were computed between equal instances\footnote{in terms of number of sentences} of different genres. 
-
-\begin{table}[h]
+\begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l|c|l|}
         \hline
-        \textbf{Genre} & \textbf{Sentence Count} \\
+        \textbf{Genre} & \textbf{Sentence Count} & \textbf{Avg()}\\
         \hline
         \hline
-        \textbf{fiction} & 7 252 \\
-        \textbf{news} & 6 744 \\
-        \textbf{nonfiction} & 1 273 \\
-        \textbf{social} & 526 \\
-        \textbf{spoken (conversational)} & 789 \\
-        academic & 51 \\
-        blog & 136 \\
-        legal & 11 \\
-        spoken (media) & 158 \\
-        spoken (prepared) & 306 \\
+        \textbf{fiction} & 7 252 & 7.124 \\
+        \textbf{news} & 6 744 & 8.401\\
+        \textbf{nonfiction} & 1 273 & 7.719\\
+        \textbf{social} & 526 & 6.977\\
+        \textbf{spoken} & 1253 & 6.047\\
+        academic & 51 & 8.118\\
+        blog & 136 & 7.772\\
+        legal & 11 & 9.273\\ 
         \hline
     \end{tabular}
     \caption{Genre Distribution in UDv2.5 \texttt{pl}-LFG treebank}
-    \label{tab:theta2_genre_data}
+    \label{tab:genre_pl}
 \end{table}
 
-% fiction 2739-
-% grammar 2002-
-% wiki 2269-
-% blog 1781-
-% jrc (legal) 1141-
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|l|}
+        \hline
+        \textbf{Genre} & \textbf{Sentence Count} & \textbf{Avg()}\\
+        \hline
+        \hline
+        \textbf{fiction} & 2739 & 11.981\\
+        \textbf{wiki} & 2269 & 14.049\\
+        \textbf{grammar} & 2002 & 8.48\\
+        \textbf{blog} & 1781 & 12.533\\
+        \textbf{legal} & 1141 & 20.968\\
+        \textbf{news} & 3064 & 13.026\\ 
+        europarl & 1082 & 18.441\\
+        uni\_articles & 1058 & 13.261\\
+        \hline
+    \end{tabular}
+    \caption{Genre Distribution in UDv2.5 \texttt{fi}-TDT treebank}
+    \label{tab:genre_fi}
+\end{table}
 
+In order to establish that the different genres are annotated consistently within themselves, we downsample the dataset for each genre in \texttt{fi}-TDT treebank to 900 sentences. On this downsampled data, we perform 2-fold cross validation split, and calculate the $\theta_{pos}$ score for the splits. We repeat this calculation 100 times, such that the data is downsampled differently each time, as per a different seed value. Table \ref{tab:genre_all_kfold} shows the calculated $\theta_{pos}$ scores averaged over 100 different runs.
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Genres} & \textbf{$\theta_{pos}$} ($\pm$ sd) & $\Theta_{pos}$\\
+        \hline
+        \textbf{fiction} & 0.316 $\pm$ 0.015 & 0.5\\
+        \textbf{wiki} & 0.3 $\pm$ 0.017 & 0.5\\
+        \textbf{grammar} & 0.427 $\pm$ 0.021 & 0.5\\
+        \textbf{blog} & 0.332 $\pm$ 0.017 & 0.5\\
+        \textbf{legal} & 0.216 $\pm$ 0.035 & 0.5\\
+        \textbf{news} & 0.286 $\pm$ 0.015 & 0.5\\
+        europarl & 0.233 $\pm$ 0.017 & 0.5\\
+        uni\_articles & 0.3 $\pm$ 0.014 & 0.5\\
+        \hline
+    \end{tabular}
+    \caption{$\theta_{pos}$ ($\pm$ sd) Scores Averaged Over 100 Different Runs for Different Genres in UDv2.5 \texttt{fi}-TDT Treebank To Show Intra-Genre Annotation Consistency}
+    \label{tab:genre_all_kfold}
+\end{table}
 
-% uni news 942-
+As can be seen from Table \ref{tab:genre_all_kfold}, the different genres in the treebank are internally consistent in their annotation, as per the constraint as per Equation \ref{eqn:size_constraint}.
 
-% wiki news 1120-
+We start the inter-genre analysis by downsampling the datasets for different genres in the dataset. Table \ref{tab:downsample_genre} shows the count of sentences in the downsampled data, along with the F-measure score associated with each genre. Each genre is downsampled to the number of instances such that the condition as specified in Equation \ref{eqn:size_constraint} is satisfied. The F-measure scores reported in the table correspond to the calculated F-measure score for the downsampled data, averaged over 100 different runs with different seed values.
 
-% uni art 1058
-% europarl 1082
-% fin news 1002
+\begin{table}[H]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{|c|l|c|c|}
+        \hline
+        \textbf{Language} & \textbf{Genre (X)} & \textbf{Downsampled To} & \textbf{$size(X) \cdot \frac{Avg(X)}{Avg(A)}$}\\
+         \hline
+         & fiction & 500 & 424 \\
+         & \textbf{news} & 500 & 500 \\
+        \texttt{pl} & nonfiction & 500 & 459 \\
+         & social & 500 & 415 \\
+         & spoken & 600 & 432 \\
+        \hline
+         & fiction & 1000 & 571 \\
+         & wiki & 1000 & 670 \\
+        \texttt{fi} & grammar & 1000 & 404 \\
+         & blog & 1000 & 598 \\
+         & \textbf{legal} & 1000 & 1000 \\
+         & news & 1000 & 621 \\
+        \hline
+    \end{tabular}
+    }
+    \caption[Counts of Sentences for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks]{Counts of Sentences and F-measure Scores ($\pm$ sd) Averaged over 100 Different Runs for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks. $A$ in $Avg(A)$ in the third column refers to the genre with the highest number of average words per sentence in each language, marked in bold.}
+    \label{tab:downsample_genre}
+\end{table}
 
-blog2, fiction12, grammar2, legal2, news12, nonfic1, social1, spoken1, wiki2
-
-\verb|pl|-LFG treebank in UDv2.5 contains data from 10 different genres\footnote{For understanding of what genre category involves exactly what kind of data, refer to the github page of the treebank at \url{https://github.com/UniversalDependencies/UD_Polish-LFG}}. The sentence counts of different genres are shown in Table \ref{tab:theta2_genre_data}. Of the different kind of data in \textit{spoken} genre, we keep only the \textit{conversational}, discarding the others from consideration. We also remove \textit{academic}, \textit{blog} and \textit{legal} data from our consideration owing to a considerably low number of sentences. The genres we work with are marked in bold in the table. For the experiment, we first split \verb|pl|-LFG treebank into the constituent genres, discarding those that are not marked in bold in Table \ref{tab:theta2_genre_data}. For the data from considered genres, we proceed as follows:
-
-\begin{enumerate}
-    \item For a given genre, we randomly sample 125 instances from the genre data. We refer to this resultant split as working data for the genre.
-    \item For the given genre, compute \(\theta_{POS}\) score of the working data of this genre with the working data of other genres.
-    \item Report the computed \(\theta_{POS}\) scores.
-\end{enumerate}
-
-We repeat the above steps for a 100 times, generating randomly sampled data for each genre, every time\footnote{For \textit{blog} data containing 136 sentences, the data can be sampled in \(\genfrac(){0pt}{2}{136}{125} > 4.8 \times 10^{15}\) ways. The count of sentences in randomly sampled data was purposefully fixed to 125, to allow increased variability of trigrams in the data without suffering from overfitting caused due to lack of data.}. We report the average of the computed scores from all the runs in Table \ref{tab:klcpos3-confusion-results}. For an individual genre under consideration, we 
+For each of the downsampled data, we compute the $\theta_{pos}$ scores across different genres. We present the scores for \texttt{pl} data in Table \ref{tab:inter_genre-pl} and for \texttt{fi} data in Table \ref{tab:inter_genre-fi}. It is worth noting that for most genres, the $\Theta_{pos}$ constraint as employed in Equation \ref{eqn:size_constraint} isn't enough, as $\theta_{pos}$ frequently surpasses the imposed limit of $0.5$.
 
 \begin{table}[H]
 \centering
-\scalebox{0.80}{
-    \begin{tabular}{|l|l|l|l|l|l|}
+\scalebox{1.0}{
+    \begin{tabular}{|l|l|l|l|l|}
     \hline
-    \textbf{Genres} & \textbf{blog} & \textbf{fiction} & \textbf{news} & \textbf{nonfiction} & \textbf{social}\\
+    \textbf{Genres} & \textbf{news} & \textbf{nonfiction} & \textbf{social} & \textbf{spoken}\\
     \hline
-    \textbf{fiction} & 0.511 \(\pm\) 0.033 & - & - & - & - \\
-    \textbf{news} & 0.446 \(\pm\) 0.027 & 0.468 \(\pm\) 0.038 & - & - & - \\
-    \textbf{nonfiction} & 0.461 \(\pm\) 0.027 & 0.41 \(\pm\) 0.034 & 0.453 \(\pm\) 0.034 & - & - \\
-    \textbf{social} & 0.594 \(\pm\) 0.045 & 0.5 \(\pm\) 0.05 & 0.631 \(\pm\) 0.061 & 0.501 \(\pm\) 0.048 & - \\
-    \textbf{spoken} & 1.184 \(\pm\) 0.068 & 0.84 \(\pm\) 0.074 & 1.178 \(\pm\) 0.095 & 0.994 \(\pm\) 0.081 & 0.824 \(\pm\) 0.056\\
+    \textbf{fiction} & 0.754 $\pm$0.047 & 0.556 $\pm$0.028 & 0.726 $\pm$0.032 & 1.059 $\pm$0.047\\
+    \textbf{news} & - & 0.55 $\pm$0.032 & 0.906 $\pm$0.044 & 1.53 $\pm$0.071\\
+    \textbf{nonfiction} & - & - & 0.624 $\pm$0.027 & 1.285 $\pm$0.046\\
+    \textbf{social} & - & - & - & 1.178 $\pm$0.033\\
     \hline
 \end{tabular}}
-\caption{\(\theta_{POS}\) Scores (\(\pm\) sd) for Genre Optimization (Averaged over 100 runs)}
-\label{tab:klcpos3-confusion-results}
+\caption{$\theta_{pos}$ Scores ($\pm$ sd) Averaged over 100 runs for Inter-Genre Analysis in Downsampled UDv2.5 \texttt{pl}-LFG Data}
+\label{tab:inter_genre-pl}
 \end{table}
 
-Intuitively, the pair of genres with the smaller value of \(\theta_{POS}\) metric are more similar to each other than those contained in the pair with a higher metric value. From the table, it is evident that the \textit{spoken} genre is least similar to any other considered genre, followed by \textit{social} and \textit{blog}. 
+\begin{table}[H]
+\centering
+\scalebox{0.85}{
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    \textbf{Genres} & \textbf{blog} & \textbf{grammar} & \textbf{wiki} & \textbf{legal} & \textbf{news}\\
+    \hline
+    \textbf{fiction} & 0.356 $\pm$0.014 & 0.47 $\pm$0.019 & 1.552 $\pm$0.041 & 1.559 $\pm$0.04 & 1.323 $\pm$0.044\\
+    \textbf{blog} & - & 0.504 $\pm$0.018 & 1.307 $\pm$0.042 & 1.328 $\pm$0.026 & 1.113 $\pm$0.043\\
+    \textbf{grammar} & - & - & 1.166 $\pm$0.041 & 1.554 $\pm$0.036 & 0.888 $\pm$0.035\\
+    \textbf{wiki} & - & - & - & 1.229 $\pm$0.032 & 0.473 $\pm$0.021\\
+    \textbf{legal} & - & - & - & - & 1.078 $\pm$0.026\\
+    \hline
+\end{tabular}}
+\caption{$\theta_{pos}$ Scores ($\pm$ sd) Averaged over 100 runs for Inter-Genre Analysis in Downsampled UDv2.5 \texttt{fi}-TDT Data}
+\label{tab:inter_genre-fi}
+\end{table}
+
+\newpage
+
+For the experiment, we first split \verb|pl|-LFG treebank into the constituent genres, discarding those that are not marked in bold in Table \ref{tab:genre_pl}. For the data from considered genres, we proceed as follows:
+
+\begin{enumerate}
+    \item For a given genre, we randomly sample 125 instances from the genre data. We refer to this resultant split as working data for the genre.
+    \item For the given genre, compute $\theta_{pos}$ score of the working data of this genre with the working data of other genres.
+    \item Report the computed $\theta_{pos}$ scores.
+\end{enumerate}
+
+We repeat the above steps for a 100 times, generating randomly sampled data for each genre, every time. We report the average of the computed scores from all the runs in Table \ref{tab:klcpos3-confusion-results}. For an individual genre under consideration, we 
+
+
+Intuitively, the pair of genres with the smaller value of $\theta_{pos}$ metric are more similar to each other than those contained in the pair with a higher metric value. From the table, it is evident that the \textit{spoken} genre is least similar to any other considered genre, followed by \textit{social} and \textit{blog}. 
 
 
 \newpage

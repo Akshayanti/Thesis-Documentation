@@ -68,6 +68,7 @@
 \setlength{\columnsep}{5mm}
 \usepackage{tikz}
 \usepackage{mathtools}
+\usepackage{venndiagram}
 \usetikzlibrary{shapes,arrows,fit,calc}
 
 \tikzstyle{decision} = [diamond, draw=black, thick, fill=blue!20, 
@@ -156,7 +157,7 @@ This research attempts at identification and correction of inconsistencies in di
 % Title page and various mandatory informational pages
 \begin{document}
 
-\include{title}
+% \include{title}
 
 %%% A page with automatically generated table of contents of the master thesis
 
@@ -187,8 +188,7 @@ This research attempts at identification and correction of inconsistencies in di
     \include{en/preface}    %     08 pages
     \include{en/problems}    % 06 pages
     \include{en/solutions}   % 04 pages
-    \include{en/pos_preface} % 05 pages on Preface to theta_POS
-    \include{en/pos_size} % 05 pages on tuning theta_POS for size variation
+    \include{en/pos_preface} % 10 pages on Preface to theta_POS and tuning theta_POS for size variation
 \include{en/pos_genre}
 \include{en/pos_conclusion}
     \include{en/conj-head} % 35 pages on conj_head
