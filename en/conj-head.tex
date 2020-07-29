@@ -72,30 +72,30 @@ It must be stressed here that the problem at hand is not about detecting the cas
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|l|l|c|l|}
+\begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
  & & \textbf{(\% Total)} & \\
 \hline
-\texttt{ar}\_pud & 651 & 5 (0.768) & 2\\
-\texttt{cs}\_pud & 626 & 5 (0.799) & -\\
-\texttt{de}\_pud & 733 & 8 (1.091) & -\\
-\texttt{en}\_pud & 575 & - & -\\
-\texttt{es}\_pud & 553 & - & -\\
-\texttt{fi}\_pud & 596 & 1 (0.168) & -\\
-\texttt{fr}\_pud & 537 & - & -\\
-\texttt{hi}\_pud & 789 & 25 (3.169) & -\\
-\texttt{id}\_pud & 545 & 3 (0.550) & -\\
-\texttt{it}\_pud & 576 & 1 (0.174) & -\\
-\texttt{ja}\_pud & - & - & -\\
-\texttt{ko}\_pud & 79 & - & -\\
-\texttt{pl}\_pud & 571 & 5 (0.876) & -\\
-\texttt{pt}\_pud & 533 & 2 (0.375) & -\\
-\texttt{ru}\_pud & 588 & - & -\\
-\texttt{sv}\_pud & 593 & 6 (1.012) & -\\
-\texttt{th}\_pud & 588 & 3 (0.510) & -\\
-\texttt{tr}\_pud & 490 & 2 (0.408) & -\\
-\texttt{zh}\_pud & 283 & 3 (1.060) & -\\
+\texttt{ar}-pud & 651 & 5 (0.768) & 2\\
+\texttt{cs}-pud & 626 & 5 (0.799) & -\\
+\texttt{de}-pud & 733 & 8 (1.091) & -\\
+\texttt{en}-pud & 575 & - & -\\
+\texttt{es}-pud & 553 & - & -\\
+\texttt{fi}-pud & 596 & 1 (0.168) & -\\
+\texttt{fr}-pud & 537 & - & -\\
+\texttt{hi}-pud & 789 & 25 (3.169) & -\\
+\texttt{id}-pud & 545 & 3 (0.550) & -\\
+\texttt{it}-pud & 576 & 1 (0.174) & -\\
+\texttt{ja}-pud & - & - & -\\
+\texttt{ko}-pud & 79 & - & -\\
+\texttt{pl}-pud & 571 & 5 (0.876) & -\\
+\texttt{pt}-pud & 533 & 2 (0.375) & -\\
+\texttt{ru}-pud & 588 & - & -\\
+\texttt{sv}-pud & 593 & 6 (1.012) & -\\
+\texttt{th}-pud & 588 & 3 (0.510) & -\\
+\texttt{tr}-pud & 490 & 2 (0.408) & -\\
+\texttt{zh}-pud & 283 & 3 (1.060) & -\\
 \hline
 \end{tabular}
 \caption{Misdirected Coordinating Conjunctions in UDv2.4 PUD Treebanks}
@@ -105,151 +105,151 @@ It must be stressed here that the problem at hand is not about detecting the cas
 The PUD treebanks contain the same set of sentences, therefore allowing for a parallel comparison. From Table \ref{tab:conjunctions_pud}, notice that while the \verb|en|-PUD treebank contains 575 instances of coordinating conjunctions, PUD treebanks for \verb|ja|, and \verb|ko| have less than 100 instances each. Similarly, there are other treebanks with 700+, as well as those with less than 300 instances of coordinating conjunctions. It is also interesting to note that the number of misdirected dependencies expressed as a percentage of total number of coordinating conjunctions also ranges widely from 0\% (\verb|en|, \verb|es|, \verb|fr|, \verb|ko|, \verb|ru|) to 3.169\% (\verb|hi|). 
 
 \begin{table}[H]
-\centering
+% \centering
 \scalebox{0.66}{
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|r|r|r|}
 \hline
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
 \hline
-\textbf{\texttt{af}\_afribooms} & \textbf{1832} & \textbf{1829} & \textbf{130}\\
-\textbf{\texttt{aii}\_as} & \textbf{25} & \textbf{8} & \textbf{-}\\
-\texttt{akk}\_pisandub & 100 & - & -\\
-\textbf{\texttt{am}\_att} & \textbf{80} & \textbf{73} & \textbf{1}\\
-\texttt{ar}\_nyuad & 48768 & 1532 & -\\
-\textbf{\texttt{ar}\_padt} & \textbf{13855} & \textbf{1411} & \textbf{80}\\
-\texttt{be}\_hse & 590 & 1 & -\\
-\texttt{bg}\_btb & 4794 & 6 & -\\
-\texttt{bm}\_crb & 64 & - & -\\
-\texttt{br}\_keb & 204 & 6 & -\\
-\texttt{bxr}\_bdt & 70 & 61 & 13\\
-\texttt{ca}\_ancora & 14067 & 19 & -\\
-\texttt{cop}\_scriptorium & 675 & 7 & -\\
-\texttt{cs}\_cac & 21798 & 509 & 8\\
-\texttt{cs}\_cltt & 1805 & 20 & -\\
-\texttt{cs}\_fictree & 7410 & 108 & 3\\
-\texttt{cs}\_pdt & 49302 & 1372 & 9\\
-\textbf{\texttt{cu}\_proiel} & \textbf{4865} & \textbf{3263} & \textbf{124}\\
-\texttt{cy}\_ccg & 305 & - & -\\
-\texttt{da}\_ddt & 3097 & 177 & 61\\
-\texttt{de}\_gsd & 8675 & 169 & 4\\
-\texttt{de}\_hdt & 68917 & 1 & -\\
-\texttt{de}\_lit & 1686 & 17 & -\\
-\texttt{el}\_gdt & 2017 & 24 & -\\
-\texttt{en}\_esl & 3189 & 2 & -\\
-\texttt{en}\_ewt & 8197 & 8 & -\\
-\texttt{en}\_gum & 3212 & 26 & 4\\
-\texttt{en}\_lines & 2510 & 10 & -\\
-\texttt{en}\_partut & 1647 & 6 & 1\\
-\texttt{es}\_ancora & 14233 & 36 & -\\
-\texttt{es}\_gsd & 12784 & 226 & 9\\
-\texttt{et}\_edt & 15957 & 37 & -\\
-\texttt{et}\_ewt & 1120 & 1 & -\\
-\texttt{eu}\_bdt & 4620 & 318 & 56\\
-\texttt{fa}\_seraji & 7653 & 101 & 5\\
-\texttt{fi}\_ftb & 4726 & 32 & -\\
-\texttt{fi}\_tdt & 8284 & 12 & -\\
-\texttt{fo}\_oft & 296 & 1 & -\\
-\texttt{fr}\_fqb & 97 & - & -\\
-\texttt{fr}\_ftb & 11605 & 45 & 5\\
-\texttt{fr}\_gsd & 10068 & 2 & -\\
-\texttt{fr}\_partut & 853 & 4 & -\\
-\texttt{fr}\_sequoia & 1621 & - & - \\
-\texttt{fr}\_spoken & 1042 & - & -\\
-\texttt{fro}\_srcmf & 10075 & 13 & -\\
-\texttt{ga}\_idt & 640 & 1 & -\\
-\textbf{\texttt{gl}\_ctg} & \textbf{4261} & \textbf{4127} & \textbf{-}\\
-\texttt{gl}\_treegal & 700 & - & -\\
-\(^{*}\)\textbf{\texttt{got}\_proiel} & \textbf{5017} & \textbf{3084} & \textbf{125}\\
-\textbf{\texttt{grc}\_perseus} & \textbf{5316} & \textbf{5098} & \textbf{780}\\
-\textbf{\texttt{grc}\_proiel} & \textbf{13980} & \textbf{10704} & \textbf{771}\\
-\textbf{\texttt{gun}\_dooley} & \textbf{24} & \textbf{3} & \textbf{-}\\
-\texttt{gun}\_thomas & 26 & 1 & -\\
-\texttt{he}\_htb & 4724 & 21 & 2\\
-\texttt{hi}\_hdtb & 6426 & 9 & 3\\
-\texttt{hr}\_set & 7236 & 78 & -\\
-\texttt{hsb}\_ufal & 419 & 5 & -\\
-\textbf{\texttt{hu}\_szeged} & \textbf{1809} & \textbf{390} & \textbf{2}\\
-\texttt{hy}\_armtdp & 1561 & 8 & -\\
-\texttt{id}\_gsd & 3549 & 215 & 18\\
-\texttt{it}\_isdt & 8131 & 2 & -\\
-\texttt{it}\_partut & 1680 & 6 & -\\
-\texttt{it}\_postwita & 2801 & 14 & -\\
-\texttt{it}\_vit & 8120 & 284 & 2\\
+\textbf{\texttt{af}-afribooms} & \textbf{1832} & \textbf{1829} & \textbf{130}\\
+\textbf{\texttt{aii}-as} & \textbf{25} & \textbf{8} & \textbf{-}\\
+\texttt{akk}-pisandub & 100 & - & -\\
+\textbf{\texttt{am}-att} & \textbf{80} & \textbf{73} & \textbf{1}\\
+\texttt{ar}-nyuad & 48768 & 1532 & -\\
+\textbf{\texttt{ar}-padt} & \textbf{13855} & \textbf{1411} & \textbf{80}\\
+\texttt{be}-hse & 590 & 1 & -\\
+\texttt{bg}-btb & 4794 & 6 & -\\
+\texttt{bm}-crb & 64 & - & -\\
+\texttt{br}-keb & 204 & 6 & -\\
+\texttt{bxr}-bdt & 70 & 61 & 13\\
+\texttt{ca}-ancora & 14067 & 19 & -\\
+\texttt{cop}-scriptorium & 675 & 7 & -\\
+\texttt{cs}-cac & 21798 & 509 & 8\\
+\texttt{cs}-cltt & 1805 & 20 & -\\
+\texttt{cs}-fictree & 7410 & 108 & 3\\
+\texttt{cs}-pdt & 49302 & 1372 & 9\\
+\textbf{\texttt{cu}-proiel} & \textbf{4865} & \textbf{3263} & \textbf{124}\\
+\texttt{cy}-ccg & 305 & - & -\\
+\texttt{da}-ddt & 3097 & 177 & 61\\
+\texttt{de}-gsd & 8675 & 169 & 4\\
+\texttt{de}-hdt & 68917 & 1 & -\\
+\texttt{de}-lit & 1686 & 17 & -\\
+\texttt{el}-gdt & 2017 & 24 & -\\
+\texttt{en}-esl & 3189 & 2 & -\\
+\texttt{en}-ewt & 8197 & 8 & -\\
+\texttt{en}-gum & 3212 & 26 & 4\\
+\texttt{en}-lines & 2510 & 10 & -\\
+\texttt{en}-partut & 1647 & 6 & 1\\
+\texttt{es}-ancora & 14233 & 36 & -\\
+\texttt{es}-gsd & 12784 & 226 & 9\\
+\texttt{et}-edt & 15957 & 37 & -\\
+\texttt{et}-ewt & 1120 & 1 & -\\
+\texttt{eu}-bdt & 4620 & 318 & 56\\
+\texttt{fa}-seraji & 7653 & 101 & 5\\
+\texttt{fi}-ftb & 4726 & 32 & -\\
+\texttt{fi}-tdt & 8284 & 12 & -\\
+\texttt{fo}-oft & 296 & 1 & -\\
+\texttt{fr}-fqb & 97 & - & -\\
+\texttt{fr}-ftb & 11605 & 45 & 5\\
+\texttt{fr}-gsd & 10068 & 2 & -\\
+\texttt{fr}-partut & 853 & 4 & -\\
+\texttt{fr}-sequoia & 1621 & - & - \\
+\texttt{fr}-spoken & 1042 & - & -\\
+\texttt{fro}-srcmf & 10075 & 13 & -\\
+\texttt{ga}-idt & 640 & 1 & -\\
+\textbf{\texttt{gl}-ctg} & \textbf{4261} & \textbf{4127} & \textbf{-}\\
+\texttt{gl}-treegal & 700 & - & -\\
+$^{*}$\textbf{\texttt{got}-proiel} & \textbf{5017} & \textbf{3084} & \textbf{125}\\
+\textbf{\texttt{grc}-perseus} & \textbf{5316} & \textbf{5098} & \textbf{780}\\
+\textbf{\texttt{grc}-proiel} & \textbf{13980} & \textbf{10704} & \textbf{771}\\
+\textbf{\texttt{gun}-dooley} & \textbf{24} & \textbf{3} & \textbf{-}\\
+\texttt{gun}-thomas & 26 & 1 & -\\
+\texttt{he}-htb & 4724 & 21 & 2\\
+\texttt{hi}-hdtb & 6426 & 9 & 3\\
+\texttt{hr}-set & 7236 & 78 & -\\
+\texttt{hsb}-ufal & 419 & 5 & -\\
+\textbf{\texttt{hu}-szeged} & \textbf{1809} & \textbf{390} & \textbf{2}\\
+\texttt{hy}-armtdp & 1561 & 8 & -\\
+\texttt{id}-gsd & 3549 & 215 & 18\\
+\texttt{it}-isdt & 8131 & 2 & -\\
+\texttt{it}-partut & 1680 & 6 & -\\
+\texttt{it}-postwita & 2801 & 14 & -\\
+\texttt{it}-vit & 8120 & 284 & 2\\
 \hline
 \end{tabular}
 \hspace{4mm}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|r|r|r|}
 \hline
 \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{Non-Proj}\\
 \hline
-\textbf{\texttt{ja}\_bccwj} & \textbf{16120} & \textbf{11574} & \textbf{-}\\
-\texttt{ja}\_gsd & - & - & -\\
-\textbf{\texttt{ja}\_modern} & \textbf{479} & \textbf{271} & \textbf{-}\\
-\texttt{kk}\_ktb & 180 & 6 & -\\
-\textbf{\texttt{kmr}\_mg} & \textbf{355} & \textbf{41} & \textbf{1}\\
-\textbf{\texttt{ko}\_gsd} & \textbf{223} & \textbf{52} & \textbf{4}\\
-\texttt{ko}\_kaist & 5136 & 2 & -\\
-\texttt{kpv}\_ikdp & 48 & 1 & -\\
-\texttt{kpv}\_lattice & 56 & 2 & -\\
-\texttt{krl}\_kkpp & 156 & - & -\\
-\(^{*}\)\texttt{la}\_ittb & 16789 & 673 & 6\\
-\(^{*}\)\textbf{\texttt{la}\_perseus} & \textbf{1255} & \textbf{960} & \textbf{65}\\
-\(^{*}\)\textbf{\texttt{la}\_proiel} & \textbf{14575} & \textbf{10311} & \textbf{638}\\
-\texttt{lt}\_alksnis & 1648 & 40 & -\\
-\texttt{lt}\_hse & 287 & - & -\\
-\texttt{lv}\_lvtb & 8043 & 9 & -\\
-\texttt{lzh}\_kyoto & 923 & - & -\\
-\texttt{mr}\_ufal & 62 & 1 & -\\
-\texttt{mt}\_mudt & 1514 & 4 & -\\
-\texttt{myv}\_jr & 314 & 3 & -\\
-\texttt{nl}\_alpino & 3853 & 7 & -\\
-\texttt{nl}\_lassysmall & 2501 & 6 & -\\
-\texttt{no}\_bokmaal & 10709 & - & -\\
-\texttt{no}\_nynorsk & 10847 & 4 & -\\
-\texttt{no}\_nynorsklia & 2421 & 188 & 1\\
-\texttt{orv}\_rnc & 1460 & - & -\\
-\textbf{\texttt{orv}\_torot} & \textbf{13640} & \textbf{6683} & \textbf{453}\\
-\texttt{pcm}\_nsc & 135 & - & -\\
-\texttt{pl}\_lfg & 3227 & - & -\\
-\texttt{pl}\_pdb & 10670 & 138 & -\\
-\texttt{pt}\_bosque & 5153 & 57 & 9\\
-\texttt{pt}\_gsd & 7717 & 82 & -\\
-\texttt{qhe}\_hiencs & 493 & 3 & -\\
-\texttt{ro}\_nonstandard & 14953 & 12 & -\\
-\texttt{ro}\_rrt & 6275 & 155 & 8\\
-\texttt{ru}\_gsd & 2952 & 44 & 2\\
-\texttt{ru}\_syntagrus & 38914 & 86 & 1\\
-\texttt{ru}\_taiga & 1712 & - & -\\
-\textbf{\(^{*}\)\texttt{sa}\_ufal} & \textbf{32} & \textbf{17} & \textbf{-}\\
-\texttt{sk}\_snk & 3162 & 29 & -\\
-\texttt{sl}\_ssj & 4665 & - & -\\
-\texttt{sl}\_sst & 1082 & 26 & 1\\
-\textbf{\texttt{sme}\_giella} & \textbf{984} & \textbf{891} & \textbf{60}\\
-\texttt{sr}\_set & 2900 & 18 & -\\
-\texttt{sv}\_lines & 2941 & 11 & 1\\
-\texttt{sv}\_talbanken & 3510 & 112 & -\\
-\texttt{swl}\_sslc & 5 & - & -\\
-\(^{*}\)\texttt{ta}\_ttb & 46 & 1 & -\\
-\textbf{\texttt{te}\_mtg} & \textbf{11} & \textbf{4} & \textbf{-}\\
-\texttt{tl}\_trg & - & - & -\\
-\texttt{tr}\_gb & 160 & 6 & -\\
-\texttt{tr}\_imst & 825 & 69 & 10\\
-\texttt{ug}\_udt & 462 & 2 & -\\
-\texttt{uk}\_iu & 4753 & - & -\\
-\texttt{ur}\_udtb & 3248 & 10 & 1\\
-\textbf{\texttt{vi}\_vtb} & \textbf{1177} & \textbf{340} & \textbf{-}\\
-\texttt{wbp}\_ufal & - & - & -\\
-\texttt{wo}\_wtb & 1365 & 1 & -\\
-\texttt{yo}\_ytb & 148 & - & -\\
-\texttt{yue}\_hk & 76 & 3 & -\\
-\texttt{zh}\_cfl & 92 & - & -\\
-\texttt{zh}\_gsd & 1739 & 21 & 1\\
-\texttt{zh}\_hk & 71 & 2 & -\\
+\textbf{\texttt{ja}-bccwj} & \textbf{16120} & \textbf{11574} & \textbf{-}\\
+\texttt{ja}-gsd & - & - & -\\
+\textbf{\texttt{ja}-modern} & \textbf{479} & \textbf{271} & \textbf{-}\\
+\texttt{kk}-ktb & 180 & 6 & -\\
+\textbf{\texttt{kmr}-mg} & \textbf{355} & \textbf{41} & \textbf{1}\\
+\textbf{\texttt{ko}-gsd} & \textbf{223} & \textbf{52} & \textbf{4}\\
+\texttt{ko}-kaist & 5136 & 2 & -\\
+\texttt{kpv}-ikdp & 48 & 1 & -\\
+\texttt{kpv}-lattice & 56 & 2 & -\\
+\texttt{krl}-kkpp & 156 & - & -\\
+$^{*}$\texttt{la}-ittb & 16789 & 673 & 6\\
+$^{*}$\textbf{\texttt{la}-perseus} & \textbf{1255} & \textbf{960} & \textbf{65}\\
+$^{*}$\textbf{\texttt{la}-proiel} & \textbf{14575} & \textbf{10311} & \textbf{638}\\
+\texttt{lt}-alksnis & 1648 & 40 & -\\
+\texttt{lt}-hse & 287 & - & -\\
+\texttt{lv}-lvtb & 8043 & 9 & -\\
+\texttt{lzh}-kyoto & 923 & - & -\\
+\texttt{mr}-ufal & 62 & 1 & -\\
+\texttt{mt}-mudt & 1514 & 4 & -\\
+\texttt{myv}-jr & 314 & 3 & -\\
+\texttt{nl}-alpino & 3853 & 7 & -\\
+\texttt{nl}-lassysmall & 2501 & 6 & -\\
+\texttt{no}-bokmaal & 10709 & - & -\\
+\texttt{no}-nynorsk & 10847 & 4 & -\\
+\texttt{no}-nynorsklia & 2421 & 188 & 1\\
+\texttt{orv}-rnc & 1460 & - & -\\
+\textbf{\texttt{orv}-torot} & \textbf{13640} & \textbf{6683} & \textbf{453}\\
+\texttt{pcm}-nsc & 135 & - & -\\
+\texttt{pl}-lfg & 3227 & - & -\\
+\texttt{pl}-pdb & 10670 & 138 & -\\
+\texttt{pt}-bosque & 5153 & 57 & 9\\
+\texttt{pt}-gsd & 7717 & 82 & -\\
+\texttt{qhe}-hiencs & 493 & 3 & -\\
+\texttt{ro}-nonstandard & 14953 & 12 & -\\
+\texttt{ro}-rrt & 6275 & 155 & 8\\
+\texttt{ru}-gsd & 2952 & 44 & 2\\
+\texttt{ru}-syntagrus & 38914 & 86 & 1\\
+\texttt{ru}-taiga & 1712 & - & -\\
+\textbf{$^{*}$\texttt{sa}-ufal} & \textbf{32} & \textbf{17} & \textbf{-}\\
+\texttt{sk}-snk & 3162 & 29 & -\\
+\texttt{sl}-ssj & 4665 & - & -\\
+\texttt{sl}-sst & 1082 & 26 & 1\\
+\textbf{\texttt{sme}-giella} & \textbf{984} & \textbf{891} & \textbf{60}\\
+\texttt{sr}-set & 2900 & 18 & -\\
+\texttt{sv}-lines & 2941 & 11 & 1\\
+\texttt{sv}-talbanken & 3510 & 112 & -\\
+\texttt{swl}-sslc & 5 & - & -\\
+$^{*}$\texttt{ta}-ttb & 46 & 1 & -\\
+\textbf{\texttt{te}-mtg} & \textbf{11} & \textbf{4} & \textbf{-}\\
+\texttt{tl}-trg & - & - & -\\
+\texttt{tr}-gb & 160 & 6 & -\\
+\texttt{tr}-imst & 825 & 69 & 10\\
+\texttt{ug}-udt & 462 & 2 & -\\
+\texttt{uk}-iu & 4753 & - & -\\
+\texttt{ur}-udtb & 3248 & 10 & 1\\
+\textbf{\texttt{vi}-vtb} & \textbf{1177} & \textbf{340} & \textbf{-}\\
+\texttt{wbp}-ufal & - & - & -\\
+\texttt{wo}-wtb & 1365 & 1 & -\\
+\texttt{yo}-ytb & 148 & - & -\\
+\texttt{yue}-hk & 76 & 3 & -\\
+\texttt{zh}-cfl & 92 & - & -\\
+\texttt{zh}-gsd & 1739 & 21 & 1\\
+\texttt{zh}-hk & 71 & 2 & -\\
 \hline
 \end{tabular}
 }
 \caption{Misdirected Coordinating Conjunctions in UDv2.4 Treebanks}
-Values in bold indicate treebanks with misdirected dependencies forming 10\%+ of the total coordinating conjunctions.
+Values in bold indicate treebanks with misdirected dependencies forming 10\%+ of the total coordinating conjunctions
 \label{tab:conjunctions_all}
 \end{table}
 
@@ -270,10 +270,12 @@ For the misdirect conjunctions such that they are attached projectively, we limi
 \begin{figure}[H]
     \centering
     \includegraphics{img/nested1.png}
-    \caption[Possible Wrong Attachments of a Coordinating Conjunction: Correct Conjunct as Wrong Head's Sibling]{Possible Wrong Attachments of a Coordinating Conjunction: Correct Conjunct as Wrong Head's Sibling.}
-        Note: \textit{D} is the common ancestor of nodes \textit{A}, \textit{B} and \textit{C}\\
-        Note: \textit{C} is the more relevant head that conjunction \textit{B} should be attached to, instead of the current misdirected attachment with node \textit{A}\\
-        Note: \textit{A}, \textit{C} and \textit{D} might be the head of their own subtrees.
+    \caption{Possible Wrong Attachments of a Coordinating Conjunction: Correct Conjunct as Wrong Head's Sibling}
+    \begin{flushleft}
+    Note: \textit{D} is the common ancestor of nodes \textit{A}, \textit{B} and \textit{C}\\
+    Note: \textit{C} is the more relevant head that conjunction \textit{B} should be attached to, instead of the current misdirected attachment with node \textit{A}\\
+    Note: \textit{A}, \textit{C} and \textit{D} might be the head of their own subtrees
+    \end{flushleft}
     \label{fig:conj-head1}
 \end{figure}
 
@@ -290,10 +292,10 @@ For the misdirect conjunctions such that they are attached projectively, we limi
   \caption{Correct Conjunct as Conjunction's Grandparent}
   \label{fig:conj-head3}
 \end{subfigure}
-\caption[Possible Wrong Attachments of a Coordinating Conjunction]{Possible Wrong Attachments of a Coordinating Conjunction}
-    Note: \textit{D} is the common ancestor of nodes \textit{A}, \textit{B} and \textit{C}\\
-    Note: \textit{C} is the more relevant head that conjunction \textit{B} should be attached to, instead of the current misdirected attachment with node \textit{A}\\
-    Note: \textit{A}, \textit{C} and \textit{D} might be the head of their own subtrees.
+\caption{Possible Wrong Attachments of a Coordinating Conjunction}
+Note: \textit{D} is the common ancestor of nodes \textit{A}, \textit{B} and \textit{C}\\
+Note: \textit{C} is the more relevant head that conjunction \textit{B} should be attached to, instead of the current misdirected attachment with node \textit{A}\\
+Note: \textit{A}, \textit{C} and \textit{D} might be the head of their own subtrees
 \label{fig:conj-head23}
 \end{figure}
 
@@ -344,7 +346,7 @@ As can be seen in the last column in Tables \ref{tab:conjunctions_pud} and \ref{
 \subsection{Conjunction Sandwich}
 \label{sec:conj-sand}
 
-We have so far discussed only the cases where the problem can be identified by the wrong direction of dependency. However, when the direction of dependency is correct, mining for the problematic instances becomes troublesome. In Figure \ref{fig:conj_removed-wrong} reproduced below, notice that the first conjunction token \texthindi{या} (\textit{yaa}; or) is linked in the correct direction, but to the wrong head. This instance of the correct direction of attachment, albeit to wrong head can be present in the original annotation, or might be introduced after the tree has been corrected for the misdirected dependency. We refer to such cases as a Conjunction Sandwich, since the conjunction is sandwich-ed in between the conjuncts, with a wrong choice of head but with the direction of attachment being as expected (right-headed in our case). The problem of not being able to identify the correct conjunct as elaborated earlier in Example \ref{examp:nonconj} can manifest itself in such cases as well, making this problem significantly harder to detect.
+We have so far discussed only the cases where the problem can be identified by the wrong direction of dependency. However, when the direction of dependency is correct, mining for the problematic instances becomes troublesome. In Figure \ref{fig:conj_removed-wrong} reproduced below, notice that the first conjunction token \texthindi{या} (\textit{yaa}; or) is linked in the correct direction, but to the wrong head. This instance of the correct direction of attachment, albeit to wrong head, can be present in the original annotation, or might be introduced after the tree has been corrected for the misdirected dependency. We refer to such cases as a Conjunction Sandwich, since the conjunction is sandwich-ed in between the conjuncts, with a wrong choice of head but with the direction of attachment being as expected (right-headed in our case). The problem of not being able to identify the correct conjunct as elaborated earlier in Example \ref{examp:nonconj} can manifest itself in such cases as well, making this problem significantly harder to detect.
 
 \begin{reusefigure}[H]{fig:conj_removed-wrong}
     \centering
@@ -354,9 +356,9 @@ We have so far discussed only the cases where the problem can be identified by t
   Note: Second \texthindi{या} (\textit{yaa}; or) should be attached to \texthindi{उससे} (\textit{usase}; therefrom), and not to \texthindi{विधायक} (\textit{vidhaayaka}; legislator)
 \end{reusefigure}
 
-In a given dependency tree, we can express node \(A\) being followed by node \(B\) in top-down ordering of tokens as \(A < B\). To establish node \(A\) is linked to node \(B\), such that \(A\) is the head of the relation, and \(B\) is the dependent, we can write \(A \rightarrow B\). In case where the direction of the relation is not important, we can express it by using double headed arrows as \(A \leftrightarrow B\). 
+In a given dependency tree, we can express node $A$ being followed by node $B$ in top-down ordering of tokens as $A < B$. To establish node $A$ is linked to node $B$, such that $A$ is the head of the relation, and $B$ is the dependent, we can write $A \rightarrow B$. In case where the direction of the relation is not important, we can express it by using double headed arrows as $A \leftrightarrow B$. 
 
-In a dependency tree, given two undirected edges \(i1 \leftrightarrow j1 \text{ and } i2 \leftrightarrow j2\), the edges are said to be overlapping if \(i1 < i2 < j1 < j2\) or \(i1 > i2 > j1 > j2\). In the example figure above, we can see that one of the ways in which a case of conjunction sandwich manifests itself is in the form of overlapping edges. However, this might not always be the case. The edges can overlap also because of the faulty annotation of other tokens in the tree, and that renders this check unreliable. In the example figure above, the edge containing the first conjunction also overlaps with the edge containing second conjunction, attached non-projectively. The constraint (of overlapping edges) was also tightened to look for a conjunction being the sole node in the gap of a non-projective attachment, but the number of cases that were flagged in the process remained very low (mostly less than 1\% of total number of conjunctions across different languages, depending on the language as some languages allow less number of non-projective structures than others). Of the total number of cases that were flagged by the tighter constraint, majority were false positives.
+In a dependency tree, given two undirected edges $i_{1} \leftrightarrow j_{1} \text{ and } i_{2} \leftrightarrow j_{2}$, the edges are said to be overlapping if $i_{1} < i_{2} < j_{1} < j_{2}$ or $i_{1} > i_{2} > j_{1} > j_{2}$. In the example figure above, we can see that one of the ways in which a case of conjunction sandwich manifests itself is in the form of overlapping edges. However, this might not always be the case. The edges can overlap also because of the faulty annotation of other tokens in the tree, and that renders this check unreliable. In the example figure above, the edge containing the first conjunction also overlaps with the edge containing second conjunction, attached non-projectively. The constraint (of overlapping edges) was also tightened to look for a conjunction being the sole node in the gap of a non-projective attachment, but the number of cases that were flagged in the process remained very low (mostly less than 1\% of total number of conjunctions across different languages, depending on the language as some languages allow less number of non-projective structures than others). Of the total number of cases that were flagged by the tighter constraint, the majority were false positives.
 
 Consider the following example from UDv2.4 \verb|en|-lines treebank, and the associated dependency tree in Figure \ref{fig:unhandled-sandwich}. In this case, the edges do not overlap, but the conjunction is still attached to the wrong head.
 
@@ -377,7 +379,7 @@ That was also mentioned by Mrs Oomen-Ruitjen \textbf{and} Mrs Glase.
 
 The trivial approach in the case of a Conjunction Sandwich would be to look for a conjunct explicitly marked by the \verb|conj| deprel, such that the said conjunct follows the conjunction in question. For example, in Figure \ref{fig:conj_removed-wrong}, the attachment for the first conjunction can be corrected by looking for the first explicitly marked conjunct that follows the current parent. This is an unreliable approach nonetheless, because (i) the conjunct needs to be explicitly marked by the deprel, which is not always the case; and (ii) the approach cannot work in the case of nested coordination, often picking up on a conjunct from another coordination structure.
 
-Since none of the cases as discussed in this section could be reliably scouted for, we do not deal with identification and/or correction of Conjunction Sandwich in the current research.
+Since none of the cases discussed in this section could be reliably scouted for, we do not deal with identification and/or correction of Conjunction Sandwich in the current research.
 
 \section{Dataset}
 \label{ssec:conj_head_dataset}
@@ -386,7 +388,7 @@ The experiment was initially started on UDv2.3 \citep{UDv2.3}, but owing to the 
 
 We limit our treatment of the problem to \verb|af|, and \verb|ar|. As can be seen from Table \ref{tab:conjunctions_all}, the languages contain treebanks such that (i) they do not display any postposed variant of conjunctions as denoted by asterisk superscript in the table; (ii) the number of misdirected dependencies in the treebank is more than 10\% of the total number of conjunctions; and (iii) the languages do not have non-projectivity as a major characteristic, and yet the number of misdirected non-projective attachments is high in the treebank (unlike \verb|grc| and \verb|la| which have non-projectivity as a characteristic feature). Additionally, the languages belong to different language families viz. Germanic Indo-European and Semitic Afro-Asiatic, thus ensuring that the results of the experiment are not specific to a limited set of languages.
 
-The number of instances of misdirected dependencies in different treebanks of UDv2.4 was highlighted in Table \ref{tab:conjunctions_pud} and \ref{tab:conjunctions_all}. The count of instances for \verb|af|\_afribooms and \verb|ar|\_padt are highlighted again in Table \ref{tab:dataset_conj} for reference.
+The number of instances of misdirected dependencies in different treebanks of UDv2.4 was highlighted in Table \ref{tab:conjunctions_pud} and \ref{tab:conjunctions_all}. The count of instances for \verb|af|-afribooms and \verb|ar|-padt are highlighted again in Table \ref{tab:dataset_conj} for reference.
 
 \begin{table}[H]
     \centering
@@ -394,8 +396,8 @@ The number of instances of misdirected dependencies in different treebanks of UD
         \hline
         \textbf{Treebank} & \textbf{Total} & \textbf{Misdirected} & \textbf{\% Total} & \textbf{Non-Proj}\\
         \hline
-        \verb|af|\_afribooms & 1 832 & 1 829 & 99.836 & 130\\
-        \verb|ar|\_padt & 13 855 & 1 411 & 10.184 & 80\\
+        \verb|af|-afribooms & 1 832 & 1 829 & 99.836 & 130\\
+        \verb|ar|-padt & 13 855 & 1 411 & 10.184 & 80\\
         \hline
     \end{tabular}
     \caption{Misdirected Coordinating Conjunctions in UDv2.4 Treebanks for \texttt{af} and \texttt{ar}}
@@ -412,7 +414,7 @@ The problem with this approach (of reducing a case of non-projective attachment 
 \section{Algorithm}
 \label{ssec:conj_head_algorithm}
 
-We start with defining some wrapper functions in Algorithm \ref{misdirected-edges-algo} and \ref{rollback-algo}. While the first one checks for the coordinating conjunctions that are attached in wrong direction, the second one tries to change the parent of the given node \(x\) to a new parent \(z\). In case the new attachment would be non-projective, the function rolls back to the previous parent. If projectivity is preserved, the function returns a \textbf{true} value, which allows us to terminate the function whenever the function call is made inside another function. The function also checks against making the node attached directly to the root of the tree, thereby making sure there is just one root node at any instance.
+We start with defining some wrapper functions in Algorithm \ref{misdirected-edges-algo} and \ref{rollback-algo}. While the first one checks for the coordinating conjunctions that are attached in wrong direction, the second one tries to change the parent of the given node $x$ to a new parent $z$. In case the new attachment would be non-projective, the function rolls back to the previous parent. If projectivity is preserved, the function returns a \textbf{true} value, which allows us to terminate the function whenever the function call is made inside another function. The function also checks against making the node attached directly to the root of the tree, thereby making sure there is just one root node at any instance.
 
 \begin{algorithm}[H]
 \caption{misdirectedDependency()}
@@ -706,7 +708,7 @@ Having established all the possible cases, we can wrap them all in a nice functi
 \end{algorithmic}
 \end{algorithm}
 
-\section{Results and Evaluation}
+\section{Evaluation and Results}
 \label{ssec:conj_head-results}
 
 We implement the algorithm in form of a Udapi-python \citep{udapi} block\footnote{Code alongwith manually annotated data available at \url{https://github.com/Akshayanti/Masters-Thesis-CUNI-2020/tree/master/conj_head}}. The runtime of the block for the data is as mentioned in Table \ref{tab:conj-head-runtime}, as run on Ubuntu 18.04 (64-bit) on a 4-core Intel i5-6300 HQ processor.
@@ -717,11 +719,11 @@ We implement the algorithm in form of a Udapi-python \citep{udapi} block\footnot
         \hline
         \textbf{Language} & \textbf{Time (in ms)}\\
         \hline
-        \verb|af| & \(81.33 \pm 7.094\) \\
-        \verb|ar| & \(317.05 \pm 23.996\) \\
+        \verb|af| & $81.33 \pm 7.094$ \\
+        \verb|ar| & $317.05 \pm 23.996$ \\
         \hline
     \end{tabular}
-    \caption{Average Runtime (\(\pm\) sd) for Udapy Python Block Implementation}
+    \caption{Average Runtime ($\pm$ sd) for Udapy Python Block Implementation}
     Note: Does Not include time taken to read the original CoNLL-U file
     \label{tab:conj-head-runtime}
 \end{table}
@@ -864,7 +866,7 @@ All the cases that were unprocessed after the attempt at projectivisation of non
 
 \subsection{Processing Pipeline Independent of Projectivity of Attachment}
 
-As can be seen from Table \ref{tab:affectedNodesOverall}, the manual evaluation if done on a randomly chosen sample of the affected nodes would be very heavily biased on the results from \textit{attachToSibling()} algorithm. To counter this effect, we decided to separately evaluate the algorithms, and so a random sample of 100 affected nodes was chosen containing the nodes affected by \textit{attachToSibling()} algorithm only. To measure the efficiency of \textit{attachToAunt()} and \textit{attachToGrandparent()} algorithms, another sample containing upto 100 randomly sampled instances was chosen. All the sampled instances were then manually annotated for the correctness in their attachment to the correct conjunct, as well as the direction of the attachment.
+As can be seen from Table \ref{tab:affectedNodesOverall}, the manual evaluation if done on a randomly chosen sample of the affected nodes would be very heavily biased on the results from \textit{attachToSibling()} algorithm. To counter this effect, we decided to separately evaluate the algorithms, and so a random sample of 100 affected nodes was chosen containing the nodes affected by \textit{attachToSibling()} algorithm only. To measure the efficiency of \textit{attachToAunt()} and \textit{attachToGrandparent()} algorithms, another sample containing 100 randomly sampled instances was chosen. All the sampled instances were then manually annotated for the correctness in their attachment to the correct conjunct, as well as the direction of the attachment.
 
 \begin{table}[H]
     \centering
@@ -889,10 +891,10 @@ We estimated the effect of \textit{projTempFix()} earlier, and so to estimate th
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
-    \multicolumn{1}{|l|}{\textbf{Algo.} \(\rightarrow\)} &
+    \multicolumn{1}{|l|}{\textbf{Algo.} $\rightarrow$} &
     \multicolumn{3}{c|}{\textit{attachToSibling()}} &
     \multicolumn{3}{c|}{Others}\\
-    \textbf{Lang. \(\downarrow\)} & \textbf{Total} & Conj. Sand. & Correct & \textbf{Total} & Conj. Sand. & Correct\\
+    \textbf{Lang. $\downarrow$} & \textbf{Total} & Conj. Sand. & Correct & \textbf{Total} & Conj. Sand. & Correct\\
     \hline
     \texttt{af} & 100 & 1 & 99 & 32 & 1 & 22\\
     \texttt{ar} & 100 & 2 & 98 & 100 & 4 & 28\\
@@ -1002,9 +1004,9 @@ By unaffected nodes, we refer to the instances of misdirected dependency which w
 
 \section{Discussion and Conclusion}
 
-We started trying to handle the cases of conjunctions that were attached non-projectively to the parent, and employed algorithms \textit{nextConjHead()} and \textit{projTempFix()} to find a better candidate. We got mixed results for the nodes. From our understanding of the patterns exhibited in the two languages, the first algorithm works only if there exists an explicitly marked conjunct. This was true in case of \verb|af| where the conjuncts are explicitly marked with \verb|conj| deprel, but when the conjuncts are not explicitly marked (as in case of \verb|ar|), the algorithm doesn't work as intended. 
+We started by identifying the cases of conjunctions that were attached non-projectively to the parent, and employed algorithms \textit{nextConjHead()} and \textit{projTempFix()} to find a better candidate. We got mixed results in all analyzed cases in both treebanks. From our understanding of the patterns exhibited in the two languages, the first algorithm works only if there exists an explicitly marked conjunct. This was true in case of \verb|af| where the conjuncts are explicitly marked with \verb|conj| deprel, but when the conjuncts are not explicitly marked (as in case of \verb|ar|), the algorithm doesn't work as intended. 
 
-The force projectivisation in \textit{projTempFix()} algorithm didn't work as expected. In the analysis of the instances, we found that this was mainly due to falsely annotated non-projectivities. In general, if the conjunction was in gap of another non-projective attachment to the same parent, the algorithm didn't work. The inefficiency of the algorithm in such cases could be exhibited in the form of node not being affected at all, or the new attachment eventually leading to a case of conjunction sandwich. If the conjunction (and any punctuation nodes attached to this token) is the only non-projective attachment to the parent, the algorithm would be able to make the correction effectively, and without an error.
+The force projectivisation in \textit{projTempFix()} algorithm did not have the desired effect. In the analysis of the instances, we found that this was mainly due to falsely annotated non-projectivities. In general, if the conjunction was in gap of another non-projective attachment to the same parent, the algorithm didn't work. The inefficiency of the algorithm in such cases could be exhibited in the form of node not being affected at all, or the new attachment eventually leading to a case of conjunction sandwich. If the conjunction (and any punctuation nodes attached to this token) is the only non-projective attachment to the parent, the algorithm would be able to make the correction effectively, and without an error.
 
 Given the aforementioned concerns about the algorithms, it would be recommended to not use the algorithms in case of a language that displays high amount of non-projectivity in sentence structures (for example, \verb|grc|) and/or on a treebank has not been checked for the annotation consistency of the non-projective structures (as in the scope of the current experiment). Furthermore, in a case where the algorithms are used, it would be advised to have an annotator look at the corrections for higher reliability.
 
@@ -1012,7 +1014,7 @@ The common part of the pipeline started with \textit{attachToSibling()} algorith
 
 While the aforementioned reasons did bring about the cases of a conjunction sandwich, a relaxation of the choice of UPOS, deprels would have catastrophic effects whereby the conjunction would be rehanged to any available node. The search for a candidate at the same level, but in the following subtree is a promising approach, but it does warrant caution in the case of the suitable candidate being the aunt, and not the new candidate thus discovered. This selection of the candidate head would be non-deterministic in nature, and also depends on the annotation consistency of the given tree. Since the number of cases that were ignored, or generated conjunction sandwich into the annotation were significantly low, the problem of descending down a level to search for a candidate node can be safely ignored. In experiments where the approach was tried, the selection of the candidate node became non-deterministic, and generated a lot of false positives and introduced plethora of conjunction sandwiches.
 
-In the evaluation, \textit{attachToSibling()} algorithms performs very well, even after accounting for sampling error. For the instances that are not processed by the algorithm, \textit{attachToAunt()} and \textit{attachToGrandparent()} algorithms don't perform as well. Upon analysis of instances that are passed to the latter algorithms, we observe a pattern. In general, if a conjunction occurs at a position such that it can change the level at which it is associated with, it will further be processed by the algorithms \textit{attachToAunt()} and \textit{attachToGrandparent()}, or would remain a case of misdirected dependency. The position of an instance in a dependency tree can be more often than not given by Equation \ref{eqn:movement-position}, where \(co\) is the conjunction of interest in dependency tree \(T\), attached to the node \(u\).
+In the evaluation, \textit{attachToSibling()} algorithms performs very well, even after accounting for sampling error. For the instances that are not processed by the algorithm, \textit{attachToAunt()} and \textit{attachToGrandparent()} algorithms don't perform as well. Upon analysis of instances that are passed to the latter algorithms, we observe a pattern. In general, if a conjunction occurs at a position such that it can change the level at which it is associated with, it will further be processed by the algorithms \textit{attachToAunt()} and \textit{attachToGrandparent()}, or would remain a case of misdirected dependency. The position of an instance in a dependency tree can be more often than not given by Equation \ref{eqn:movement-position}, where $co$ is the conjunction of interest in dependency tree $T$, attached to the node $u$.
 
 \begin{equation}
 \boxed{

@@ -1,4 +1,6 @@
-\verb|pl|-LFG treebank in UDv2.5 (rated 4 stars on a scale of 5 stars) contains data from 10 different genres\footnote{For understanding of what genre category involves exactly what kind of data, refer to the github page of the treebank at \url{https://github.com/UniversalDependencies/UD_Polish-LFG}}. The sentence counts of different genres are shown in Table \ref{tab:genre_pl}. Of the different kind of data in \textit{spoken} genre, we keep only the \textit{conversational}, discarding the others from consideration. We also remove \textit{academic}, \textit{blog} and \textit{legal} data from our consideration owing to a considerably low number of sentences. Table \ref{tab:genre_fi} shows the genre distribution in UDv2.5 \texttt{fi}-TDT data. The genres we work with are marked in bold in the table. 
+\subsection{Inter-Genre Similarity}
+
+\verb|pl|-LFG treebank in UDv2.5 (rated 4 stars on a scale of 5 stars) contains data from 8 different genres\footnote{For understanding of what genre category involves exactly what kind of data, refer to the github page of the treebank at \url{https://github.com/UniversalDependencies/UD_Polish-LFG}}. The sentence counts of different genres are shown in Table \ref{tab:genre_pl}. We club together the different kind of data in \textit{spoken} genre, as one. We remove \textit{academic}, \textit{blog} and \textit{legal} data from our consideration owing to a considerably low number of sentences. Table \ref{tab:genre_fi} shows the genre distribution in UDv2.5 \texttt{fi}-TDT data. In this case, the data with source as \textit{europarl} and university articles (\textit{uni\_articles}) is kept separate from other categories. The genres we work with are marked in bold in the table. 
 
 \begin{table}[H]
     \centering
@@ -66,11 +68,10 @@ In order to establish that the different genres are annotated consistently withi
 
 As can be seen from Table \ref{tab:genre_all_kfold}, the different genres in the treebank are internally consistent in their annotation, as per the constraint as per Equation \ref{eqn:size_constraint}.
 
-We start the inter-genre analysis by downsampling the datasets for different genres in the dataset. Table \ref{tab:downsample_genre} shows the count of sentences in the downsampled data, along with the F-measure score associated with each genre. Each genre is downsampled to the number of instances such that the condition as specified in Equation \ref{eqn:size_constraint} is satisfied. The F-measure scores reported in the table correspond to the calculated F-measure score for the downsampled data, averaged over 100 different runs with different seed values.
+We start the inter-genre analysis by downsampling the datasets for different genres in the dataset. Table \ref{tab:downsample_genre} shows the count of sentences in the downsampled data from each genre. Each genre is downsampled to the number of instances such that the condition as specified in Equation \ref{eqn:size_constraint} is satisfied.
 
 \begin{table}[H]
     \centering
-    \scalebox{0.8}{
     \begin{tabular}{|c|l|c|c|}
         \hline
         \textbf{Language} & \textbf{Genre (X)} & \textbf{Downsampled To} & \textbf{$size(X) \cdot \frac{Avg(X)}{Avg(A)}$}\\
@@ -89,12 +90,11 @@ We start the inter-genre analysis by downsampling the datasets for different gen
          & news & 1000 & 621 \\
         \hline
     \end{tabular}
-    }
-    \caption[Counts of Sentences for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks]{Counts of Sentences and F-measure Scores ($\pm$ sd) Averaged over 100 Different Runs for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks. $A$ in $Avg(A)$ in the third column refers to the genre with the highest number of average words per sentence in each language, marked in bold.}
+    \caption[Counts of Sentences for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks]{Counts of Sentences for Different Genres in Downsampled Data from UDv2.5 \texttt{fi}-TDT and \texttt{pl}-LFG Treebanks. $A$ in $Avg(A)$ in the third column refers to the genre with the highest number of average words per sentence in each language, marked in bold.}
     \label{tab:downsample_genre}
 \end{table}
 
-For each of the downsampled data, we compute the $\theta_{pos}$ scores across different genres. We present the scores for \texttt{pl} data in Table \ref{tab:inter_genre-pl} and for \texttt{fi} data in Table \ref{tab:inter_genre-fi}. It is worth noting that for most genres, the $\Theta_{pos}$ constraint as employed in Equation \ref{eqn:size_constraint} isn't enough, as $\theta_{pos}$ frequently surpasses the imposed limit of $0.5$.
+For downsampled data from each genre, we compute the $\theta_{pos}$ scores. We present the scores for \texttt{pl} data in Table \ref{tab:inter_genre-pl} and for \texttt{fi} data in Table \ref{tab:inter_genre-fi}. It is worth noting that for most genres, the $\Theta_{pos}$ constraint as employed in Equation \ref{eqn:size_constraint} isn't enough, as $\theta_{pos}$ frequently surpasses the imposed limit of $0.5$.
 
 \begin{table}[H]
 \centering
@@ -131,20 +131,14 @@ For each of the downsampled data, we compute the $\theta_{pos}$ scores across di
 \label{tab:inter_genre-fi}
 \end{table}
 
-\newpage
+We attempted to associate the $\theta_{pos}$ scores across two genres based on if the genre belonged to spoken discourse, or from textual medium. However, as can be seen from the tables above, the scores can not be estimated on the basis of such distinction.
 
-For the experiment, we first split \verb|pl|-LFG treebank into the constituent genres, discarding those that are not marked in bold in Table \ref{tab:genre_pl}. For the data from considered genres, we proceed as follows:
+Looking at the data in the tables above, the maximal $\theta_{pos}$ score of $1.559$ is computed between \textit{legal} and \textit{fiction} categories. We hypothesise that a combination of F-score metric with a metric on `Narrative vs Non-Narrative Concerns' can be used to explain such high score. However, there exists no numeric metric to compute a genre's score on its `Narrative vs Non-Narrative Concerns' to the best of our knowledge. We therefore, are unable to associate the upper limit on $\theta_{pos}$ scores with respect to individual genres.
 
-\begin{enumerate}
-    \item For a given genre, we randomly sample 125 instances from the genre data. We refer to this resultant split as working data for the genre.
-    \item For the given genre, compute $\theta_{pos}$ score of the working data of this genre with the working data of other genres.
-    \item Report the computed $\theta_{pos}$ scores.
-\end{enumerate}
+However, we can estimate a general upper bound. We allow some room for change in $\theta_{pos}$ score owing to high quality of annotation as while accounting for variability of dataset size change. With that in mind, we frame the general upper bound on $\theta_{pos}$ scores between genre $x$ in dataset $A$ (written as $A_{x}$) and genre $y$ in dataset $B$ (written as $B_{y}$) as in Equation \ref{eqn:theta_pos_genre_limit}, given below:
 
-We repeat the above steps for a 100 times, generating randomly sampled data for each genre, every time. We report the average of the computed scores from all the runs in Table \ref{tab:klcpos3-confusion-results}. For an individual genre under consideration, we 
-
-
-Intuitively, the pair of genres with the smaller value of $\theta_{pos}$ metric are more similar to each other than those contained in the pair with a higher metric value. From the table, it is evident that the \textit{spoken} genre is least similar to any other considered genre, followed by \textit{social} and \textit{blog}. 
-
-
+\begin{equation}
+    \boxed{\theta_{pos}(A_{x}, B_{y}) \leq \Theta_{pos}(A_{x}, B_{y}) = 2.0}
+\label{eqn:theta_pos_genre_limit}
+\end{equation}
 \newpage

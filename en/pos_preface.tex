@@ -1,11 +1,11 @@
-\chapter{Part-of-Speech (POS) Annotation Consistency}
+\chapter{Estimating POS Annotation Consistency of Different Treebanks in a Language (Experiment 1)}
 \label{chap:pos-harmony}
 
 We introduced the problem of inter treebank POS annotation quality in Section \ref{sec:harmony} earlier, followed by a discussion of the literature relevant to the problem in Section \ref{ssec:inconsistency-detection-pos}. 
 
 In this chapter, we propose a metric based on $KL_{cpos^3}$ metric \citep{klcpos3}, which in turn is based upon Kullback-Liebler Divergence (KL Divergence). 
 
-We start by a short introduction to $KL_{cpos^3}$ metric and a definition of the proposed metric in Section \ref{sec:pos-harmony-definition}. We define our dataset for the experiments in this chapter in Section \ref{sec:pos-harmony-dataset}, followed by the metric values being listed in Section \ref{sec:pos-harmony-scores}. The experiments are detailed in Section \ref{sec:pos-harmony-size} and Section \ref{sec:pos-harmony-genre}, with their results summarised in Section \ref{sec:pos-harmony-calculations}. The chapter concludes with a discussion on the metric in Section \ref{sec:pos-harmony-conclusion}.
+We start by a short introduction to $KL_{cpos^3}$ metric and a definition of the proposed metric in Section \ref{sec:pos-harmony-definition}. We define our dataset for the experiments in this chapter in Section \ref{sec:pos-harmony-dataset}, followed by the metric values being listed for different treebanks in UDv2.5 \citep{UDv2.5} in Section \ref{sec:pos-harmony-scores}. The experiments are detailed in Section \ref{sec:pos-harmony-size} and Section \ref{sec:pos-harmony-genre}, with their results summarised in Section \ref{sec:pos-harmony-calculations}. We mark the treebanks as consistent or inconsistent in their POS annotation in Section \ref{sec:theta_pos_annotations}. The chapter concludes with a discussion on the metric in Section \ref{sec:pos-harmony-conclusion}.
 
 \section{\texorpdfstring{$KL_{cpos^3}$}{KLcpos3} and Metric Definition}
 \label{sec:pos-harmony-definition}
@@ -14,17 +14,21 @@ We start by a short introduction to $KL_{cpos^3}$ metric and a definition of the
 
 \begin{definition}
 \label{def:klcpos3}
+
 \textbf{ }\\
+
 \begin{equation}
 \label{eqn:klcpos3}
 \small KL_{cpos^3}(tgt, src) = \sum_{\forall cpos^3 \in tgt}^{}f_{tgt}(cpos^3)\log\frac{f_{tgt}(cpos^3)}{f_{src}(cpos^3)}
 \end{equation}
 where $cpos^3$ is a coarse POS tag trigram, and \\
+
 \begin{align}
 \label{eqn:cpos}
 f(cpos^3) & = \nonumber f(cpos_{i-1}, cpos_{i}, cpos_{i+1}) \\ &= \frac{count(cpos_{i-1}, cpos_{i}, cpos_{i+1})}{\sum_{\forall cpos_{a,b,c}}{count(cpos_{a}, cpos_{b}, cpos_{c})}}
 \end{align}
 with $count_{src}(cpos^3) = 1$ for each unseen trigram.
+
 \end{definition}
 
 Intuitively, treebanks of the same language (despite the differences in the genres covered) should be better fit for single-source transfer than a treebank from another language. This is the primary motivation for using $KL_{cpos^3}$ (as defined for a single-source transfer scenario) to assess the annotation consistency among the treebanks of a language. However, $KL_{cpos^3}$ is a variant of KL-Divergence, and thus asymmetric, making it unfit in its original form for assessing annotation consistency symmetrically. We refer to the symmetric variant of the metric as $\theta_{pos}$ defined for the treebanks $A$ and $B$ as follows:
@@ -53,7 +57,7 @@ Even though $\Theta_{pos}$ is a bound on the $\theta_{pos}$ metric, the former i
 \section{Dataset}
 \label{sec:pos-harmony-dataset}
 
-UDv2.5 \citep{UDv2.5} contains 157 treebanks in 90 languages. There are multiple languages with more than one treebank, with some containing up to 6 treebanks. A list of all such languages, with the associated treebanks can be seen in Appendix \ref{app:multi_trees}. We list $\theta_{pos}$ scores of the different treebanks in different languages in the next section. In the listing of scores, the treebanks where the data needs to be fetched from another corpus because of licensing issues are not included.
+UDv2.5 \citep{UDv2.5} contains 157 treebanks in 90 languages. There are multiple languages with more than one treebank, with some containing up to 6 treebanks. A list of all such languages, with the associated treebanks can be seen in Appendix \ref{app:multi_trees}. We list $\theta_{pos}$ scores of the different treebanks in different languages in the next section. In the listing of scores, small treebanks where the total number of sentences is less than 1 000 are not included.
 
 As mentioned earlier, the treebanks in UD are assigned a score based on the system of checks run by the official UD validator. We want to estimate the $\Theta_{pos}$ scores to the best of our ability, and so, working with a pair of low quality treebanks would be the worst approach that can be undertaken. To that effect, we estimate the bounding score on treebanks with the ratings of at least 3.5 stars (out of 5 stars). The treebanks selected in this manner can be considered to be of high quality. The selection of high quality treebanks also enforces an important assumption, that the data within a singular treebank has been annotated consistently or that there are considerably lower number of annotation inconsistencies within the data in a treebank. The assumption would also imply that in a pair of considered treebanks, while the treebanks might not be annotated consistently with respect to each other, the individual treebanks are assumed to be internally consistent with respect to their annotation.
 
@@ -62,12 +66,14 @@ The assumption as mentioned above is a strict constraint, and might not always h
 \section{\texorpdfstring{$\theta_{pos}$}{theta\_pos} Scores for UDv2.5}
 \label{sec:pos-harmony-scores}
 
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.50\textwidth}
 \subsection*{Languages with 2 Treebanks}
 \begin{table}[H]
     \scalebox{0.90}{\begin{tabular}{|l|l|l|}
     \hline
     \textbf{Treebank1} & \textbf{Treebank2} & \textbf{$\theta_{pos}$} \\
+    \hline
+    \texttt{ar}-NYUAD & \texttt{ar}-PADT & 2.497\\
     \hline
     \texttt{es}-AnCora & \texttt{es}-GSD & 0.352\\
     \hline
@@ -79,19 +85,17 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \hline
     \texttt{grc}-Perseus & \texttt{grc}-PROIEL & 4.641 \\
     \hline
-    \texttt{ja}-GSD & \texttt{ja}-Modern & 2.915 \\
+    \texttt{ja}-GSD & \texttt{ja}-BCCWJ & 0.951 \\
     \hline
     \texttt{ko}-GSD & \texttt{ko}-Kaist & 2.56 \\
     \hline
-    \texttt{lt}-ALKSNIS & \texttt{lt}-HSE & 1.096 \\
-    \hline
     \texttt{nl}-Alpino & \texttt{nl}-LassySmall & 0.664 \\
-    \hline
-    \texttt{orv}-RNC & \texttt{orv}-TOROT & 4.468 \\
     \hline
     \texttt{pl}-LFG & \texttt{pl}-PDB & 0.623 \\
     \hline
     \texttt{pt}-Bosque & \texttt{pt}-GSD & 0.678 \\
+    \hline
+    \texttt{ro}-Nonstandard & \texttt{ro}-RRT & 1.233 \\
     \hline
     \texttt{sl}-SSJ & \texttt{sl}-SST & 2.405 \\
     \hline
@@ -99,10 +103,12 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \hline
     \texttt{tr}-GB & \texttt{tr}-IMST & 1.477 \\
     \hline
+    \texttt{zh}-GSD & \texttt{zh}-HK & 1.958\\
+    \hline
     \end{tabular}}
     \end{table}
     
-    \subsection*{Languages with 4 Treebanks}
+    \subsection*{Languages with 3+ Treebanks}
     
     \begin{table}[H]
     \scalebox{0.90}{\begin{tabular}{|l|l|l|l|}
@@ -118,8 +124,7 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \end{tabular}}
     \end{table}
     
-    \vspace{1cm}
-    \subsection*{Languages with 5 Treebanks}
+    % \vspace{1cm}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
@@ -161,18 +166,6 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \end{table}
     
     \begin{table}[H]
-    \scalebox{0.90}{\begin{tabular}{|l|l|l|}
-    \hline
-    \texttt{ro} & \textbf{Nonstandard} & \textbf{RRT} \\
-    \hline
-    \textbf{RRT} & 1.233 & - \\
-    \hline
-    \textbf{SiMoNERo} & 2.712 & 0.866 \\
-    \hline
-    \end{tabular}}
-    \end{table}
-    
-    \begin{table}[H]
     \begin{tabular}{|l|l|l|}
     \hline
     \texttt{ru} & \textbf{GSD} & \textbf{SynTagRus} \\
@@ -180,18 +173,6 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \textbf{SynTagRus} & 0.567 & - \\
     \hline
     \textbf{Taiga} & 1.027 & 0.631 \\
-    \hline
-    \end{tabular}
-    \end{table}
-    
-    \begin{table}[H]
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \texttt{zh} & \textbf{CFL} & \textbf{GSD} \\
-    \hline
-    \textbf{GSD} & 1.97 & - \\
-    \hline
-    \textbf{HK} & 0.74 & 1.958 \\
     \hline
     \end{tabular}
     \end{table}
@@ -208,23 +189,25 @@ The assumption as mentioned above is a strict constraint, and might not always h
     \hline 
     \textbf{ParTUT} & 0.62 & 0.432 & 0.581 & -\\
     \hline 
-    \textbf{Pronouns} & 3.828 & 3.927 & 3.426 & 4.224\\
+    \textbf{ESL} & 0.592 & 0.799 & 0.564 & 0.823\\
     \hline 
     \end{tabular}}
     \end{table}
     
     \begin{table}[H]
-    \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|}
+    \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|l|}
     \hline
-    \texttt{fr} & \textbf{FQB} & \textbf{GSD} & \textbf{ParTUT} & \textbf{Sequoia}\\
+    \texttt{fr} & \textbf{FQB} & \textbf{GSD} & \textbf{ParTUT} & \textbf{Sequoia} & \textbf{Spoken}\\
     \hline
-    \textbf{GSD} & 1.582 & - & - & -\\
+    \textbf{GSD} & 1.582 & - & - & - & -\\
     \hline
-    \textbf{ParTUT} & 1.942 & 0.683 & - & -\\
+    \textbf{ParTUT} & 1.942 & 0.683 & - & - & -\\
     \hline
-    \textbf{Sequoia} & 1.693 & 0.248 & 0.524 & -\\
+    \textbf{Sequoia} & 1.693 & 0.248 & 0.524 & - & -\\
     \hline
-    \textbf{Spoken} & 3.644 & 3.089 & 2.599 & 2.732\\
+    \textbf{Spoken} & 3.644 & 3.089 & 2.599 & 2.732 & -\\
+    \hline
+    \textbf{FTB} & 2.226 & 0.379 & 0.7 & 0.272 & 3.507\\
     \hline
     \end{tabular}}
     \end{table}
@@ -428,15 +411,12 @@ In \cite{biber2}, a line of distinction is drawn between between text type and g
     \label{tab:dimensions-genres}
 \end{table}
 
-The dimensions marked in bold in Table \ref{tab:dimensions-genres} can be summarised under the notion of \textit{deep formality}, as coined in \cite{formality1}. \citeauthor{formality1} are able to classify linguistic constructions into different genres according to the measurement of their formality, based on a numerical measure of formality. The formality of a construction was numerically calculated in terms of F-measure (formality measure), as defined in Equation \ref{eqn:formality}. \cite{formality2} discovered that a numerical I-measure (informality measure, needed for working with Web2.0 data, given in Equation \ref{eqn:informality}) combined with F-measure worked better in identification of formality levels in data than when either of the measure was used on its own.
+The dimensions marked in bold in Table \ref{tab:dimensions-genres} can be summarised under the notion of \textit{deep formality}, as coined in \cite{formality1}. \citeauthor{formality1} are able to classify linguistic constructions into different genres according to the measurement of their formality, based on a numerical measure of formality. The numerical measure, however doesn't account for all the dimensions marked in bold, but mainly to the first dimension on `Involved vs Informational Production'. The formality of a construction was numerically calculated in terms of F-measure (formality measure), as defined in Equation \ref{eqn:formality}. \cite{formality2} discovered that a numerical I-measure (informality measure, needed for working with Web2.0 data, given in Equation \ref{eqn:informality}) combined with F-measure worked better in identification of formality levels in data than when either of the measure was used on its own.
 
 \begin{align}
     \text{F-measure} &= \textstyle{\frac{f_{noun} + f_{adjective} + f_{preposition} + f_{article} - f_{pronoun} - f_{verb} - f_{adverb} - f_{interjection} + 100}{2}} \label{eqn:formality}\\
     \text{I-measure} &= (f_{mistyped} + f_{interjection} + f_{emoticon}) * 100 \label{eqn:informality}
 \end{align}
-where $f_{A}$ represents relative frequency of $A$.
+where $f_{A}$ represents frequency of $A$.
 
-\subsection{Inter-Genre Similarity}
-
-In our attempt at trying to understand the differences between different genres, we use F-measure as a primary classifying measure. Considering that CoNLL-U format does not differentiate between typos and other errors from the usual annotation in POS annotation\footnote{https://universaldependencies.org/u/overview/typos.html}, we do not use I-measure in our experiment.
-% \newpage
+In our experiment, we tried to experiment with a combination of F-measure and I-measure, as well as with the measures by themselves. Considering that the absolute frequency would be dependent on the size of the database, the measure scores were computed in terms of relative frequencies. However, we found no correlation between $\theta_{pos}$ scores between two genres, with their F-measure or I-measure scores or a combination of the two.

@@ -69,6 +69,7 @@
 \usepackage{tikz}
 \usepackage{mathtools}
 \usepackage{venndiagram}
+\usepackage{colortbl}
 \usetikzlibrary{shapes,arrows,fit,calc}
 
 \tikzstyle{decision} = [diamond, draw=black, thick, fill=blue!20, 
@@ -123,9 +124,9 @@
 % consultant, a person who lent the software, etc.)
 \def\Dedication{%
 
-I would like to express my gratitude to my supervisors, Daniel Zeman from Charles University for his dedicated guidance as well as his recommendation of the thesis topic; and Koldo Gojenola from UPV/EHU for his valuable remarks and the much needed push to allow me to keep things structured.
+I would like to express my gratitude to my supervisors, Daniel Zeman from Charles University for his dedicated guidance, his valuable comments as well as his recommendation of the thesis topic; and Koldo Gojenola from UPV/EHU for the much needed push to allow me to keep things structured.
 
-I am very thankful to Prof. Mark\'eta Lopatkov\'a and Prof. Vladislav Kubo\v n from Charles University, Prague and also Dr. Bobbye Pernice from Universit\"at des Saarlandes for their immense help in handling all the difficulties encountered during the two years of studying in LCT programme.
+I am very thankful to Prof. Mark\'eta Lopatkov\'a and Prof. Vladislav Kubo\v n from Charles University, Prague and also Dr. Bobbye Pernice from Universit\"at des Saarlandes for their immense help in handling all the difficulties encountered during the entire period of study in LCT programme.
 
 A very special note of thanks is extended to Chiara Alzetta of ItaliaNLP Lab for her constant help in an experiment. From the discussion about the algorithm, to actually running it, the experiment on lisca tools would not have been possible without her valuable inputs.
 
@@ -133,11 +134,11 @@ A very sincere vote of thanks is also extended to Charles University in Prague f
 
 Computational resources were supplied by the Ministry of Education, Youth and Sports of the Czech Republic under the Projects CESNET (Project No. LM2015042) and CERIT-Scientific Cloud (Project No. LM2015085) provided within the program Projects of Large Research, Development and Innovations Infrastructures.
 
-Finally, I would like to thank all the people who supported me during the two and a half years, my family and friends. Special thanks are due to my friends in Prague for helping me keep my sanity in place.}
+Finally, I would like to thank all the people who supported me during the entire period, my family and friends. Special thanks are due to my friends in Prague for helping me keep my sanity in place.}
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\Abstract{%
-This research attempts at identification and correction of inconsistencies in different treebanks. The inconsistencies might be related to linguistic constructions, failure of the guidelines of annotation, failure to understand the guidelines on annotator's part, or random errors caused by annotators, among others. The work also proposes a metric to test the similarity of different treebanks in the same language, when the annotation guidelines remain the same. We offer solutions to some previously identified inconsistencies in the scope of the Universal Dependencies Project in a language neutral manner, the solutions being reliable enough to not need a human annotator in the pipeline.
+This thesis attempts at correction of some identified inconsistencies in different treebanks. The inconsistencies can be related to linguistic constructions, failure of the guidelines of annotation, failure to understand the guidelines on annotator's part, or random errors caused by annotators, among others. We propose a metric to test the POS annotation consistency of different treebanks in the same language, when the annotation guidelines remain the same. We offer solutions to some previously identified inconsistencies in the scope of the Universal Dependencies Project, and check the viability of a proposed inconsistency detection tool in a low-resource setting. The solutions discussed in the thesis are language-neutral, intended to work with multiple languages with efficiency.
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces
@@ -157,7 +158,7 @@ This research attempts at identification and correction of inconsistencies in di
 % Title page and various mandatory informational pages
 \begin{document}
 
-% \include{title}
+\include{title}
 
 %%% A page with automatically generated table of contents of the master thesis
 
@@ -189,8 +190,8 @@ This research attempts at identification and correction of inconsistencies in di
     \include{en/problems}    % 06 pages
     \include{en/solutions}   % 04 pages
     \include{en/pos_preface} % 10 pages on Preface to theta_POS and tuning theta_POS for size variation
-\include{en/pos_genre}
-\include{en/pos_conclusion}
+    \include{en/pos_genre}
+    \include{en/pos_conclusion}
     \include{en/conj-head} % 35 pages on conj_head
     \include{en/lisca} % 17 pages on LISCA
     \include{en/AUXvsVERB} % 06 pages on AuxVsVerbs

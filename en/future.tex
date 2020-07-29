@@ -50,7 +50,7 @@ Furthermore, both the POS tags in question (\verb|SCONJ|, \verb|CCONJ|) can have
 \section{\texttt{auxHead}: Auxiliary as Head of Dependency}
 \label{future:auxHead}
 
-In the discussion of this problem, we refer to the case when an auxiliary (marked by either of \verb|AUX| or \verb|aux|) is treated as the head of a dependency relation. Although allowed in certain cases, the auxiliary should not be marked as the dependency head in general sense. Consider the following example in Figure \ref{fig:aux-head-example}, taken directly from \cite{alzetta2017dangerous}\footnote{In the original example, \textbf{noi} (us) was annotated as a dependent of both  \textbf{Per} (for), and \textbf{\`e} (has-been). Under UD representation, there can not be more than one head for any given node in regular annotation. As such, we believe it was a typo in the publication and not in their data. In this case, we show the corrected dependencies.}. The token of interest is marked in bold.
+In the discussion of this problem, we refer to the case when an auxiliary (marked by either of \verb|AUX| or \verb|aux|) is treated as the head of a dependency relation. Although allowed in certain cases, the auxiliary should not be marked as the dependency head in general sense. Consider the following example in Figure \ref{fig:aux-head-example}, taken directly from \cite{alzetta2017dangerous}. The token of interest is marked in bold.
 
 \begin{example}
 \textbf{ }\\
@@ -72,7 +72,7 @@ In the discussion of this problem, we refer to the case when an auxiliary (marke
   \caption{Corrected Annotation}
   \label{fig:aux-head-corrected}
   \end{subfigure}
-    \caption{Example tree from \cite{alzetta2017dangerous}}
+    \caption[Example tree from \cite{alzetta2017dangerous} showcasing \texttt{auxHead} error type]{Example tree from \cite{alzetta2017dangerous} showcasing \texttt{auxHead} error type. In the original example, \textbf{noi} (us) was annotated as a dependent of both  \textbf{Per} (for), and \textbf{\`e} (has-been). Under UD representation, there can not be more than one head for any given node in regular annotation. As such, we believe it was a typo in the publication and not in their data. In this figure, we show the corrected dependencies.}
     \label{fig:aux-head-example}
 \end{figure}
     
