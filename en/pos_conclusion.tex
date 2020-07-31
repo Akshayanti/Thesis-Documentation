@@ -256,7 +256,7 @@ In our analysis so far, we have restricted ourselves to instances when the data 
 \end{enumerate}
 
 
-We define a genre as an adulterant genre in the dataset if the number of instances in the genre don't satisfy Equation \ref{eqn:size_constraint}. In this subsection, we take a look at how the presence of adulterant genres affect the $\theta_{pos}$ scores.
+We define a genre as an adulterant genre in the dataset if the number of instances in the genre does not satisfy Equation \ref{eqn:size_constraint}. In this subsection, we take a look at how the presence of adulterant genres affect the $\theta_{pos}$ scores.
 
 From Table \ref{tab:inter_genre-pl}, the maximal $\theta_{pos}$ score of $1.53$ was computed between \textit{news} and \textit{spoken} genres in data from \texttt{pl}-LFG treebank. We calculate the effect of the adulterant genres in the following manner:
 
@@ -420,19 +420,19 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \hline
     \texttt{fi}-FTB & \texttt{fi}-TDT & \cellcolor{red!25}1.195\\
     \hline
-    \cellcolor{blue!25}\texttt{gl}-CTG & \texttt{gl}-TreeGal & \cellcolor{blue!25}0.714\\
+    \texttt{gl}-CTG & \texttt{gl}-TreeGal & \cellcolor{gray!25}0.714\\
     \hline
     \texttt{grc}-Perseus & \texttt{grc}-PROIEL & \cellcolor{red!25}4.641\\
     \hline
-    \texttt{ja}-BCCWJ & \cellcolor{gray!25}\texttt{ja}-GSD & \cellcolor{gray!25}0.951\\
+    \texttt{ja}-BCCWJ & \texttt{ja}-GSD$^{*}$ & \cellcolor{gray!25}0.951\\
     \hline
-    \cellcolor{gray!25}\texttt{ko}-GSD & \texttt{ko}-Kaist & \cellcolor{gray!25}2.56\\
+    \texttt{ko}-GSD$^{*}$ & \texttt{ko}-Kaist & \cellcolor{gray!25}2.56\\
     \hline
     \texttt{nl}-Alpino & \texttt{nl}-LassySmall & \cellcolor{green!25}0.664\\
     \hline
-    \texttt{pl}-LFG & \cellcolor{blue!25}\texttt{pl}-PDB & \cellcolor{blue!25}0.623\\
+    \texttt{pl}-LFG & \texttt{pl}-PDB$^{*}$ & \cellcolor{gray!25}0.623\\
     \hline
-    \texttt{pt}-Bosque & \cellcolor{gray!25}\texttt{pt}-GSD & \cellcolor{gray!25}0.678\\
+    \texttt{pt}-Bosque & \texttt{pt}-GSD$^{*}$ & \cellcolor{gray!25}0.678\\
     \hline
     \texttt{ro}-Nonstandard & \texttt{ro}-RRT & \cellcolor{green!25}1.233\\
     \hline
@@ -440,7 +440,7 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \hline
     \texttt{sv}-LinES & \texttt{sv}-Talbanken & \cellcolor{green!25}0.443\\
     \hline
-    \texttt{tr}-GB & \cellcolor{blue!25}\texttt{tr}-IMST & \cellcolor{blue!25}1.477\\
+    \texttt{tr}-GB & \texttt{tr}-IMST & \cellcolor{gray!25}1.477\\
     \hline
     \texttt{zh}-GSD & \texttt{zh}-HK & \cellcolor{green!25}1.958\\
     \hline
@@ -468,9 +468,9 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \begin{table}[H]
     \begin{tabular}{|l|l|l|}
     \hline
-    \texttt{de} & \cellcolor{gray!25}\textbf{GSD} & \cellcolor{gray!25}\textbf{HDT} \\
+    \texttt{de} & \textbf{GSD$^{*}$} & \textbf{HDT$^{*}$} \\
     \hline
-    \cellcolor{gray!25}\textbf{HDT} & \cellcolor{green!25}0.49 & - \\
+    \textbf{HDT$^{*}$} & \cellcolor{green!25}0.49 & - \\
     \hline
     \textbf{LIT} & \cellcolor{gray!25}1.383 & \cellcolor{gray!25}1.1 \\
     \hline
@@ -492,11 +492,11 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \begin{table}[H]
     \scalebox{0.85}{\begin{tabular}{|l|l|l|}
     \hline
-    \texttt{no} & \cellcolor{blue!25}\textbf{Bokmaal} & \cellcolor{blue!25}\textbf{Nynorsk} \\
+    \texttt{no} & \textbf{Bokmaal} & \textbf{Nynorsk} \\
     \hline
-    \cellcolor{blue!25}\textbf{Nynorsk} & \cellcolor{green!25}0.095 & - \\
+    \textbf{Nynorsk} & \cellcolor{green!25}0.095 & - \\
     \hline
-    \textbf{NynorskLIA} & \cellcolor{blue!25}2.291 & \cellcolor{blue!25}2.375 \\
+    \textbf{NynorskLIA} & \cellcolor{gray!25}2.291 & \cellcolor{gray!25}2.375 \\
     \hline
     \end{tabular}}
     \end{table}
@@ -504,7 +504,7 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \begin{table}[H]
     \begin{tabular}{|l|l|l|}
     \hline
-    \texttt{ru} & \cellcolor{gray!25}\textbf{GSD} & \textbf{Taiga}$^{+}$ \\
+    \texttt{ru} & \textbf{GSD$^{*}$} & \textbf{Taiga}$^{+}$ \\
     \hline
     \textbf{Taiga$^{+}$} & \cellcolor{green!25}1.027 & - \\
     \hline
@@ -533,9 +533,9 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \begin{table}[H]
     \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|l|}
     \hline
-    \texttt{fr} & \textbf{FQB$^{+}$} & \cellcolor{gray!25}\textbf{GSD} & \textbf{ParTUT$^{+}$} & \textbf{Sequoia} & \textbf{Spoken}\\
+    \texttt{fr} & \textbf{FQB$^{+}$} & \textbf{GSD$^{*}$} & \textbf{ParTUT$^{+}$} & \textbf{Sequoia} & \textbf{Spoken}\\
     \hline
-    \cellcolor{gray!25}\textbf{GSD} & \cellcolor{green!25}1.582 & - & - & - & -\\
+    \textbf{GSD$^{*}$} & \cellcolor{green!25}1.582 & - & - & - & -\\
     \hline
     \textbf{ParTUT$^{+}$} & \cellcolor{green!25}1.942 & \cellcolor{green!25}0.683 & - & - & -\\
     \hline
@@ -551,18 +551,18 @@ This section lists the $\theta_{pos}$ scores in UDv2.5 data \citep{UDv2.5}, as l
     \begin{table}[H]
     \scalebox{0.80}{\begin{tabular}{|l|l|l|l|l|}
     \hline
-    \texttt{it} & \textbf{ISDT} & \textbf{ParTUT} & \cellcolor{gray!25}\textbf{VIT} & \textbf{PoSTWITA}\\
+    \texttt{it} & \textbf{ISDT} & \textbf{ParTUT} & \textbf{VIT$^{*}$} & \textbf{PoSTWITA}\\
     \hline
     \textbf{ParTUT} & \cellcolor{green!25}0.133 & - & - & - \\
     \hline
-    \cellcolor{gray!25}\textbf{VIT} & \cellcolor{green!25}0.121 & \cellcolor{green!25}0.194 & - & -\\
+    \textbf{VIT$^{*}$} & \cellcolor{green!25}0.121 & \cellcolor{green!25}0.194 & - & -\\
     \hline
     \textbf{PoSTWITA} & \cellcolor{green!25}1.67 & \cellcolor{green!25}1.478 & \cellcolor{gray!25}1.764 & - \\
     \hline
     \textbf{TWITTIRO} & \cellcolor{green!25}1.501 & \cellcolor{green!25}1.376 & \cellcolor{gray!25}1.594 & \cellcolor{green!25}0.347 \\
     \hline
     \end{tabular}}
-    \caption[$\theta_{pos}$ Scores in UDv2.5 Marked for Consistency or Inconsistency in POS Annotation]{$\theta_{pos}$ Scores in UDv2.5 Marked for Consistency or Inconsistency in POS Annotation. Note that treebanks with at least one adulterant genres are marked with superscript. Additionally, if a treebank cannot be split into constituent genres, it is marked with Gray color in the table.}
+    \caption[$\theta_{pos}$ Scores in UDv2.5 Marked for Consistency or Inconsistency in POS Annotation]{$\theta_{pos}$ Scores in UDv2.5 Marked for Consistency or Inconsistency in POS Annotation. Note that treebanks with at least one adulterant genres are marked with superscript plus sign ($+$). Additionally, if a treebank cannot be split into constituent genres, it is marked with superscript asterisk sign ($*$) in the table.}
     \label{tab:theta-pos-again}
     \end{table}
 
@@ -593,7 +593,7 @@ Table \ref{tab:theta-pos-limits} marks the $\Theta_{pos}$ limit for treebanks th
         \texttt{fr}-FTB \& \texttt{fr}-Spoken & 3.507 & 2.0 & One Genre Each\\
         & & & Violation of Equation \ref{eqn:theta_pos_genre_limit}\\
         \hline
-        \texttt{fr}-Sequoia \& \texttt{fr}-Spoken & 2.732 & 2.726 & No Adulterant Genre\\
+        \texttt{fr}-Sequoia \& \texttt{fr}-Spoken & 2.732 & 2.0 & No Adulterant Genre\\
         & & & Violation of Equations \ref{eqn:theta_pos_genre_limit}, \ref{eqn:theta_pos_combo_limit_final}\\
         \hline
         \texttt{la}-ITTB \& \texttt{la}-PROIEL & 3.763 & 2.0 & No Adulterant Genre\\
@@ -603,6 +603,19 @@ Table \ref{tab:theta-pos-limits} marks the $\Theta_{pos}$ limit for treebanks th
     \caption{Comparison of $\theta_{pos}$ Score and $\Theta_{pos}$ Limit for Pairs of Treebanks Marked as Inconsistent in Table \ref{tab:theta-pos-again}}
     \label{tab:theta-pos-limits}
 \end{table}
+
+There are two important points that need to be specified here:
+
+\begin{enumerate}
+    \item The affiliation of individual sentences in any given treebank is optional and not standardized. If the \texttt{README.md} file associated with a treebank in question does not specify how to split the treebank into the constituent genres, the information can be queried through the data providers of the treebank in question. The following treebanks could not be assessed for the annotation consistency with other treebanks in the language as the information on their genre split could not be fetched through either of the treebank's \texttt{README.md} file or through the treebank's data providers:
+    \begin{itemize}
+        \item \texttt{gl}-CTG
+        \item \texttt{no}-Bokmaal
+        \item \texttt{no}-Nynorsk
+        \item \texttt{tr}-IMST
+    \end{itemize}
+    \item For treebanks with adulterant genres, the higher $\Theta_{pos}$ limit on the $\theta_{pos}$ scores can be problematic. Even though the $\theta_{pos}$ scores for the treebanks with adulterant genre(s) have also been marked as consistent in Table \ref{tab:theta-pos-again}, it is recommended to check the annotation consistency of the treebank without the adulterant genre(s) as well.
+\end{enumerate}
 
 \section{Discussion And Conclusion}
 \label{sec:pos-harmony-conclusion}
@@ -619,13 +632,13 @@ For most treebanks, the influence of OOV words should be minimal. Nonetheless, c
 
 While the $\theta_{pos}$ metric is primarily meant to identify if the given treebanks under consideration are consistent in their POS annotation, the metric can also be employed to localise points of inconsistency, if required.
 
-Consider the example of UDv2.5 \texttt{fi}-FTB and \texttt{fi}-TDT treebanks in UDv2.5. While the data in \texttt{fi}-TDT is composed of \textit{grammar-examples} genres, the data in \texttt{fi}-FTB treebank is composed of multiple genres, including \textit{grammar-examples}. While calculating the $\theta_{pos}$ scores to estimate annotation-consistency for different genres across the two treebanks, it was noted that 
+Consider the example of UDv2.5 \texttt{fi}-FTB and \texttt{fi}-TDT treebanks in UDv2.5. While the data in \texttt{fi}-FTB is composed of \textit{grammar-examples} genres, the data in \texttt{fi}-TDT treebank is composed of multiple genres, including \textit{grammar-examples}. While calculating the $\theta_{pos}$ scores to estimate annotation-consistency for different genres across the two treebanks, it was noted that 
 
 \begin{equation*}
     \theta_{pos}(\texttt{fi}\text{-TDT}_{grammar-examples}, \texttt{fi}\text{-FTB}_{grammar-examples}) = 0.707 > 0.5
 \end{equation*}
 
-which is a clear violation of the condition as specified in Equation \ref{eqn:theta_pos_size_limit}. We believe that the inconsistency in the annotation can be localised to the genre in \texttt{fi}-FTB treebank. Consequently, concentrating simply on the instances from \textit{grammar-examples} genre in \texttt{fi}-FTB treebank should be enough to bring the overall $\theta_{pos}$ score between the two treebanks under the $\Theta_{pos}$ limit for the treebanks to be marked as inconsistent.
+which is a clear violation of the condition as specified in Equation \ref{eqn:theta_pos_size_limit}. We believe that the inconsistency in the annotation can be localised to the genre in \texttt{fi}-TDT treebank. Consequently, concentrating simply on the instances from \textit{grammar-examples} genre in \texttt{fi}-TDT treebank should be enough to bring the overall $\theta_{pos}$ score between the two treebanks under the $\Theta_{pos}$ limit for the treebanks to be marked as inconsistent.
 
 \subsection{Split Into Constituent Genres As Requirement}
 

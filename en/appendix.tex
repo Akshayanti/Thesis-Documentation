@@ -216,7 +216,7 @@ Table \ref{tab:multi_trees} contains the different languages in UDv2.5 such that
 \section{PUD Treebanks}
 \label{app:pud}
 
-PUD treebanks were formed as a part of CoNLL 2017 Shared Task \citep{ud-shared-task}. Across different languages, the PUD treebanks contain the same 1000 sentences, from news genre, and from Wikipedia. Of these sentences, the first 750 sentences were originally in \verb|en|, whereas the others were originally in \verb|de|, \verb|es|, \verb|fr| or \verb|it| and were translated to other languages via \verb|en|. The translation into majority of the languages have been performed by professional translators. The treebanks for the languages were first annotated as per Google universal annotation guidelines \cite{google}, and then to UDv2 guidelines. The treebanks for \verb|cs|, \verb|fi| and \verb|sv| were translated by local teams responsible for the language, and were annotated directly as per UDv2 guidelines.
+PUD treebanks were formed as a part of CoNLL 2017 Shared Task \citep{ud-shared-task}. Across different languages, the PUD treebanks contain the same 1000 sentences, from news genre, and from Wikipedia. Of these sentences, the first 750 sentences were originally in \verb|en|, whereas the others were originally in \verb|de|, \verb|es|, \verb|fr| or \verb|it| and were translated to other languages via \verb|en|. The translation into majority of the languages have been performed by professional translators. The treebanks for the languages were first annotated as per Google universal annotation guidelines \cite{google}, and then to UDv2 guidelines. The treebanks for \verb|cs|, \verb|fi|, \texttt{pl} and \verb|sv| were translated by local teams responsible for the language, and were annotated directly as per UDv2 guidelines.
 
 Table \ref{tab:pud} contains a list of languages which contain a PUD treebank. Notice that PUD treebanks contain only the test set, and are devoid of train and dev data. The official recommended usage of PUD treebanks is with a 10-fold cross validation for training purpose, or using the whole treebank as testing data, as the case may be.
 
@@ -259,10 +259,10 @@ The condition of projectivity is a strict constraint for natural languages, exhi
 
 \begin{enumerate}
     \item \textbf{Planarity}\\
-    The given tree is said to be planar, if it does not have any edges that overlap. Formally speaking, given two undirected edges \(i1 \leftrightarrow j1 \text{ and } i2 \leftrightarrow j2\); if \(i1 < i2 < j1 < j2\) or \(i1 > i2 > j1 > j2\), the edges are said to overlap.
-    Therefore, a given tree is called non-planar if there exists a pair of edges \(i1 \leftrightarrow j1\) and \(i2 \leftrightarrow j2\) such that the edges overlap.
+    The given tree is said to be planar, if it does not have any edges that overlap. Formally speaking, given two undirected edges \(i_{1} \leftrightarrow j_{1} \text{ and } i_{2} \leftrightarrow j_{2}\); if \(i_{1} < i_{2} < j_{1} < j_{2}\) or \(i_{1} > i_{2} > j_{1} > j_{2}\), the edges are said to overlap.
+    Therefore, a given tree is called non-planar if there exists a pair of edges \(i_{1} \leftrightarrow j_{1}\) and \(i_{2} \leftrightarrow j_{2}\) such that the edges overlap.
     \item \textbf{Ill-Nestedness}\\
-    It is easier to define the condition of ill-nestedness rather than to define the well-nestedness. A given (sub)tree is called ill-nested, if for given undirected edges \(i1 \leftrightarrow j1 \text{ and } i2 \leftrightarrow j2\); \(i1 \in Gap(i2,j2) \And i2 \in Gap(i1,j1)\). It is worth noting that projective trees are always well-nested, but a well-nested tree is not always projective.
+    It is easier to define the condition of ill-nestedness rather than to define the well-nestedness. A given (sub)tree is called ill-nested, if for given undirected edges \(i_{1} \leftrightarrow j_{1} \text{ and } i_{2} \leftrightarrow j_{2}\); \(i_{1} \in Gap(i_{2},j_{2}) \And i_{2} \in Gap(i_{1},j_{1})\). It is worth noting that projective trees are always well-nested, but a well-nested tree is not always projective.
     \item \textbf{Mild Non-Projectivity}\\
     A tree is said to be mildly non-projective if
     \begin{enumerate}

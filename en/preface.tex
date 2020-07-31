@@ -8,7 +8,7 @@ In this work, our main focus is on syntactic treebanks and especially dependency
 
 \section{Inter-conversion of Treebanks}
 
-There exist a multitude of treebanks for different languages as they can be seen on Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Treebank\#Syntactic_treebanks}}, for example. As noted by \cite{kakkonen2006}, there exist a variety of formats and annotation schemes even for the treebanks for the same language. A well known example to this is the case of distinctive POS tagging schemes for PennTreebank\footnote{\url{https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html}} and for British National Corpus\footnote{\url{http://www.natcorp.ox.ac.uk/docs/c5spec.html}}, both of which are meant for annotation of English language. \citeauthor{kakkonen2006}, in his work also notices that there exist tools which are meant to work for a particular tagset/annotation scheme. Given enough similarities in annotation schemes, a (automatic) conversion process can be drafted from one annotation schema to another.
+There exist a multitude of treebanks for different languages as they can be seen on Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Treebank\#Syntactic_treebanks}}, for example. As noted by \cite{kakkonen2006}, there exist a variety of formats and annotation schemes even for the treebanks for the same language. A well known example to this is the case of distinctive POS tagging schemes for PennTreebank\footnote{\url{https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html}} and for British National Corpus\footnote{\url{http://www.natcorp.ox.ac.uk/docs/c5spec.html}}, both of which are meant for annotation of English language. \citeauthor{kakkonen2006}, in his work also notices that there exist tools which are meant to work for a particular tagset, or for a particular annotation scheme. Given enough similarities in annotation schemes, a (automatic) conversion process can be drafted from one annotation schema to another.
 
 This conversion process of a treebank from one annotation scheme to another can be either 1:1 (one-to-one mapping) or n:m (many-to-many mapping). As in Machine Translation, the approach can also be pivot-based, i.e. conversion to an intermediate set, and then from the intermediate set to the desired set. For example, Interset \citep{interset}  uses the pivot-based approach, implemented in form of a Perl library. More often than not, the conversion between different schemes can be applied deterministically, making use of rule-based approach whenever needed.
 
@@ -33,11 +33,11 @@ Although there already existed annotation schemes that were used as de facto sta
 
 With the modifications resulting in development of HamleDT 2.0 \citep{HamleDT2}, and Universal Stanford Dependencies (USD) \citep{USD}, the Universal Dependencies (UD) Project was thus born in 2014 as a means of unifying all the novel features of different annotation formats as a universal annotation scheme consistent among different languages.
 
-The version 1.0 of UD (also referred to as UDv1.0) \citep{UDv1.0} was launched in January 2015, and covered 10 treebanks in 10 different languages. With the iterative methodology, the project evolved to contain 146 treebanks in 83 languages in UDv2.4 \citep{UDv2.4}, and 157 treebanks in 90 languages in UDv2.5 \citep{UDv2.5}. It is worth noting that not all the treebanks in UD are manually annotated. Rather, most treebanks are semi-automatically converted from the original source to the UD format according to a set of guidelines\footnote{\url{https://universaldependencies.org/guidelines.html}}.
+The version 1.0 of UD (also referred to as UDv1.0) \citep{UDv1.0} was launched in January 2015, and covered 10 treebanks in 10 different languages. With the iterative methodology, the project evolved to contain 146 treebanks in 83 languages in UDv2.4 \citep{UDv2.4}, and 157 treebanks in 90 languages in UDv2.5 \citep{UDv2.5}. It is worth noting that not all the treebanks were manually annotated directly in the UD style. Rather, most treebanks are semi-automatically converted from the original source to the UD format according to a set of guidelines\footnote{\url{https://universaldependencies.org/guidelines.html}}.
 
 \section{Motivation for the Problem}
 
-Since the introduction of UD, it has fast become a standard reference to compare scores relating to parser performance (\cite{parser-performance1}, \cite{parser-performance2}), study of language-specific features \citep{language-study}, and for Shared Tasks on UD \citep{ud-shared-task}. Given how different UD treebanks are being considered as benchmarks for comparison of different scores, it only makes sense to be considered them as Gold Standard (GS) data.
+Since the introduction of UD, it has fast become a standard reference to compare scores relating to parser performance (\cite{parser-performance1}, \cite{parser-performance2}), study of language-specific features \citep{language-study}, and for dependency parsing shared tasks on UD \citep{ud-shared-task}. Given how different UD treebanks are being considered as benchmarks for comparison of different scores, it only makes sense to be considered them as Gold Standard (GS) data.
 
 We discussed earlier how many of the UD treebanks are generated through a semi-automatic process, and thus are liable to contain a significant amount of errors. Such errors are detrimental in a GS, because of multiple reasons. Some of the reasons are listed as follows:
 
@@ -48,7 +48,7 @@ We discussed earlier how many of the UD treebanks are generated through a semi-a
         \item In case of the inflation of error (\(x_1 > x_0\)), the data which otherwise did not exhibit \(F\) suddenly starts displaying the pattern, thus affecting the quality of the data.
         \item In case of the deflation of pattern (\(x_1 < x_0\)), the data might not exhibit \(F\) at all, increasing its rarity. Considering the case of parser evaluation as above, the parser might decide to overlook this feature in entirety, thus losing out on essential data.
     \end{itemize}
-    \item With respect to identification of language-specific features, it is very possible that a lot of features might start getting wrongly associated with a language (the case of inflation as above) or they might be deemed a rare status (the case of deflation as above). Such instances, while seemingly harmless for high/medium resource languages, can pose serious problems with respect to low-resource languages, impacting the way the given language is studied.
+    \item With respect to identification of language-specific features, it is very possible that a lot of features might start getting wrongly associated with a language (the case of inflation as above) or they might be deemed a rare status (the case of deflation as above). Such instances, while seemingly harmless for high or medium resource languages, can pose serious problems with respect to low-resource languages, impacting the way the given language is studied.
 \end{enumerate}
 
 The problems as mentioned above are but a subset of multiple problems associated with an erroneous GS, and how they affect UD and the research around it. As such, these problems need to be minimized as much as possible, with attempts at their elimination in an ideal case. However, doing the task (of correcting the GS) manually is again a difficult one and the automatic methods are not always 100\% reliable and/or effective. While the methods often work well for individual languages or a language family, they often fail to generalize in a language-neutral sense. This is because of the different properties of languages, different language families, among others.
@@ -57,7 +57,7 @@ The problems as mentioned above are but a subset of multiple problems associated
 
 Having learned about the UD project, problems concerning semi-automatic conversions, and possible effects of these problems within the scope of UD, we can now formulate our problem statement for the scope of the thesis as follows:
 
-Given the different treebanks in UD, the thesis aims to identify inconsistencies in treebanks, and provide corresponding automated correction tools for them. The inconsistencies might be related to linguistic annotation, improper adherence to guidelines, lack of guidelines related to an observed phenomenon, annotator caused error, among others. The proposed methods should ideally not require a human annotator for verification, and should be as language-neutral as possible. However, language-specific methods can also be investigated and reported.
+Given the different treebanks in UD, the thesis aims to identify errors and inconsistencies in treebanks, and provide corresponding automated correction tools for them. The inconsistencies might be related to linguistic annotation, improper adherence to guidelines, lack of guidelines related to an observed phenomenon, annotator caused error, among others. The proposed methods and tools should ideally not require a human annotator for verification, and should be as language-neutral as possible. The tools can be adapted with language specific methods but that is out of the scope of this thesis.
 
 \section{Data Source}
 
@@ -67,7 +67,7 @@ There are some experiments that work well for UDv2.4 and UDv2.5 throughout, and 
 
 \section{Organizational Layout of the Document}
 
-We first continue the preface of the document by very quickly noting a few conventions that are used throughout this document. In Chapter \ref{sec:problems}, we take a look at the different categorisation of errors, and then the typology of different problems identified in UD treebanks. We continue the document with Chapter \ref{chap:prev_research}, containing the background on the research pertaining to the problems from Chapter \ref{sec:problems}. In the subsequent chapters (Chapters \ref{chap:pos-harmony} - \ref{chap:failures}), we layout the individual problems, and elaborate on the method/approach undertaken to solve the problem(s). In Chapter \ref{chap:future}, we discuss on some of the open problems as identified by the other authors, which were not undertaken in the current work. We officially conclude the document with a chapter on Conclusions.
+We first continue the preface of the document by very quickly noting a few conventions that are used throughout this document. In Chapter \ref{sec:problems}, we take a look at the different categorisation of errors, and then the typology of different problems identified in UD treebanks. We continue the document with Chapter \ref{chap:prev_research}, containing the background on the research pertaining to the problems from Chapter \ref{sec:problems}. In the subsequent chapters (Chapters \ref{chap:pos-harmony} - \ref{chap:failures}), we layout the individual problems, and elaborate on the method/approach undertaken to solve the problem(s). In Chapter \ref{chap:future}, we discuss on some of the open problems as identified by other authors, which were not undertaken in the current work. We officially conclude the document with a chapter on Conclusions.
 
 Attached to the document are also a series of Appendices. The appendices contain the data meant to help the reader understand some of the terms used through out the document, with an example being a list of ISO language codes used throughout.
 
@@ -80,32 +80,16 @@ This section is an overview on some of the important conventions used throughout
     \item The following conventions hold with respect to the UD terminology. A short introduction to different terms associated with UD can be accessed in Appendix \ref{app:UDterminology}.
     \begin{itemize}
         \item Unless otherwise mentioned, part-of-speech (POS) refers to `UPOS' field in the CoNLL-U format (Appendix \ref{app:conlluformat}). The two terms are used interchangeably, unless mentioned otherwise.
-        \item Syntactic Relations in UD can be referred to by either of `relation(s)', `deprel', or `dependency relation'. Unless otherwise mentioned, the instances refer to the `udeprel' field in CoNLL-U format (Appendix \ref{app:conlluformat}).
+        \item Syntactic Relations in UD can be referred to by either of `relation(s)', `deprel', or `dependency relation'. Unless otherwise mentioned, the instances refer to the `DEPREL' field in CoNLL-U format (Appendix \ref{app:conlluformat}).
     \end{itemize}
     
-    \item The POS tags, as well as dependency relations are formatted in the same formatting style, with one essential difference. Both the categories are marked orthographically using a separate tag in \LaTeX. We refer to this formatting style as `tag' category. \\
-    Table \ref{tab:formats} shows the difference in formatting as below:
-
-        \begin{table}[H]
-            \centering
-            \begin{tabular}{|l|l|}
-            \hline
-            Text Format & Output \\
-            \hline \hline
-            % heading
-            Regular & Lorem ipsum \\
-            Italic & \textit{Lorem ipsum}\\
-            Bold & \textbf{Lorem ipsum}\\
-            Tag & \verb|Lorem ipsum| \\
-            \hline
-        \end{tabular}
-        \caption{Illustration of Formatting styles}
-        \label{tab:formats}
-        \end{table}
-
-    \item The POS tags are always capitalized (written in upper-case), while the deprels are always non-capitalized (written in lower-case).
+    \item The POS tags, as well as dependency relations are formatted in the same formatting style, with one essential difference. Both the categories are marked typographically using a separate tag in \LaTeX. We refer to this formatting style as `Tag' category, shown in the example below.
     
-    \item When referring to specific files that are part of the standard release of the accompanying module, the filename is referred to with `Tag' category formatting.
+    \begin{example}
+    \texttt{VERB} is a POS tag, while \texttt{nmod} is a deprel.
+    \end{example}
+    
+    \item The POS tags are always capitalized (written in upper-case), while the deprels are always non-capitalized (written in lower-case).
     
     \item The use of `Tag' category is also reserved for nomenclature of problems. Thus, a problem identified as \verb|ProblemX| will act as the unique identifier for the problem across the length of the document.
     

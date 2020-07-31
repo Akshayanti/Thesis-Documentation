@@ -6,7 +6,7 @@ This chapter discusses in brief the other problems that have been recognised wit
 \section{Enhanced Dependencies}
 \label{future:enhanced}
 
-Enhanced Dependencies can be understood as an additional layer of annotation of dependencies in UD, which essentially marks all the dependencies. Considering some of the restrictions imposed by the regular annotation scheme like a singular head constraint where each node can have only one head, the Enhanced Dependencies aim to cover aspects which can be missed by the regular annotation scheme. However, not all of the languages, or their treebanks have been annotated with the Enhanced Dependencies so far. While the enhanced dependencies have been deemed to be useful in multiple cases (like that of ellipsis, cf. Section \ref{future:ellipsis}), their full potential might not have been realized so far.
+Enhanced Dependencies can be understood as an additional layer of annotation of dependencies in UD, which essentially marks added dependencies. Considering some of the restrictions imposed by the regular annotation scheme like a singular head constraint where each node can have only one head, the Enhanced Dependencies aim to cover aspects which can be missed by the regular annotation scheme. However, not all of the languages, or their treebanks have been annotated with the Enhanced Dependencies so far. While the enhanced dependencies have been deemed to be useful in multiple cases (like that of ellipsis, cf. Section \ref{future:ellipsis}), their full potential might not have been realized so far.
 
 In our experiment on \verb|conj_head| (cf. Chapter \ref{chap:conj_head}), we did not work with the problem of conjunction sandwiches. It is very likely that such problems which are difficult to be recognized by the regular dependencies can be searched for rather easily with the Enhanced Dependencies. For example, if Enhanced Dependencies mark all the conjuncts by the \texttt{conj} deprel, regardless of whether they are labelled by the deprel in the regular annotation or not, it would allow searching for the available conjuncts rather easily.
 
@@ -31,11 +31,11 @@ Note that projectivisation or the act of making a non-projective tree as project
 \section{Function Words and Associated deprels}
 \label{sssec:conj_deprels_association}
 
-Conjunctions are identified by two POS tags, viz. \verb|SCONJ|, \verb|CCONJ|. The associated dependency relations for the two POS tags are \verb|mark|, and \verb|cc| respectively. While these are the usually associated dependency relations, the boundary between the two is fuzzy. In the sense, it is possible for a token to be marked by \verb|SCONJ|, and have a \verb|cc| dependency relation (similarly for \verb|CCONJ| and \verb|mark|). Added to this are the cases where the tokens marked by another POS tag can act as conjunctions. Consider the following example from \verb|en|-ParTUT (UDv2.3) and the associated tree in Figure \ref{fig:func_multi}, where \verb|PART| acts as a conjunction, and thus the \verb|mark| deprel associated to it.
+Conjunctions are identified by two POS tags, viz. \verb|SCONJ|, \verb|CCONJ|. The associated dependency relations for the two POS tags are \verb|mark|, and \verb|cc| respectively. While these are the usually associated dependency relations, the boundary between the two is fuzzy. In the sense, it is possible for a token to be marked by \verb|SCONJ|, and have a \verb|cc| dependency relation (similarly for \verb|CCONJ| and \verb|mark|). Added to this are the cases where the tokens marked by another POS tag can act as conjunctions. Consider the following example from \verb|en|-ParTUT (UDv2.3) and the associated tree in Figure \ref{fig:func_multi}, where \verb|PART| (\textit{to}) acts as a conjunction, and thus the \verb|mark| deprel associated to it.
 
 \begin{example}
 \label{example:cc-mark}
-Ukraine's constitutional structure is for Ukraine's citizens alone to decide.
+Ukraine's constitutional structure is for Ukraine's citizens alone \textbf{to} decide.
 \end{example}
 
 \begin{figure}[ht]
@@ -93,8 +93,8 @@ Depending on the parent node, the relations were modified as follows:
 
 \begin{enumerate}
     \item If the parent node was a verb, the deprel was changed from \texttt{nmod} to \texttt{obl}.
-    \item If the parent was not a nominal predicate, the deprel could be either of \texttt{nmod} or \texttt{obl}, depending on if only the nominal was being modified, or the whole clause was being modified.
-    \item If the parent was a nominal, there was no change in the deprel.
+    \item If the parent was a nominal predicate, the deprel could be either of \texttt{nmod} or \texttt{obl}, depending on if only the nominal was being modified, or the whole clause was being modified.
+    \item If the parent was a nominal, but not a nominal predicate, there was no change in the deprel.
     \item If the parent was an adjective or an adverb, the deprel would be changed to \texttt{obl}, based on additional conditions.
     \item In case none of the above conditions held true, the instance would deserve individual treatment.
 \end{enumerate}
@@ -108,7 +108,7 @@ The UD Annotation guidelines on punctuation are simple and straightforward\footn
 \begin{enumerate}
     \item It is difficult to identify the next conjunct in case of missing \verb|CCONJ| and \verb|SCONJ| tags as in case of asyndetic coordination. In such cases, the information about the next conjunct should be deduced semantically in most cases. We saw a similar case in Section \ref{sec:conj-sand} (Example \ref{examp:nonconj} and Figure \ref{fig:nonconj}) where the next conjunct is not clear, owing to other (more suitable) deprel(s) being used in place of \verb|conj| deprel.
     \item Re-attachment of a punctuation node is a problem that goes with the previous instance since it's not always clear at what level the punctuation must attach to.
-    \item For nested punctuation, different languages use different sets of nested punctuation pairs, specifically with respect to quotation marks. As such, the treatment of paired punctuation pairs needs to be handled in a language-specific manner.
+    \item For paired and nested punctuation, different languages use different sets of nested punctuation pairs, specifically with respect to quotation marks. As such, the treatment of paired punctuation pairs needs to be handled in a language-specific manner.
 \end{enumerate}
 
 The \verb|fixpunct.py| block in Udapi-python \citep{udapi} tries to take care of significant number of edge cases in different UD treebanks. However, a more concrete solution is needed for the problems aforementioned.

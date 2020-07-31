@@ -6,7 +6,7 @@ As discussed in Section \ref{sssec:conj_head}, \texttt{conj\_head} refers to the
 \section{Observations About Problem Statement}
 \label{ssec:conj_head_observations}
 
-Identification of coordinating conjunctions, and separating them from subordinating conjunctions is a problem in itself and warrants a separate discussion of its own. Combined with the possible association of multiple deprels to a particular POS tag (cf. Section \ref{sssec:conj_deprels_association}), it is necessary to explicitly put a constraint on the instances to be considered during the scope of this experiment. To that effect, we identify coordinating conjunctions with their POS tag marked as \verb|CCONJ|, and the deprel as \verb|cc|. We disregard other deprels associated with the POS \verb|CCONJ| in the current context, effectively limiting the number of instances to be considered. In other words, we assume that any token that is POS tagged as \verb|CCONJ| and with deprel as \verb|cc| is a coordinating conjunction and that every coordinating conjunction is tagged in this manner, without exceptions. While the assumption is not fool proof and is not guaranteed to always hold, a deviation from this assumption would be a parsing/tagging error, and is therefore not relevant to this experiment.
+Identification of coordinating conjunctions, and separating them from subordinating conjunctions is a problem in itself and warrants a separate discussion of its own. Combined with the possible association of multiple deprels to a particular POS tag (cf. Section \ref{sssec:conj_deprels_association}), it is necessary to explicitly put a constraint on the instances to be considered during the scope of this experiment. To that effect, we identify coordinating conjunctions with their POS tag marked as \verb|CCONJ|, and the deprel as \verb|cc|. We disregard other deprels associated with the POS \verb|CCONJ| in the current context, effectively limiting the number of instances to be considered. In other words, we assume that any token that is POS tagged as \verb|CCONJ| and with deprel as \verb|cc| is a coordinating conjunction and that every coordinating conjunction is tagged in this manner, without exceptions. While the assumption is not fool proof and is not guaranteed to always hold, a deviation from this assumption would be an error in labeling rather than in dependency structure, i.e., an error type that is outside of the scope of the present experiment.
 
 In the following subsections, we take a look at some of the quirks associated with the problem. Through these quirks, we seek to (i) discover triggers that can help us in identification of problematic instances; and (ii) identify possible problems that we can run into while handling the aforementioned problematic instances. Throughout the rest of the experiment, we shall employ the following terminology:
 
@@ -20,6 +20,7 @@ In the following subsections, we take a look at some of the quirks associated wi
 \end{enumerate}
 
 \subsection{Direction of Dependency}
+\label{sec:direction}
 
 Owing to the change in associated dependency from right-headed to left-headed\footnote{\url{https://universaldependencies.org/v2/coordination.html\#left--vs-right-headed-coordination}}, the intuitive approach to the problem at hand is to first look for the direction of dependency for a given coordinating conjunction token, identifying the instances where the attachment is right-headed. However, the identification of the correct direction can be non-trivial if worked in a language-independent manner. Consider the case of \verb|sa|, and how it differs from \verb|en|, as in Example \ref{examp:conj_sa}. In \verb|en|, the coordinating conjunction occurs in between the different conjuncts. In the given example for \verb|sa|, the conjunction is linked with the last conjunct in a form that is typical of the language. The word of interest in the example is marked explicitly in bold. Referred to as monosyndentic postposing by \cite{stassen}, he observes that the phenomenon is relatively common in languages around the world. In the same article, the author also observes that the case of syndentic preposition (as opposed to postposition in the given example) is unattested for the the first conjunct. A brief typology of monosyndetic coordinations is listed in Table \ref{tab:syndetion}. We do not discuss other types of coordination like polysyndetic, asyndetic, or coordination by juxtaposition in the table. While polysyndetic coordination would essentially require the same treatment as monosyndetic coordination, the others are not relevant to the problem owing to the lack of a defined conjunction.
 
@@ -63,12 +64,12 @@ The above cases exhibit two problematic instances. Nonetheless, they can easily 
 
 \item The directions ``left" and ``right" in left-headedness (right-headedness) are to be understood logically, disregarding the right-to-left writing systems of languages like \verb|he|. Therefore, the head is said to be to the left of the dependent, if its numeric position (ID in the CoNLL-U file) is lower than the position of the dependent. 
 
-\item For a language that showcases only left-headed conjunctions, a right-headed conjunction is an erroneous annotation, and vice-versa for languages showing only right-headed conjunctions. This reversed direction of dependency (or reversed headedness of the conjunction head) forms the basis for mining of the problematic instance.
+\item For a language that showcases only left-headed conjunctions\footnote{The language's characteristic of whether it showcases conjunctions as left-headed, or right-headed, or both should be included in the language-specific documentation.}, a right-headed conjunction is an erroneous annotation, and vice-versa for languages showing only right-headed conjunctions. This reversed direction of dependency (or reversed headedness of the conjunction head) forms the basis for mining of the problematic instance.
 \end{enumerate}
 
 Table \ref{tab:conjunctions_all} shows the total count of instances of coordinating conjunctions (tokens with \verb|CCONJ| as POS tag, and \verb|cc| as deprel), along with the number of instances that have reverse direction of dependency in different treebanks of UDv2.4 \citep{UDv2.4}. The different PUD treebanks\footnote{Appendix \ref{app:pud} mentions in detail about how the different PUD treebanks were created, and how they are recommended to be used.} contain the same sentences, translated into the corresponding language from \verb|en|. Keeping this in mind, PUD treebanks are analysed separately in Table \ref{tab:conjunctions_pud}. The tables also show the number of instances where a case of misdirected dependency of conjunction head causes a non-projectivity in the sentence.
 
-It must be stressed here that the problem at hand is not about detecting the cases of misdirected dependencies, but rather the selection of a more relevant head for the dependency. However, the identification of misdirected dependencies can be the first step towards detection of such cases, as discussed earlier. Notice that the notion of misdirected dependency can be defined only for languages such that the conjunctions in the language are either of left-headed or right-headed, but not both (as in the case of \verb|sa| from before). From earlier discussion, the language's characteristic of whether it showcases conjunctions as left-headed, or right-headed, or both should be included in language-specific documentation. In our work, we focus on languages where the conjunctions are only right-headed, i.e. the correct head should be located towards the logical right of the conjunction. Tables \ref{tab:conjunctions_pud} and \ref{tab:conjunctions_all} mark languages that show either of left-headed conjunctions or a mix of left and right-headed conjunctions with an asterisk superscript. However, the marking should not be considered exhaustive.
+It must be stressed here that the problem at hand is not about detecting the cases of misdirected dependencies, but rather the selection of a more relevant head for the dependency. However, the identification of misdirected dependencies can be the first step towards detection of such cases, as discussed earlier. Notice that the notion of misdirected dependency can be defined only for languages such that the conjunctions in the language are either of left-headed or right-headed, but not both (as in the case of \verb|sa| from before). In our work, we focus on languages where the conjunctions are only right-headed, i.e. the correct head should be located towards the logical right of the conjunction. Tables \ref{tab:conjunctions_pud} and \ref{tab:conjunctions_all} mark languages that show either of left-headed conjunctions or a mix of left and right-headed conjunctions with an asterisk superscript. However, the marking should not be considered exhaustive.
 
 \begin{table}[h]
 \centering
@@ -270,7 +271,7 @@ For the misdirect conjunctions such that they are attached projectively, we limi
 \begin{figure}[H]
     \centering
     \includegraphics{img/nested1.png}
-    \caption{Possible Wrong Attachments of a Coordinating Conjunction: Correct Conjunct as Wrong Head's Sibling}
+    \caption{Possible Wrong Attachments of a Coordinating Conjunction: Correct Head as Wrong Head's Sibling}
     \begin{flushleft}
     Note: \textit{D} is the common ancestor of nodes \textit{A}, \textit{B} and \textit{C}\\
     Note: \textit{C} is the more relevant head that conjunction \textit{B} should be attached to, instead of the current misdirected attachment with node \textit{A}\\
@@ -283,13 +284,13 @@ For the misdirect conjunctions such that they are attached projectively, we limi
 \begin{subfigure}{.45\textwidth}
   \centering
   \includegraphics{img/nested2.png}
-  \caption{Correct Conjunct as Conjunction's Sibling}
+  \caption{Correct Head as Conjunction's Sibling}
   \label{fig:conj-head2}
   \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics{img/nested3.png}
-  \caption{Correct Conjunct as Conjunction's Grandparent}
+  \caption{Correct Head as Conjunction's Grandparent}
   \label{fig:conj-head3}
 \end{subfigure}
 \caption{Possible Wrong Attachments of a Coordinating Conjunction}
@@ -547,7 +548,7 @@ Comparing the documentations of \texttt{ccomp}\footnote{\url{https://universalde
 
 We could not find a strong reason for discarding the remaining deprels, viz. \verb|obl|, \verb|nmod|, and \verb|nsubj|, and thus included them with \verb|xcomp| in the list of deprels that can be searched for, while looking for a candidate conjunct.
 
-The restriction with respect to deprels is necessary to make sure we don't over-generate and rehang the conjunction to a wrong head. In case the deprel is not restricted, the token of interest might associate itself to the wrong sibling, but in correct direction, making it as a case of conjunction sandwich (which as we mentioned earlier, is significantly harder to detect).
+The restriction with respect to deprels is necessary to make sure we don't over-generate and rehang the conjunction to a wrong head. As demonstrated earlier, a non-first conjunct may or may not be labelled by the \texttt{conj} deprel. The deprels associated with the core arguments, non-core dependents and nominal dependents are governed (non-deterministically) by the POS tag of a token and the head of this token, whereas the \texttt{conj} deprel is not limited by the POS tag of either the token or its head. Therefore, we can rely upon the other deprels to be annotated better than the \texttt{conj} relation. However, if the deprel is not restricted, the token of interest might associate itself to the wrong sibling, but in the correct direction, making it as a case of a conjunction sandwich (which as we mentioned earlier, is significantly harder to detect).
 
 We formally define the constraints and the processing in Algorithm \ref{conj-head-sibling}. Notice how we decide on whether or not the algorithm terminates by continuously checking the condition of projectivity, and returning a value from the function only if the condition of projectivity with respect to the new parent is maintained. It is also important to note that we always limit our search for a suitable candidate to cases where the candidate occurs later than the conjunction we are trying to rehang.
 
@@ -770,7 +771,7 @@ Of all the nodes affected by \textit{nextConjHead()} algorithm (cf. Algorithm \r
      \caption{Final Annotation}
     \end{subfigure}
     \caption{Annotation Error in Example \ref{examp:nextConjHead-wrong}}
-    Note: Z is used as a placeholder for ellipsed text\\
+    Note: Z is used as a placeholder for omitted text\\
     Note: \textbf{,} should be attached to \textbf{huise} (house) or to the immediately succeeding \textbf{op} (on)\\
     Note: \textbf{straat} (street) and its children should be attached to \textbf{verkeer} (find-\textit{Pres.})\\
     Note: \textbf{en} (and) should be attached to \textbf{pad} (path-\textit{Sg.}) \\
@@ -904,7 +905,7 @@ We estimated the effect of \textit{projTempFix()} earlier, and so to estimate th
     \label{tab:evalOverall}
 \end{table}
 
-We based \textit{attachToSibling()} algorithm based on the assumption that we would not need to descend the tree level in the search for the correct conjunct and that we need to only ascend the level in the tree. In the analysis of instances with an introduced conjunction sandwich in \verb|ar|, the correct conjunct could have been found by descending the tree level. Example \ref{examp:siblingAttachar} shows the relevant part of one such example, with the corresponding dependency trees before and after the correction procedure in Figures \ref{fig:siblingAttach-ar-1} and \ref{fig:siblingAttach-ar-2} respectively. In the example, \textit{Z} is used to denote the ellipsed part of the tree, while \textit{Root} is used to donate the root of the tree. The token of interest is marked in bold.
+We based \textit{attachToSibling()} algorithm based on the assumption that we would not need to descend the tree level in the search for the correct conjunct and that we need to only ascend the level in the tree. In the analysis of instances with an introduced conjunction sandwich in \verb|ar|, the correct conjunct could have been found by descending the tree level. Example \ref{examp:siblingAttachar} shows the relevant part of one such example, with the corresponding dependency trees before and after the correction procedure in Figures \ref{fig:siblingAttach-ar-1} and \ref{fig:siblingAttach-ar-2} respectively. In the example, \textit{Z} is used to denote the omitted part of the tree, while \textit{Root} is used to donate the root of the tree. The token of interest is marked in bold.
 
 \begin{example}
 \label{examp:siblingAttachar}
@@ -932,13 +933,13 @@ We based \textit{attachToSibling()} algorithm based on the assumption that we wo
     \label{fig:siblingAttach-ar-2}
     \end{subfigure}
     \caption{Introduced Conjunction Sandwich in \texttt{ar}}
-    Note: Z is used as a placeholder for ellipsed text\\
+    Note: Z is used as a placeholder for omitted text\\
     Note: Root is used as a placeholder for root of the tree\\
     Note: \textarabic{ف} (\textit{f}; And) should be attached to \textarabic{انتهاء} (\textit{aintiha'}; finishing) and not to \textarabic{بات} (\textit{bat}; become-\textit{Perf.}-\textit{3P})
     \label{fig:siblingAttach-ar}
 \end{figure}
 
- In case of \verb|af|, the actual conjunct could not be discovered because of the improper annotation of the subtree. The modification as done by \textit{attachToSibling()} algorithm attached the conjunction to where the conjunct should have been. Attachment to the right conjunct in this case was not possible because (i) the change of levels in present annotation would bypass the enforced limit of one level; and (ii) the new attachment would have been non-projective in nature, and was therefore not allowed. Example \ref{examp:siblingAttachaf} and the associated dependency trees in Figure \ref{fig:siblingAttach-af} demonstrate this with a part of the actual sentence. As in previous example, \textit{Z} is used to denote the ellipsed part of the tree, while also showcasing the relative position of the root of the tree. The token of interest is marked in bold.
+ In case of \verb|af|, the actual conjunct could not be discovered because of the improper annotation of the subtree. The modification as done by \textit{attachToSibling()} algorithm attached the conjunction to where the conjunct should have been. Attachment to the right conjunct in this case was not possible because (i) the change of levels in present annotation would bypass the enforced limit of one level; and (ii) the new attachment would have been non-projective in nature, and was therefore not allowed. Example \ref{examp:siblingAttachaf} and the associated dependency trees in Figure \ref{fig:siblingAttach-af} demonstrate this with a part of the actual sentence. As in previous example, \textit{Z} is used to denote the omitted part of the tree, while also showcasing the relative position of the root of the tree. The token of interest is marked in bold.
  
 \begin{example}
 \label{examp:siblingAttachaf}
@@ -964,7 +965,7 @@ We based \textit{attachToSibling()} algorithm based on the assumption that we wo
     \end{subfigure}
     \caption{Introduced Conjunction Sandwich in \texttt{af}}
     \label{fig:siblingAttach-af}
-    Note: Z is used as a placeholder for ellipsed text, and also to mark the position of the root of the tree\\
+    Note: Z is used as a placeholder for omitted text, and also to mark the position of the root of the tree\\
     Note: \textbf{gevolg} (consequence) should be the head of the subtree, with \textbf{as} (as) attached to it\\
     Note: \textbf{inderdaad} (indeed) should be attached to \textbf{gevolg} (consequence) after the change of subtree head\\
     Note: \textbf{en} (and) should be attached to \textbf{gevolg} (consequence) after the change of subtree head

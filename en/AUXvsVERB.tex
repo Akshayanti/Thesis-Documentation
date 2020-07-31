@@ -1,7 +1,7 @@
 \chapter{\texttt{AUX} vs. \texttt{VERB}: Attempt at Separation of Verbs and Auxiliary Verbs (Experiment 4)}
 \label{chap:failures}
 
-We earlier mentioned how the line of distinction between verbs (POS tag \texttt{VERB}) and auxiliary verbs (POS tag \texttt{AUX}) is not well-defined in Section \ref{ssec:AuxVERB}. We shall treat this problem in this section, with a glance through some of the observations on the problem in Section \ref{ssec:auxverbsObservations}, followed by the definition of the working dataset in Section \ref{ssec:auxverbDataset}. We elaborate on the proposed solution to the problem, and the results of the experiment in Section \ref{ssec:auxverbExperiment} and \ref{ssec:auxverbResults} respectively. We finally conclude this section with a discussion of the results in \ref{ssec:auxverbDiscussion}.
+We earlier mentioned in Section \ref{ssec:AuxVERB} how the line of distinction between verbs (POS tag \texttt{VERB}) and auxiliary verbs (POS tag \texttt{AUX}) is not well-defined. We shall treat this problem in this section, with a glance through some of the observations on the problem in Section \ref{ssec:auxverbsObservations}, followed by the definition of the working dataset in Section \ref{ssec:auxverbDataset}. We elaborate on the proposed solution to the problem, and the results of the experiment in Section \ref{ssec:auxverbExperiment} and \ref{ssec:auxverbResults} respectively. We finally conclude this section with a discussion of the results in \ref{ssec:auxverbDiscussion}.
 
 \section{Observations About Problem Statement}
 \label{ssec:auxverbsObservations}
@@ -12,21 +12,21 @@ This definition of auxiliaries is a bit different from \cite{langtypology} which
 
 While the generalization made by \citeauthor{greenberg1963some} is a very good marker for possible identification of inflected auxiliaries, the requirement of identification of auxiliaries in noninflected form still remains as a problem. This problem can however, be mitigated in part by the usage of the list of tokens identified as auxiliary in a given language, as was started in UDv2.4 \citep{UDv2.4} with the help of a validator (cf. Level 5 checks in \verb|validate.py|\footnote{\url{https://github.com/UniversalDependencies/tools}} file). It must also be pointed out that since \citeauthor{greenberg1963some} did not extend this generalization to SVO languages, the generalization only holds for languages with VSO and SOV dominant word-order. Combining that with verb-second languages, the generalization can not be used globally across all the languages.
 
-When the copulas are included in the definition of \verb|AUX|, the already difficult problem of separating \verb|AUX| and \verb|VERB| becomes even harder. In many languages, auxiliaries are a subset of verbs, with respect to specific usages. In other words, the same token can act as a verb or an auxiliary, depending upon the usage. The list of copula in many languages is also a subset of verbs, called as copulative verbs. However, as \citeauthor{langtypology} notes, there are cases of languages where the copula are not verbal in nature. The function of a copula can be realized by other means as well. The most common of these, viz. juxtaposition (example language- Ilocano), and use of predicators (example language- \verb|bm|) are listed in the work, where they may be combined with existing copulative verbs in the grammar of the language.
+When the copulas are included in the definition of \verb|AUX|, the already difficult problem of separating \verb|AUX| and \verb|VERB| becomes even harder. In many languages, auxiliaries are a subset of verbs, with respect to specific usages. In other words, the same token can act as a verb or an auxiliary, depending upon the usage. The list of copula in many languages is also a subset of verbs, called as copulative verbs. However, as \citeauthor{langtypology} notes, there are cases of languages where the copula are not verbal in nature. The function of a copula can be realized by other means as well. The most common of these, viz. juxtaposition (example language- Ilocano), and use of predicators (example language- Bambara) are listed in the work, where they may be combined with existing copulative verbs in the grammar of the language.
 
 In essence, while the class \verb|AUX| in UD includes the copulative verbs, predicators, and other non-verbal TAME markers, the class \verb|VERB| is composed of open class categories of verbs.
 
 \section{Dataset Definition}
 \label{ssec:auxverbDataset}
 
-This experiment was initially tried on \verb|hi|-HDTB treebank from UDv2.3 \citep{UDv2.3}, but failed terribly. With the release of UDv2.4 \citep{UDv2.4}, this experiment was tried again, keeping the dataset treebank same, but changing the model architecture among other parameters.
+This experiment uses \verb|hi|-HDTB treebank from UDv2.4 \citep{UDv2.4}.
 
 There are a few reasons for the choice of the language for the experiment. In \verb|hi|, we can more often than not draw a clear line of distinction between auxiliary as defined by UD, and the verbs. While the auxiliaries undergo inflection, and also include predicators and other TAME markers, they are restricted to a few tokens which rarely, if at all, are used as independent verbs. The factors as listed above, combined with the author's native fluency in the language makes it an ideal candidate for this experiment.
 
 \section{Experiment}
 \label{ssec:auxverbExperiment}
 
-We approach the problem at hand as a classification problem. In the experiment, we create a classifier that tags the data in either of the three categories as \verb|AUX|, \verb|VERB| or neither of the two. Since the training data needs to contain the information on what instances to mark in either category and also differentiate tokens not marked as either UPOS tag, we label the data using NER tag format. As the classifier predicts the output label for each token, it also outputs a confidence score associated with each predicted label. By analysing the confidence score of each prediction and comparing it with the already annotated data, we should be able to point out the anomalies.
+We approach the problem at hand as a classification problem. In the experiment, we create a classifier that tags the data in categories of whether a particular token is an instance of \verb|AUX|, \verb|VERB| or neither of the two.  Since the training data needs to contain the information on what instances to mark in either category and also differentiate tokens not marked as either UPOS tag, we label the data using Named-Entity Recognition (NER) task tag format. The classifier we described above is available as off-the-shelf tool for NER task, and that is the reason the data was labelled using NER task tags. As the classifier predicts the output label for each token, it also outputs a confidence score associated with each predicted label. By analysing the confidence score of each prediction and comparing it with the already annotated data, we should be able to point out the anomalies.
 
 If we consider the gold-standard (GS) as erroneous as in present case, we need some data in a higher quality of annotation. A platinum standard is considered as a super-refined gold standard from which even the GS can be evaluated and verified. However, given a lack of such platinum standard, we restrict to a manual evaluation of the output of the classifier, using k-fold cross validation technique to test and train the classifier on the same data. We first split the data into 10 folds, and then proceed to label the data using NER format.
 
@@ -135,9 +135,9 @@ Having identified instances within each category that have confidence scores wit
 \section{Results}
 \label{ssec:auxverbResults}
 
-The associated code for the experiment, alongwith the manually annotated data is available online\footnote{\url{https://github.com/Akshayanti/Masters-Thesis-CUNI-2020/tree/master/AUX-vs-VERB-UDv2.4}}. Given that the experiment is a case of a multi-class classification, the model performance is expressed in form of confusion metrics for each class \verb|AUX|, \verb|VERB| along with the metrics like Precision, Recall, Accuracy, F1 Score.
+Given that the experiment is a case of a multi-class classification, the model performance is expressed in form of confusion metrics for each class \verb|AUX|, \verb|VERB| along with the metrics like Precision, Recall, Accuracy, F1 Score.
 
-The metrics corresponding to the best performing model on the original treebank is listed in Table \ref{tab:auxverbBest}. When the models were trained on each of the folds, keeping the architecture of the best model, there was no loss in performance of the trained models (metric considered- micro averaged F1 score). 
+The metrics corresponding to the best performing model on the entire treebank are listed in Table \ref{tab:auxverbBest}. The best performing model was trained on training set of UDv2.4 \texttt{hi}-HDTB data, and tuned over the dev set, and tested over the test set. The evaluation presented in the table corresponds to the automatic evaluation over test set.  
 
 % Change to a longtable if needed
 \begin{table}[ht]
@@ -150,28 +150,18 @@ The metrics corresponding to the best performing model on the original treebank 
         \verb|VERB| & 99.32 & 98.87 & 98.20 & 99.09 \\
         \hline
     \end{tabular}
-\caption{Metrics of Best Model trained over original \texttt{hi} data}
+\caption[Metrics of Best Model trained over UDv2.4 \texttt{hi}-HDTB Treebank]{Metrics of Best Model trained over UDv2.4 \texttt{hi}-HDTB Treebank. The metrics are reported for automatic evaluation over test data in the treebank.}
 \label{tab:auxverbBest}
 \end{table}
 
-As mentioned in previous section, we focused on the instances of the tagged data with confidence scores in particular bounds. Table \ref{tab:auxverbResults} lists the number of instances that were focused on in each category (as defined in Table \ref{tab:auxverbCategories}). The table also lists the number of instances that were identified as mislabelled, following the annotation procedure.
+When the models were trained on each of the folds, keeping the architecture of the best model, there was no loss in performance (metric considered- micro averaged F1 score). This essentially means that the instances corresponding to \texttt{AUX} and \texttt{VERB} are annotated consistently within the treebank. As mentioned in previous section, we focused on the instances of the tagged data with confidence scores in particular bounds, and manually annotated them\footnote{Associated Code and annotated data can be accessed at \url{https://github.com/Akshayanti/Masters-Thesis-CUNI-2020/tree/master/AUX-vs-VERB-UDv2.4}}. Table \ref{tab:auxverbResults} lists the number of instances that were focused on in each category (as defined in Table \ref{tab:auxverbCategories}). The table also lists the number of instances that were identified as mislabelled, following the manual annotation procedure.
 
-\newpage
-\begin{longtable}{|c|c|c|c|}
-\hline 
-\multicolumn{1}{|l|}{\textbf{Category}} &
-\multicolumn{1}{l|}{\textbf{Focused}} &
-\multicolumn{1}{l|}{\textbf{Mislabelled}} &
-\multicolumn{1}{l|}{\textbf{Percentage}} \\
-\hline 
-\endhead
-\hline 
-\multicolumn{4}{|r|}{{Continued on next page}} \\ 
-\hline
-\endfoot
-\endlastfoot
-    \hline
-    \label{tab:auxverbResults}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline 
+    \textbf{Category} & \textbf{Focused} & \textbf{Mislabelled} & \textbf{Percentage}\\
+    \hline 
     aux\_TP & 83 & 3 & 3.61 \\
     O\_TP & 25 & 5 & 20.00 \\
     verb\_TP & 45 & 10 & 22.22 \\
@@ -183,8 +173,12 @@ As mentioned in previous section, we focused on the instances of the tagged data
     \hline
     \textbf{Overall} & 225 & 61 & 27.11 \\
     \hline
-\caption{Results of Manual Annotation}
-\end{longtable}
+    \end{tabular}
+    \caption[Results of Manual Annotation]{Results of Manual Annotation}
+    Note: *\_TP is the identifier for instances for which the prediction matches the label. The values in the `Focused' column refer to count of instances with Confidence Score $\leq 0.6700$\\
+    Note: X-Y is the identifier for instances which were labelled as X but predicted as Y, or labelled as Y but predicted as X. The values in the `Focused' column refer to count of instances with Confidence Score $\geq 0.9950$\\
+\label{tab:auxverbResults}
+\end{table}
 
 \section{Discussion of the Results}
 \label{ssec:auxverbDiscussion}
@@ -201,7 +195,7 @@ As mentioned in previous section, we focused on the instances of the tagged data
         Tagged \verb|VERB| & 33 753 \\
         \hline
     \end{tabular}
-    \caption{Statistics for \texttt{hi} data}
+    \caption{Statistics for \texttt{hi}-HDTB Treebank}
     \label{tab:auxverbDetails}
 \end{table}
 
